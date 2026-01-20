@@ -9,7 +9,6 @@
 
 
     <!-- Centrar contenedor de imagen y texto de bienvenida -->
-
     <LinearLayout
         android:id="@+id/centerContainer"
         android:layout_width="match_parent"
@@ -32,14 +31,13 @@
 
 
         <!-- Texto de bienvenida a la aplicación -->
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="THERAPETS"
             android:textSize="32sp"
             android:textColor="#9D676C"
-            android:letterSpacing="0.2"
+            android:letterSpacing="0.5"
             android:fontFamily="@font/baloo_bhai_bold"
             android:layout_marginTop="16dp" />
 
