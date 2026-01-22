@@ -13,6 +13,12 @@
         android:theme="@style/Theme.TheraPets"
         tools:targetApi="31">
         <activity
+            android:name=".RegistroTheraPets"
+            android:exported="false" />
+        <activity
+            android:name=".IniciarSesion"
+            android:exported="false" />
+        <activity
             android:name=".BienvenidoTherapetsActivity"
             android:exported="false" />
         <activity

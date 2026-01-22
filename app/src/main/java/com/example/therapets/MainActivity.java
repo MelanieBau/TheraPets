@@ -16,8 +16,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        //Pantalla clikeable.
         findViewById(R.id.main).setOnClickListener(v ->{
             Intent intent = new Intent(MainActivity.this, BienvenidoTherapetsActivity.class);
+
+            //Abrir pestaña BienvenidoTheraPets.
             startActivity(intent);
             finish();
         });
