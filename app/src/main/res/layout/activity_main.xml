@@ -24,6 +24,7 @@
 
         <!-- Logo para TheraPets -->
         <ImageView
+            android:id="@+id/logoImageTherapets"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:src="@drawable/logo_theraPets"
@@ -32,6 +33,7 @@
 
         <!-- Texto de bienvenida a la aplicación -->
         <TextView
+            android:id="@+id/textoInicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="THERAPETS"
