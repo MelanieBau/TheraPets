@@ -39,7 +39,7 @@ public class BienvenidoTherapetsActivity extends AppCompatActivity {
 
         //Boton para registrarse en pantalla registro
         botonRegistrarme.setOnClickListener(v -> {
-            Intent intent = new Intent(BienvenidoTherapetsActivity.this, RegistroTheraPets.class);
+            Intent intent = new Intent(BienvenidoTherapetsActivity.this, Registro.class);
             startActivity(intent);
         });
     }
