@@ -19,11 +19,11 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistroTheraPets"
-            android:exported="false" />
-        <activity
             android:name=".IniciarSesion"
             android:exported="false" />
+        <activity android:name=".AgendarCitaActivity" />
+
+
         <activity
             android:name=".BienvenidoTherapetsActivity"
             android:exported="false" />

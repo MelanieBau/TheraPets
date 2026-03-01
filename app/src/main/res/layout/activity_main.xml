@@ -27,7 +27,7 @@
             android:id="@+id/logoImageTherapets"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/logo_therapets"
+            android:src="@drawable/logo_theraPets"
             android:contentDescription="Logo TheraPets" />
 
 
