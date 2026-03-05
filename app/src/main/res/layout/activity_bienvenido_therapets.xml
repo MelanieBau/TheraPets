@@ -23,7 +23,7 @@
             android:id="@+id/logoImage"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/logo_theraPets"
+            android:src="@drawable/therapets"
             android:contentDescription="Logo"/>
 
         <TextView

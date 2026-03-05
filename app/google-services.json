@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "591444517021",
+    "project_id": "therapets-b4802",
+    "storage_bucket": "therapets-b4802.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591444517021:android:492eba1757f000e1863474",
+        "android_client_info": {
+          "package_name": "com.example.therapets"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjvQ66QzlkQ0sjTE2zTp1CVxEF_aL2gUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

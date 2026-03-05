@@ -15,7 +15,6 @@
         android:layout_width="0dp"
         android:layout_height="320dp"
         android:scaleType="fitXY"
-        android:src="@drawable/wave_header"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

@@ -5,11 +5,9 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
 
-    <style name="ShapeAppearance.TheraPets.TopRounded">
+    <style name="ShapeAppearance.TheraPets.TopRounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeTopLeft">37dp</item>
-        <item name="cornerSizeTopRight">37dp</item>
-        <item name="cornerSizeBottomLeft">0dp</item>
-        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSize">24dp</item>
     </style>
+
 </resources>

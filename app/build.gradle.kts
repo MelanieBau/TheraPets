@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,4 +41,16 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    //FireBase
+
+    //Gestión automática de las versiones de todos los paquetes de Firebase.
+    implementation(platform("com.google.firebase:firebase-bom:34.9.0"))
+
+    //Librería de autenticación de Firebase:
+    //Crear usuarios nuevos con email y contraseña
+    //Iniciar sesión con email y contraseña
+    //Cerrar sesión
+    //Recuperar contraseña por email
+    implementation("com.google.firebase:firebase-auth")
 }
