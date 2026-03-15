@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Compartir experiencia"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#3D2A2A"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Foto con el animal -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardFotoTestimonio"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
+
+            <ImageView
+                android:id="@+id/ivFotoTestimonio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_launcher_foreground"
+                android:background="#F4C2C2" />
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Botón seleccionar foto -->
+        <Button
+            android:id="@+id/btnSeleccionarFoto"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="12dp"
+            android:text="Seleccionar foto"
+            android:textAllCaps="false"
+            android:textColor="#9D676C"
+            android:backgroundTint="#FFF0EC"
+            app:cornerRadius="12dp" />
+
+        <!-- Comentario -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etComentario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cuéntanos tu experiencia..."
+                android:inputType="textMultiLine"
+                android:minLines="4"
+                android:gravity="top" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón publicar -->
+        <Button
+            android:id="@+id/btnPublicarTestimonio"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Publicar testimonio"
+            android:textAllCaps="false"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#9D676C"
+            app:cornerRadius="12dp" />
+
+    </LinearLayout>
+
+</ScrollView>

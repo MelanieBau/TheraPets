@@ -48,10 +48,16 @@ public class HomeActivity extends AppCompatActivity {
             } else if (id == R.id.nav_citas) {
                 openFragment(new CitasFragment());
                 return true;
+
+            } else if (id == R.id.nav_testimonios) {
+                openFragment(new TestimoniosFragment());
+                return true;
+
             } else if (id == R.id.nav_perfil) {
                 openFragment(new PerfilFragment());
                 return true;
             }
+
             return false;
         });
     }
