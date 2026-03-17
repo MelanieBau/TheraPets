@@ -47,7 +47,7 @@ public class IniciarSesion extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(this, "Bienvenida 🐾", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Bienvenida", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(this, HomeActivity.class));
                             finish();
                         } else {

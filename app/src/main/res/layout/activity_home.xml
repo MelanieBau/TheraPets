@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFF7F0">
 
-    <!-- Aquí se cargan las "pestañas" -->
+    <!-- Contenedor de fragments -->
     <FrameLayout
         android:id="@+id/fragmentContainer"
         android:layout_width="0dp"
@@ -18,13 +18,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Barra inferior -->
+    <!-- Barra inferior con estilo personalizado -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bg_bottom_nav"
+        android:elevation="8dp"
         app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/nav_item_color"
+        app:itemTextColor="@color/nav_item_color"
+        app:itemActiveIndicatorColor="#F4C2C2"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
