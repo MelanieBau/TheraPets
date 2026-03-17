@@ -1,21 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp">
+    android:background="#FAFAFA">
 
+    <!-- Título -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Citas"
+        android:text="Mis Citas"
         android:textSize="22sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="#3D2A2A"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="12dp" />
 
-    <Button
-        android:id="@+id/btnAgendarCita"
+    <!-- Pestañas -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:text="Agendar nueva cita"
-        android:layout_marginTop="20dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:tabSelectedTextColor="#9D676C"
+        app:tabTextColor="#9E9E9E"
+        app:tabIndicatorColor="#9D676C"
+        app:tabBackground="@android:color/transparent"
+        app:tabMode="fixed" />
+
+    <!-- Contenido de las pestañas -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Botón agendar nueva cita -->
+    <Button
+        android:id="@+id/btnNuevaCita"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="16dp"
+        android:text="+ Agendar nueva cita"
+        android:textAllCaps="false"
+        android:textSize="15sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#9D676C"
+        app:cornerRadius="12dp" />
+
 </LinearLayout>
