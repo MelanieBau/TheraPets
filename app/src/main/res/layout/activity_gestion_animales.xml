@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA">
+
+    <!-- Cabecera -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF0EC"
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Gestionar Animales"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#3D2A2A" />
+
+        <Button
+            android:id="@+id/btnAgregarAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:text="+ Añadir"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#9D676C"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+
+    <!-- Lista de animales -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvAnimales"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:clipToPadding="false" />
+
+</LinearLayout>
