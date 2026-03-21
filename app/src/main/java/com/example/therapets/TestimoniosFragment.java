@@ -52,7 +52,7 @@ public class TestimoniosFragment extends Fragment {
         fabAgregar.setOnClickListener(v -> {
             requireActivity().getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.stepContainer, new AgregarTestimoniosFragment())
+                    .replace(R.id.fragmentContainer, new AgregarTestimoniosFragment())
                     .addToBackStack(null)
                     .commit();
         });

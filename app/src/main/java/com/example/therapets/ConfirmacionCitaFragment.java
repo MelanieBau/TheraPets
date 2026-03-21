@@ -5,10 +5,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 public class ConfirmacionCitaFragment extends Fragment {
 
@@ -36,16 +44,44 @@ public class ConfirmacionCitaFragment extends Fragment {
 
         tvResumen.setText(resumen);
 
-        // Vuelve a la app (tab Citas)
         btnVolverCitas.setOnClickListener(v -> requireActivity().finish());
 
-        // Ir a Inicio: cerramos y abrimos HomeActivity seleccionando Inicio
-        btnIrInicio.setOnClickListener(v -> {
-            Intent intent = new Intent(requireContext(), HomeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.putExtra("open_tab", "inicio");
-            startActivity(intent);
-            requireActivity().finish();
-        });
+        btnIrInicio.setOnClickListener(v -> guardarCitaEIrInicio());
+    }
+
+    private void guardarCitaEIrInicio() {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        Cita cita = new Cita();
+        cita.setNombres(CitaDraftStore.nombres);
+        cita.setApellidos(CitaDraftStore.apellidos);
+        cita.setTelefono(CitaDraftStore.telefono);
+        cita.setFecha(CitaDraftStore.fecha);
+        cita.setHora(CitaDraftStore.hora);
+        cita.setCentro(CitaDraftStore.centro);
+        cita.setCuidador(CitaDraftStore.cuidador);
+        cita.setMotivo(
+                CitaDraftStore.otroMotivo.isEmpty()
+                        ? CitaDraftStore.motivo
+                        : CitaDraftStore.motivo + " - " + CitaDraftStore.otroMotivo
+        );
+        cita.setEstado("pendiente");
+        cita.setUsuarioId(uid);
+
+        FirebaseFirestore.getInstance()
+                .collection("citas")
+                .add(cita)
+                .addOnSuccessListener(documentReference -> {
+                    CitaDraftStore.clear();
+
+                    Intent intent = new Intent(requireContext(), HomeActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra("open_tab", "inicio");
+                    startActivity(intent);
+                    requireActivity().finish();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(requireContext(), "Error al guardar la cita", Toast.LENGTH_SHORT).show();
+                });
     }
 }

@@ -90,7 +90,14 @@ public class InicioFragment extends Fragment {
                         String centro = queryDocumentSnapshots.getDocuments().get(0).getString("centro");
                         tvProximaCitaFecha.setText("📅 " + fecha2 + " a las " + hora);
                         tvProximaCitaDetalle.setText("Centro: " + centro);
+                    } else {
+                        tvProximaCitaFecha.setText("📅 Sin citas próximas");
+                        tvProximaCitaDetalle.setText("Agenda tu primera sesión");
                     }
+                })
+                .addOnFailureListener(e -> {
+                    tvProximaCitaFecha.setText("Error al cargar cita");
+                    tvProximaCitaDetalle.setText("");
                 });
 
         // Botón agendar cita
