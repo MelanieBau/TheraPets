@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FAFAFA"
+    android:padding="20dp">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Panel Coordinador"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#3D2A2A"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:id="@+id/tvNombreCoordinador"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TheraPets"
+        android:textSize="14sp"
+        android:textColor="#9D676C"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Tarjeta Mi Centro -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMiCentro"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mi Centro"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#3D2A2A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=">"
+                android:textSize="20sp"
+                android:textColor="#9D676C" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Tarjeta Mis Animales -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardMisAnimales"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Mis Animales"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#3D2A2A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=">"
+                android:textSize="20sp"
+                android:textColor="#9D676C" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Tarjeta Citas de mi centro -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardCitasCentro"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp"
+        app:cardBackgroundColor="#FFFFFF">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Citas de mi Centro"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#3D2A2A" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=">"
+                android:textSize="20sp"
+                android:textColor="#9D676C" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Botón cerrar sesión -->
+    <Button
+        android:id="@+id/btnCerrarSesionCoordinador"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Cerrar sesión"
+        android:textAllCaps="false"
+        android:textColor="#9D676C"
+        android:backgroundTint="#FFF0EC"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

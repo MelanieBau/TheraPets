@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class IniciarSesion extends AppCompatActivity {
 
@@ -16,10 +17,8 @@ public class IniciarSesion extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // Si ya hay sesión activa, va directo al Home
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(this, HomeActivity.class));
-            finish();
+            verificarRolYRedirigir(FirebaseAuth.getInstance().getCurrentUser().getUid());
         }
     }
 
@@ -47,9 +46,8 @@ public class IniciarSesion extends AppCompatActivity {
             mAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
-                            Toast.makeText(this, "Bienvenida", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(this, HomeActivity.class));
-                            finish();
+                            String uid = mAuth.getCurrentUser().getUid();
+                            verificarRolYRedirigir(uid);
                         } else {
                             Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
                         }
@@ -59,5 +57,32 @@ public class IniciarSesion extends AppCompatActivity {
         tvOlvide.setOnClickListener(v -> {
             Toast.makeText(this, "Próximamente: recuperar la contraseña", Toast.LENGTH_SHORT).show();
         });
+    }
+
+    private void verificarRolYRedirigir(String uid) {
+        FirebaseFirestore.getInstance()
+                .collection("usuarios")
+                .document(uid)
+                .get()
+                .addOnSuccessListener(document -> {
+                    if (document.exists()) {
+                        String rol = document.getString("rol");
+                        if ("administrador".equals(rol)) {
+                            startActivity(new Intent(this, AdminActivity.class));
+                        } else if ("coordinador".equals(rol)) {
+                            startActivity(new Intent(this, CoordinadorActivity.class));
+                        } else {
+                            startActivity(new Intent(this, HomeActivity.class));
+                        }
+                        finish();
+                    } else {
+                        startActivity(new Intent(this, HomeActivity.class));
+                        finish();
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    startActivity(new Intent(this, HomeActivity.class));
+                    finish();
+                });
     }
 }
