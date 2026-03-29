@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA">
+    android:background="@color/fondo_principal">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFF0EC"
+            android:background="@color/fondo_secundario"
             android:padding="24dp"
             android:orientation="vertical">
 
@@ -22,10 +22,10 @@
                 android:id="@+id/tvSaludo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¡Hola! 🐾"
+                android:text="¡Hola!"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                android:textColor="#3D2A2A" />
+                android:textColor="@color/texto_principal" />
 
             <TextView
                 android:id="@+id/tvFecha"
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="Hoy es un buen día"
                 android:textSize="14sp"
-                android:textColor="#9D676C"
+                android:textColor="@color/morado_principal"
                 android:layout_marginTop="4dp" />
 
         </LinearLayout>
@@ -46,7 +46,7 @@
             android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="#9D676C">
+            app:cardBackgroundColor="@color/morado_principal">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,7 +59,7 @@
                     android:layout_height="wrap_content"
                     android:text="Frase del día"
                     android:textSize="12sp"
-                    android:textColor="#FFCDD2"
+                    android:textColor="@color/morado_claro"
                     android:textAllCaps="true"
                     android:letterSpacing="0.1" />
 
@@ -85,11 +85,11 @@
             android:layout_height="56dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:text="🐾 Agendar una cita"
+            android:text="Agendar una cita"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="#9D676C"
+            android:backgroundTint="@color/coral_acento"
             app:cornerRadius="16dp" />
 
         <!-- Próxima cita -->
@@ -99,7 +99,7 @@
             android:text="Tu próxima cita"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#3D2A2A"
+            android:textColor="@color/texto_principal"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp" />
 
@@ -123,9 +123,9 @@
                     android:id="@+id/tvProximaCitaFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📅 Sin citas próximas"
+                    android:text="Sin citas próximas"
                     android:textSize="15sp"
-                    android:textColor="#3D2A2A"
+                    android:textColor="@color/texto_principal"
                     android:textStyle="bold" />
 
                 <TextView
@@ -134,7 +134,7 @@
                     android:layout_height="wrap_content"
                     android:text="Agenda tu primera sesión"
                     android:textSize="13sp"
-                    android:textColor="#9E9E9E"
+                    android:textColor="@color/texto_hint"
                     android:layout_marginTop="4dp" />
 
             </LinearLayout>
@@ -149,7 +149,7 @@
             android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="#FFF0EC">
+            app:cardBackgroundColor="@color/coral_claro">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -160,18 +160,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🧠 ¿Sabías que..."
+                    android:text="¿Sabías que..."
                     android:textSize="14sp"
-                    android:textColor="#9D676C"
+                    android:textColor="@color/coral_acento"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvDatoCurioso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Acariciar un perro puede reducir el cortisol hasta un 30%, disminuyendo el estrés de forma natural."
+                    android:text="Acariciar un perro puede reducir el cortisol hasta un 30%"
                     android:textSize="14sp"
-                    android:textColor="#3D2A2A"
+                    android:textColor="@color/texto_principal"
                     android:layout_marginTop="8dp"
                     android:lineSpacingExtra="4dp" />
 
@@ -186,7 +186,7 @@
             android:text="Animales disponibles"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="#3D2A2A"
+            android:textColor="@color/texto_principal"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="24dp" />
 

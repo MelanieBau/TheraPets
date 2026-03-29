@@ -1,55 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_pink_gradient"
-    tools:context=".Registro">
+    android:background="#FFFFFF">
 
-
-    <!-- Tarjeta blanca -->
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardRegister"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:shapeAppearanceOverlay="@style/ShapeAppearance.TheraPets.TopRounded"
-        tools:ignore="MissingConstraints">
+        android:orientation="vertical">
 
+        <!-- Cabecera morada -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/morado_principal"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/logo_therapets" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Crear cuenta"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Únete a TheraPets"
+                android:textSize="14sp"
+                android:textColor="@color/morado_claro"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+        <!-- Formulario -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:paddingTop="32dp">
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Crear cuenta"
-                android:textColor="#1F1F1F"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="Sign up to get started"
-                android:textColor="#666666"
-                android:textSize="14sp" />
+            android:padding="24dp">
 
             <!-- Email -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp">
+                android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEmail"
@@ -61,9 +66,10 @@
 
             <!-- Password -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -74,11 +80,12 @@
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Confirmar contraseña del usuario -->
+            <!-- Confirmar contraseña -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="12dp"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -91,9 +98,10 @@
 
             <!-- Nombre completo -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNombre"
@@ -105,9 +113,10 @@
 
             <!-- Teléfono -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTelefono"
@@ -119,9 +128,10 @@
 
             <!-- Fecha de nacimiento -->
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:layout_marginBottom="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etFechaNacimiento"
@@ -131,23 +141,31 @@
                     android:inputType="date" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Botón registrar -->
             <Button
                 android:id="@+id/btnSignUp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="18dp"
-                android:text="Registrar" />
+                android:text="Registrar"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/morado_oscuro"
+                android:radius="24dp"/>
+
 
             <TextView
                 android:id="@+id/tvGoLogin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
                 android:text="¿Ya tienes una cuenta? Iniciar sesión"
-                android:textColor="#444444" />
+                android:textColor="@color/morado_principal" />
 
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+
+</ScrollView>
