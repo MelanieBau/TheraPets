@@ -35,6 +35,14 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
 
         holder.tvFechaCita.setText("Fecha " + cita.getFecha() + " a las " + cita.getHora());
         holder.tvEstado.setText(cita.getEstado());
+
+        // Cambiar color según el estado
+        if (cita.getEstado().equals("pendiente")) {
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cita); // coral
+        } else if (cita.getEstado().equals("confirmada")) {
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_cita_confirmada); // verde
+        }
+
         holder.tvCentroCita.setText("Centro" + cita.getCentro());
         holder.tvCuidadorCita.setText("Cuidador: " + cita.getCuidador());
         holder.tvMotivoCita.setText("Motivo: " + cita.getMotivo());

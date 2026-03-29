@@ -51,6 +51,8 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
                     .addOnSuccessListener(a -> {
                         t.setMeGusta(nuevoContador);
                         holder.tvContadorMeGusta.setText(String.valueOf(nuevoContador));
+                        // Cambiar a estrella amarilla
+                        holder.btnMeGusta.setImageResource(android.R.drawable.btn_star_big_on);
                     });
         });
 

@@ -13,87 +13,109 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal">
 
-        <!-- Cabecera: fecha y estado -->
+        <!-- Barra morada izquierda -->
+        <View
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            android:background="@color/morado_principal" />
+
+        <!-- Contenido -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tvFechaCita"
-                android:layout_width="0dp"
+            <!-- Fecha y estado -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="10/04/2026 a las 10:00"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="#3D2A2A" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
 
+                <TextView
+                    android:id="@+id/tvFechaCita"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="10 abril · 10:00"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/texto_principal" />
+
+                <!-- Píldora estado -->
+                <TextView
+                    android:id="@+id/tvEstado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pendiente"
+                    android:textSize="11sp"
+                    android:textColor="#FFFFFF"
+                    android:background="@drawable/bg_estado_cita"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp" />
+
+            </LinearLayout>
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0"
+                android:layout_marginVertical="10dp" />
+
+            <!-- Centro -->
             <TextView
-                android:id="@+id/tvEstado"
+                android:id="@+id/tvCentroCita"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pendiente"
-                android:textSize="12sp"
-                android:textColor="#9D676C"
-                android:background="@drawable/bg_input"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp" />
+                android:text="Centro Barcelona"
+                android:textSize="14sp"
+                android:textColor="@color/texto_principal"
+                android:textStyle="bold" />
+
+            <!-- Cuidador -->
+            <TextView
+                android:id="@+id/tvCuidadorCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cuidador: María"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="4dp" />
+
+            <!-- Motivo -->
+            <TextView
+                android:id="@+id/tvMotivoCita"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motivo: Ansiedad"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="4dp" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0"
+                android:layout_marginVertical="10dp" />
+
+            <!-- Botón cancelar -->
+            <Button
+                android:id="@+id/btnCancelarCita"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:text="Cancelar cita"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/morado_oscuro"
+                app:cornerRadius="8dp" />
 
         </LinearLayout>
-
-        <!-- Separador -->
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#F0F0F0"
-            android:layout_marginVertical="12dp" />
-
-        <!-- Centro -->
-        <TextView
-            android:id="@+id/tvCentroCita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Centro: Barcelona"
-            android:textSize="14sp"
-            android:textColor="#444444" />
-
-        <!-- Cuidador -->
-        <TextView
-            android:id="@+id/tvCuidadorCita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cuidador: María"
-            android:textSize="14sp"
-            android:textColor="#444444"
-            android:layout_marginTop="6dp" />
-
-        <!-- Motivo -->
-        <TextView
-            android:id="@+id/tvMotivoCita"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motivo: Ansiedad"
-            android:textSize="14sp"
-            android:textColor="#444444"
-            android:layout_marginTop="6dp" />
-
-        <!-- Botón cancelar (solo en próximas) -->
-        <Button
-            android:id="@+id/btnCancelarCita"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="12dp"
-            android:text="Cancelar cita"
-            android:textAllCaps="false"
-            android:textSize="13sp"
-            android:textColor="#9D676C"
-            android:backgroundTint="#FFF0EC"
-            app:cornerRadius="10dp" />
 
     </LinearLayout>
 

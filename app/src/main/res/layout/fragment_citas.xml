@@ -4,19 +4,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA">
+    android:background="#FFFFFF">
 
-    <!-- Título -->
-    <TextView
-        android:layout_width="wrap_content"
+    <!-- Cabecera morada -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Mis Citas"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:textColor="#3D2A2A"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="12dp" />
+        android:background="@color/morado_principal"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mis Citas"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+    </LinearLayout>
 
     <!-- Pestañas -->
     <com.google.android.material.tabs.TabLayout
@@ -24,9 +29,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        app:tabSelectedTextColor="#9D676C"
-        app:tabTextColor="#9E9E9E"
-        app:tabIndicatorColor="#9D676C"
+        app:tabSelectedTextColor="@color/morado_principal"
+        app:tabTextColor="@color/texto_hint"
+        app:tabIndicatorColor="@color/morado_principal"
         app:tabBackground="@android:color/transparent"
         app:tabMode="fixed" />
 
@@ -48,7 +53,7 @@
         android:textAllCaps="false"
         android:textSize="15sp"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#9D676C"
+        android:backgroundTint="@color/morado_oscuro"
         app:cornerRadius="12dp" />
 
 </LinearLayout>
