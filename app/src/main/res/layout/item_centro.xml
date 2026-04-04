@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="8dp"
+    android:layout_marginHorizontal="12dp"
     android:layout_marginBottom="12dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
@@ -13,74 +13,88 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal">
 
-        <!-- Nombre -->
-        <TextView
-            android:id="@+id/tvNombreCentro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Nombre del centro"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#3D2A2A" />
-
-        <!-- Dirección -->
-        <TextView
-            android:id="@+id/tvDireccionCentro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dirección"
-            android:textSize="13sp"
-            android:textColor="#666666"
-            android:layout_marginTop="4dp" />
-
-        <!-- Teléfono -->
-        <TextView
-            android:id="@+id/tvTelefonoCentro"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Teléfono"
-            android:textSize="13sp"
-            android:textColor="#666666"
-            android:layout_marginTop="2dp" />
-
-        <!-- Separador -->
+        <!-- Barra morada izquierda -->
         <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#F0F0F0"
-            android:layout_marginVertical="12dp" />
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            android:background="@color/morado_principal" />
 
-        <!-- Botones -->
+        <!-- Contenido -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/btnEditarCentro"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="Editar"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:backgroundTint="#9D676C"
-                app:cornerRadius="8dp" />
+            <!-- Nombre -->
+            <TextView
+                android:id="@+id/tvNombreCentro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre del centro"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/texto_principal" />
 
-            <Button
-                android:id="@+id/btnBorrarCentro"
-                android:layout_width="0dp"
-                android:layout_height="36dp"
-                android:layout_weight="1"
-                android:text="Borrar"
-                android:textAllCaps="false"
-                android:textColor="#9D676C"
-                android:backgroundTint="#FFF0EC"
-                app:cornerRadius="8dp" />
+            <!-- Dirección -->
+            <TextView
+                android:id="@+id/tvDireccionCentro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dirección"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="4dp" />
+
+            <!-- Teléfono -->
+            <TextView
+                android:id="@+id/tvTelefonoCentro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Teléfono"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="2dp" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0"
+                android:layout_marginVertical="12dp" />
+
+            <!-- Botones -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnEditarCentro"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Editar"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/morado_oscuro"
+                    app:cornerRadius="8dp" />
+
+                <Button
+                    android:id="@+id/btnBorrarCentro"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:text="Borrar"
+                    android:textAllCaps="false"
+                    android:textColor="@color/morado_principal"
+                    android:backgroundTint="@color/morado_claro"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
