@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF7F0">
+    android:background="#FFFFFF">
 
     <!-- Contenedor de fragments -->
     <FrameLayout

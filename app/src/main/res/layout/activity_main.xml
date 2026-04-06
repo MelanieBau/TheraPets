@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF7F0">
+    android:background="#FFFFFF">
 
 
     <!-- Centrar contenedor de imagen y texto de bienvenida -->
@@ -27,7 +27,7 @@
             android:id="@+id/logoImageTherapets"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/therapets"
+            android:src="@drawable/logo_therapets"
             android:contentDescription="Logo TheraPets" />
 
 
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:text="THERAPETS"
             android:textSize="32sp"
-            android:textColor="#9D676C"
+            android:textColor="@color/morado_principal"
             android:letterSpacing="0.5"
             android:fontFamily="@font/baloo_bhai_bold"
             android:layout_marginTop="16dp" />

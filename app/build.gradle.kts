@@ -54,4 +54,6 @@ dependencies {
     //Cerrar sesión
     //Recuperar contraseña por email
     implementation("com.google.firebase:firebase-auth")
+
+    implementation("com.airbnb.android:lottie:6.3.0")
 }

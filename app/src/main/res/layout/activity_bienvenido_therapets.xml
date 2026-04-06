@@ -5,9 +5,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFF6EE"
-    android:padding="24dp">
+    android:background="@color/morado_principal">
 
+    <!-- Contenido central -->
     <LinearLayout
         android:id="@+id/brandContainer"
         android:layout_width="wrap_content"
@@ -19,30 +19,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Logo -->
         <ImageView
             android:id="@+id/logoImage"
-            android:layout_width="110dp"
-            android:layout_height="110dp"
-            android:src="@drawable/therapets"
-            android:contentDescription="Logo"/>
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:src="@drawable/logo_therapets"
+            android:contentDescription="Logo" />
 
+        <!-- Nombre app -->
         <TextView
             android:id="@+id/tituloTexto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="THERAPETS"
-            android:textSize="24sp"
-            android:textColor="#9D676C"
+            android:textSize="28sp"
+            android:textColor="#FFFFFF"
             android:letterSpacing="0.4"
             android:fontFamily="@font/baloo_bhai_bold"
-            android:layout_marginTop="12dp"/>
+            android:layout_marginTop="16dp" />
+
+        <!-- Subtítulo -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bienestar emocional con animales"
+            android:textSize="14sp"
+            android:textColor="@color/morado_claro"
+            android:layout_marginTop="8dp" />
+
     </LinearLayout>
 
+    <!-- Botones -->
     <LinearLayout
         android:id="@+id/buttonsContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:padding="24dp"
+        android:background="@color/morado_oscuro"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -50,29 +65,27 @@
         <Button
             android:id="@+id/btnContinuar"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginBottom="14dp"
-            android:text="Continuar"
+            android:layout_height="50dp"
+            android:layout_marginBottom="12dp"
+            android:text="Iniciar sesión"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:fontFamily="@font/baloo_bhai_bold"
-            android:background="@drawable/bg_button_continuar"
-            app:backgroundTint="@null"
-            android:textColor="#3D2A2A"/>
+            android:textColor="@color/morado_oscuro"
+            android:backgroundTint="#FFFFFF"
+            app:cornerRadius="12dp" />
 
         <Button
             android:id="@+id/btnRegistrarme"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginHorizontal="24dp"
+            android:layout_height="50dp"
             android:text="Registrarme"
             android:textAllCaps="false"
             android:textSize="16sp"
             android:fontFamily="@font/baloo_bhai_bold"
-            android:background="@drawable/bg_button_registrarme"
-            app:backgroundTint="@null"
-            android:textColor="#3D2A2A"/>
+            android:textColor="#FFFFFF"
+            android:backgroundTint="@color/coral_acento"
+            app:cornerRadius="12dp" />
 
     </LinearLayout>
 
