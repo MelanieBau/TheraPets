@@ -19,7 +19,6 @@ TheraPets es una aplicación móvil que conecta a usuarios con centros de terapi
 - **IDE:** Android Studio
 - **Control de versiones:** Git / GitHub
 
----
 
 ## Roles de usuario
 
