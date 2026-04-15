@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Pantalla de confirmación con fondo blanco -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:gravity="center">
+
+    <!-- Logo de TheraPets centrado -->
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/logo_therapets"
+        android:layout_marginBottom="24dp" />
+
+    <!-- Título de confirmación -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email enviado"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/morado_principal"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Mensaje explicativo -->
+    <TextView
+        android:id="@+id/tvEmailEnviado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Te hemos enviado un email con las instrucciones para recuperar tu contraseña"
+        android:textSize="15sp"
+        android:textColor="@color/texto_secundario"
+        android:gravity="center"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="8dp"
+        android:lineSpacingExtra="4dp" />
+
+    <!-- Instrucción de qué hacer -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Revisa tu bandeja de entrada y sigue el enlace para crear una nueva contraseña"
+        android:textSize="13sp"
+        android:textColor="@color/texto_hint"
+        android:gravity="center"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginBottom="32dp"
+        android:lineSpacingExtra="4dp" />
+
+    <!-- Botón para volver al login -->
+    <Button
+        android:id="@+id/btnVolverAlLogin"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="32dp"
+        android:text="Volver al login"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/morado_oscuro"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

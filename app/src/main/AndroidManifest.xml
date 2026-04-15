@@ -35,6 +35,10 @@
         <activity android:name=".GestionCitasActivity" android:exported="false" />
         <activity android:name=".CoordinadorActivity" android:exported="false" />
 
+
+        <activity android:name=".RecuperarContrasenaActivity" android:exported="false" />
+        <activity android:name=".EmailEnviadoActivity" android:exported="false" />
+
     </application>
 
 </manifest>

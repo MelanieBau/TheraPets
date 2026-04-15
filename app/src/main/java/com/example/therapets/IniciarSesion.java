@@ -57,22 +57,9 @@ public class IniciarSesion extends AppCompatActivity {
 
         //Interación "he olvidado mi contraseña"
 
+        // Interacción "he olvidado mi contraseña"
         tvOlvide.setOnClickListener(v -> {
-            String email = etCorreo.getText().toString().trim();
-
-            if (email.isEmpty()) {
-                Toast.makeText(this, "Introduce tu email primero", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            mAuth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(this, "Email de recuperación enviado", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
-                    });
+            startActivity(new Intent(this, RecuperarContrasenaActivity.class));
         });
     }
 
