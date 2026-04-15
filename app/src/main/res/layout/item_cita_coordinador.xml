@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Tarjeta de cita para el coordinador -->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Barra morada izquierda -->
+        <View
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            android:background="@color/morado_principal" />
+
+        <!-- Contenido de la tarjeta -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Fecha y hora -->
+            <TextView
+                android:id="@+id/tvFechaCitaCoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha y hora"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="@color/texto_principal" />
+
+            <!-- Estado de la cita en píldora -->
+            <TextView
+                android:id="@+id/tvEstadoCitaCoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pendiente"
+                android:textSize="11sp"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/bg_estado_cita"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0"
+                android:layout_marginVertical="10dp" />
+
+            <!-- Nombre del paciente -->
+            <TextView
+                android:id="@+id/tvNombreCitaCoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nombre paciente"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="@color/texto_principal" />
+
+            <!-- Centro -->
+            <TextView
+                android:id="@+id/tvCentroCitaCoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Centro"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="4dp" />
+
+            <!-- Cuidador -->
+            <TextView
+                android:id="@+id/tvCuidadorCitaCoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cuidador"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="4dp" />
+
+            <!-- Motivo -->
+            <TextView
+                android:id="@+id/tvMotivoCitaCoord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Motivo"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="4dp" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0"
+                android:layout_marginVertical="10dp" />
+
+            <!-- Botones confirmar y cancelar -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Botón confirmar en verde -->
+                <Button
+                    android:id="@+id/btnConfirmarCita"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="8dp"
+                    android:text="Confirmar"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#02A009"
+                    app:cornerRadius="8dp" />
+
+                <!-- Botón cancelar en coral -->
+                <Button
+                    android:id="@+id/btnCancelarCitaCoord"
+                    android:layout_width="0dp"
+                    android:layout_height="36dp"
+                    android:layout_weight="1"
+                    android:text="Cancelar"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#E60000"
+                    app:cornerRadius="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

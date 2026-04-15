@@ -39,6 +39,8 @@
         <activity android:name=".RecuperarContrasenaActivity" android:exported="false" />
         <activity android:name=".EmailEnviadoActivity" android:exported="false" />
 
+        <activity android:name=".GestionCitasCoordinadorActivity" android:exported="false" />
+
     </application>
 
 </manifest>

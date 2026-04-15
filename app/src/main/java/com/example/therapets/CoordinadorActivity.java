@@ -54,12 +54,10 @@ public class CoordinadorActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Ir a ver citas de su centro
+        // Cuando el coordinador pulsa "Citas de mi Centro"
+        // va a su pantalla específica con botones de confirmar y cancelar
         cardCitasCentro.setOnClickListener(v -> {
-            Intent intent = new Intent(this, GestionCitasActivity.class);
-            intent.putExtra("centroId", centroId);
-            intent.putExtra("soloMiCentro", true);
-            startActivity(intent);
+            startActivity(new Intent(this, GestionCitasCoordinadorActivity.class));
         });
 
         // Cerrar sesión
