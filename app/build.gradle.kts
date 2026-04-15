@@ -58,4 +58,10 @@ dependencies {
 
     //Animación
     implementation("com.airbnb.android:lottie:6.3.0")
+
+    //Cloudinary: insertar imagenes a testimonios
+    implementation("com.cloudinary:cloudinary-android:2.3.1")
+
+    //Carga de las imagenes (URLS)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
 }

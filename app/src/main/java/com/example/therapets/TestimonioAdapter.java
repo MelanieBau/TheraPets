@@ -9,6 +9,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
+
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.List;
@@ -39,6 +42,19 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
         holder.tvNombreUsuario.setText(t.getNombreUsuario());
         holder.tvComentario.setText(t.getComentario());
         holder.tvFecha.setText(t.getFecha());
+        // Cargar la foto del testimonio si existe
+        if (t.getFotoUrl() != null && !t.getFotoUrl().isEmpty()) {
+            // Si hay foto la cargamos con Glide
+            holder.ivFotoAnimal.setVisibility(View.VISIBLE);
+            Glide.with(holder.itemView.getContext())
+                    .load(t.getFotoUrl())
+                    .centerCrop()
+                    .into(holder.ivFotoAnimal);
+        } else {
+            // Si no hay foto ocultamos el ImageView
+            holder.ivFotoAnimal.setVisibility(View.GONE);
+        }
+
         holder.tvContadorMeGusta.setText(String.valueOf(t.getMeGusta()));
 
         // Botón me gusta
@@ -83,6 +99,7 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombreUsuario, tvComentario, tvFecha, tvContadorMeGusta;
         ImageButton btnMeGusta, btnBorrar;
+        android.widget.ImageView ivFotoAnimal;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -92,6 +109,7 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
             tvContadorMeGusta = itemView.findViewById(R.id.tvContadorMeGusta);
             btnMeGusta = itemView.findViewById(R.id.btnMeGusta);
             btnBorrar = itemView.findViewById(R.id.btnBorrar);
+            ivFotoAnimal = itemView.findViewById(R.id.ivFotoAnimal);
         }
     }
 }

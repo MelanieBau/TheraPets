@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Permiso para acceder a la galería de imágenes -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +27,9 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".RecuperarContrasenaActivity" android:exported="false" />
+        <activity android:name=".EmailEnviadoActivity" android:exported="false" />
+
         <activity android:name=".BienvenidoTherapetsActivity" android:exported="false" />
         <activity android:name=".IniciarSesion" android:exported="false" />
         <activity android:name=".Registro" android:exported="false" />
@@ -35,11 +41,8 @@
         <activity android:name=".GestionCitasActivity" android:exported="false" />
         <activity android:name=".CoordinadorActivity" android:exported="false" />
 
-
-        <activity android:name=".RecuperarContrasenaActivity" android:exported="false" />
-        <activity android:name=".EmailEnviadoActivity" android:exported="false" />
-
         <activity android:name=".GestionCitasCoordinadorActivity" android:exported="false" />
+
 
     </application>
 

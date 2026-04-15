@@ -10,12 +10,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.cloudinary.android.MediaManager;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Inicializamos Cloudinary con nuestras credenciales
+        Map config = new HashMap();
+        config.put("cloud_name", "dre2owild");
+        config.put("api_key", "217945322553883");
+        config.put("api_secret", "dTifUy8AUeiXvHwbiLDU8uyk2Qs");
+        MediaManager.init(this, config);
+
+
         setContentView(R.layout.activity_main);
 
         ImageView logo = findViewById(R.id.logoImageTherapets);
