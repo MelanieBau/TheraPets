@@ -80,7 +80,7 @@ public class InicioFragment extends Fragment {
         FirebaseFirestore.getInstance()
                 .collection("citas")
                 .whereEqualTo("usuarioId", uid)
-                .orderBy("fecha", Query.Direction.ASCENDING)
+                .whereEqualTo("estado", "pendiente")
                 .limit(1)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {

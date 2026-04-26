@@ -44,7 +44,7 @@ public class GestionCitasCoordinadorActivity extends AppCompatActivity{
         rvCitas.setAdapter(adapter);
 
         //Centro del coordinador y carga de sus citas
-        obtenerCentroYCargasCitas();
+        obtenerCentroYCargarCitas();
     }
 
     private void obtenerCentroYCargarCitas() {
