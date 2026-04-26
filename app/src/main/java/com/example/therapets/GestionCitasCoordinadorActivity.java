@@ -11,10 +11,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class GestionCitasCoordinadorActivity extends AppCompatActivity{
-
-    //Variables principales
+public class GestionCitasCoordinadorActivity extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private List<Cita> listaCitas;
@@ -25,51 +22,48 @@ public class GestionCitasCoordinadorActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_citas_coordinador);
 
-        //Inciar Firestore
-
         db = FirebaseFirestore.getInstance();
 
-        //Configuración del RecyclerView
         RecyclerView rvCitas = findViewById(R.id.rvCitasCoordinador);
         rvCitas.setLayoutManager(new LinearLayoutManager(this));
 
-        //Inicio de la lista de citas y el Adapter
-
         listaCitas = new ArrayList<>();
         adapter = new CitaCoordinadorAdapter(listaCitas,
-                // Cuando el coordinador pulsa Confirmar
                 cita -> confirmarCita(cita),
-                // Cuando el coordinador pulsa Cancelar
                 cita -> cancelarCita(cita));
         rvCitas.setAdapter(adapter);
 
-        //Centro del coordinador y carga de sus citas
         obtenerCentroYCargarCitas();
     }
 
     private void obtenerCentroYCargarCitas() {
-        // Obtenemos el UID del coordinador logueado
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        android.util.Log.d("COORDINADOR", "UID del coordinador: " + uid);
 
-        // Leemos el centroId del coordinador desde Firestore
         db.collection("usuarios")
                 .document(uid)
                 .get()
                 .addOnSuccessListener(document -> {
                     if (document.exists()) {
                         String centro = document.getString("centroId");
-                        // Cargamos solo las citas de su centro
+                        android.util.Log.d("COORDINADOR", "centroId encontrado: " + centro);
                         cargarCitasDeCentro(centro);
+                    } else {
+                        android.util.Log.d("COORDINADOR", "Documento del coordinador no existe");
                     }
+                })
+                .addOnFailureListener(e -> {
+                    android.util.Log.d("COORDINADOR", "Error al obtener coordinador: " + e.getMessage());
                 });
     }
 
     private void cargarCitasDeCentro(String centro) {
-        // Buscamos en Firestore las citas que pertenecen a este centro
+        android.util.Log.d("COORDINADOR", "Buscando citas con centro: " + centro);
         db.collection("citas")
                 .whereEqualTo("centro", centro)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
+                    android.util.Log.d("COORDINADOR", "Citas encontradas: " + queryDocumentSnapshots.size());
                     listaCitas.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Cita cita = doc.toObject(Cita.class);
@@ -79,30 +73,27 @@ public class GestionCitasCoordinadorActivity extends AppCompatActivity{
                     adapter.notifyDataSetChanged();
                 })
                 .addOnFailureListener(e -> {
+                    android.util.Log.d("COORDINADOR", "Error al cargar citas: " + e.getMessage());
                     Toast.makeText(this, "Error al cargar citas", Toast.LENGTH_SHORT).show();
                 });
     }
 
     private void confirmarCita(Cita cita) {
-        // Actualizamos el estado de la cita a "confirmada" en Firestore
         db.collection("citas")
                 .document(cita.getId())
                 .update("estado", "confirmada")
                 .addOnSuccessListener(a -> {
                     Toast.makeText(this, "Cita confirmada", Toast.LENGTH_SHORT).show();
-                    // Recargamos la lista para reflejar el cambio
                     obtenerCentroYCargarCitas();
                 });
     }
 
     private void cancelarCita(Cita cita) {
-        // Actualizamos el estado de la cita a "cancelada" en Firestore
         db.collection("citas")
                 .document(cita.getId())
                 .update("estado", "cancelada")
                 .addOnSuccessListener(a -> {
                     Toast.makeText(this, "Cita cancelada", Toast.LENGTH_SHORT).show();
-                    // Recargamos la lista para reflejar el cambio
                     obtenerCentroYCargarCitas();
                 });
     }

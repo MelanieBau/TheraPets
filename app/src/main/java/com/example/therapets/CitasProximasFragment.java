@@ -35,7 +35,9 @@ public class CitasProximasFragment extends Fragment {
         FirebaseFirestore.getInstance()
                 .collection("citas")
                 .whereEqualTo("usuarioId", uid)
-                .whereEqualTo("estado", "pendiente")
+
+                //Se muestra la cita en el apartado del usuario cuando esta pendiente y también cuando ya esta confirmada.
+                .whereIn("estado", java.util.Arrays.asList("pendiente", "confirmada"))
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     lista.clear();
