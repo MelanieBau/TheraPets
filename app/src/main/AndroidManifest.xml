@@ -43,6 +43,8 @@
 
         <activity android:name=".GestionCitasCoordinadorActivity" android:exported="false" />
 
+        <activity android:name=".ValorarCitaActivity" android:exported="false" />
+
 
     </application>
 

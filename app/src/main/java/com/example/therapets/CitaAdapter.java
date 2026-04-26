@@ -1,5 +1,6 @@
 package com.example.therapets;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,7 +66,23 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
                         });
             });
         } else {
+            //En el apartado de citas pasadas mostramos el boton de valoracion
             holder.btnCancelarCita.setVisibility(View.GONE);
+
+            // Si la cita está completada mostramos el botón valorar
+            if (cita.getEstado().equals("completada")) {
+                holder.btnValorarCita.setVisibility(View.VISIBLE);
+                holder.btnValorarCita.setOnClickListener(v -> {
+                    // Abrimos la pantalla de valoración pasando los datos de la cita
+                    Intent intent = new Intent(v.getContext(), ValorarCitaActivity.class);
+                    intent.putExtra("citaId", cita.getId());
+                    intent.putExtra("centro", cita.getCentro());
+                    intent.putExtra("fecha", cita.getFecha());
+                    v.getContext().startActivity(intent);
+                });
+            } else {
+                holder.btnValorarCita.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -76,7 +93,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvFechaCita, tvEstado, tvCentroCita, tvCuidadorCita, tvMotivoCita;
-        Button btnCancelarCita;
+        Button btnCancelarCita, btnValorarCita;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -86,6 +103,8 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
             tvCuidadorCita = itemView.findViewById(R.id.tvCuidadorCita);
             tvMotivoCita = itemView.findViewById(R.id.tvMotivoCita);
             btnCancelarCita = itemView.findViewById(R.id.btnCancelarCita);
+            btnValorarCita = itemView.findViewById(R.id.btnValorarCita);
+
         }
     }
 }

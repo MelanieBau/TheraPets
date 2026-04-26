@@ -115,6 +115,20 @@
                 android:backgroundTint="@color/morado_oscuro"
                 app:cornerRadius="8dp" />
 
+            <!-- Botón valorar sesión, solo visible en citas completadas -->
+            <Button
+                android:id="@+id/btnValorarCita"
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:layout_marginTop="8dp"
+                android:text="Valorar sesion"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/coral_acento"
+                app:cornerRadius="8dp" />
+
+
         </LinearLayout>
 
     </LinearLayout>
