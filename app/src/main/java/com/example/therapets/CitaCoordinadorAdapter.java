@@ -15,8 +15,9 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
     private List<Cita> lista;
     private OnConfirmarListener onConfirmar;
     private OnCancelarListener onCancelar;
+    private OnCompletarListener onCompletar;
 
-    // Interfaces para manejar los clicks de confirmar y cancelar
+    // Interfaces para manejar los clicks de confirmar, cancelar y completar
     public interface OnConfirmarListener {
         void onConfirmar(Cita cita);
     }
@@ -25,17 +26,21 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
         void onCancelar(Cita cita);
     }
 
-    // Constructor del adapter
-    public CitaCoordinadorAdapter(List<Cita> lista, OnConfirmarListener onConfirmar, OnCancelarListener onCancelar) {
+    public interface OnCompletarListener {
+        void onCompletar(Cita cita);
+    }
+
+    // Constructor del adapter actualizado con el listener de completar
+    public CitaCoordinadorAdapter(List<Cita> lista, OnConfirmarListener onConfirmar, OnCancelarListener onCancelar, OnCompletarListener onCompletar) {
         this.lista = lista;
         this.onConfirmar = onConfirmar;
         this.onCancelar = onCancelar;
+        this.onCompletar = onCompletar;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        // Inflamos el layout de cada tarjeta de cita
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_cita_coordinador, parent, false);
         return new ViewHolder(view);
@@ -53,21 +58,28 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
         holder.tvMotivo.setText("Motivo: " + cita.getMotivo());
         holder.tvEstado.setText(cita.getEstado());
 
-        // Solo mostramos los botones si la cita está pendiente
+        // Lógica de botones según el estado de la cita
         if (cita.getEstado().equals("pendiente")) {
+            // Cita pendiente: mostrar confirmar y cancelar
             holder.btnConfirmar.setVisibility(View.VISIBLE);
             holder.btnCancelar.setVisibility(View.VISIBLE);
-        } else {
-            // Si ya está confirmada o cancelada ocultamos los botones
+            holder.btnCompletar.setVisibility(View.GONE);
+        } else if (cita.getEstado().equals("confirmada")) {
+            // Cita confirmada: mostrar solo completar
             holder.btnConfirmar.setVisibility(View.GONE);
             holder.btnCancelar.setVisibility(View.GONE);
+            holder.btnCompletar.setVisibility(View.VISIBLE);
+        } else {
+            // Cita completada o cancelada: sin botones
+            holder.btnConfirmar.setVisibility(View.GONE);
+            holder.btnCancelar.setVisibility(View.GONE);
+            holder.btnCompletar.setVisibility(View.GONE);
         }
 
-        // Cuando pulsa confirmar
+        // Listeners de los botones
         holder.btnConfirmar.setOnClickListener(v -> onConfirmar.onConfirmar(cita));
-
-        // Cuando pulsa cancelar
         holder.btnCancelar.setOnClickListener(v -> onCancelar.onCancelar(cita));
+        holder.btnCompletar.setOnClickListener(v -> onCompletar.onCompletar(cita));
     }
 
     @Override
@@ -75,10 +87,10 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
         return lista.size();
     }
 
-    // ViewHolder con todas las referencias a los elementos de la tarjeta
+    // ViewHolder con todas las referencias incluyendo el botón completar
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvFecha, tvNombre, tvCentro, tvCuidador, tvMotivo, tvEstado;
-        Button btnConfirmar, btnCancelar;
+        Button btnConfirmar, btnCancelar, btnCompletar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -90,6 +102,7 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
             tvEstado = itemView.findViewById(R.id.tvEstadoCitaCoord);
             btnConfirmar = itemView.findViewById(R.id.btnConfirmarCita);
             btnCancelar = itemView.findViewById(R.id.btnCancelarCitaCoord);
+            btnCompletar = itemView.findViewById(R.id.btnCompletarCita);
         }
     }
 }

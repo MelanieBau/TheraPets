@@ -137,6 +137,18 @@
                     android:backgroundTint="#E60000"
                     app:cornerRadius="8dp" />
 
+                <!-- Botón marcar como completada, solo visible cuando está confirmada -->
+                <Button
+                    android:id="@+id/btnCompletarCita"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Marcar como completada"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="@color/morado_oscuro"
+                    app:cornerRadius="8dp" />
+
             </LinearLayout>
 
         </LinearLayout>

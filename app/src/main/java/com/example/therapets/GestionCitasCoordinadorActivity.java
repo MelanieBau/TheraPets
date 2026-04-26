@@ -30,7 +30,8 @@ public class GestionCitasCoordinadorActivity extends AppCompatActivity {
         listaCitas = new ArrayList<>();
         adapter = new CitaCoordinadorAdapter(listaCitas,
                 cita -> confirmarCita(cita),
-                cita -> cancelarCita(cita));
+                cita -> cancelarCita(cita),
+                cita -> completarCita(cita));
         rvCitas.setAdapter(adapter);
 
         obtenerCentroYCargarCitas();
@@ -95,6 +96,21 @@ public class GestionCitasCoordinadorActivity extends AppCompatActivity {
                 .addOnSuccessListener(a -> {
                     Toast.makeText(this, "Cita cancelada", Toast.LENGTH_SHORT).show();
                     obtenerCentroYCargarCitas();
+                });
+    }
+
+    private void completarCita(Cita cita) {
+        // Actualizamos el estado de la cita a "completada" en Firestore
+        db.collection("citas")
+                .document(cita.getId())
+                .update("estado", "completada")
+                .addOnSuccessListener(a -> {
+                    Toast.makeText(this, "Cita marcada como completada", Toast.LENGTH_SHORT).show();
+                    // Recargamos la lista para reflejar el cambio
+                    obtenerCentroYCargarCitas();
+                })
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error al completar la cita", Toast.LENGTH_SHORT).show();
                 });
     }
 }
