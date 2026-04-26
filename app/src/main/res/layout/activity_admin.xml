@@ -119,7 +119,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Gestionar Animales"
+                    android:text="Gestionar Coordinadores"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="@color/texto_principal" />

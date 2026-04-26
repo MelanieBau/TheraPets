@@ -6,70 +6,77 @@
     android:orientation="vertical"
     android:padding="20dp">
 
-
+    <!-- Nombre del coordinador -->
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/RoundedInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etNombreAnimal"
+            android:id="@+id/etNombreCoordinador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre del animal"
-            android:inputType="textCapWords" />
+            android:hint="Nombre completo"
+            android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Email del coordinador -->
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/RoundedInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTipoAnimal"
+            android:id="@+id/etEmailCoordinador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Tipo (perro, gato, conejo...)"
-            android:inputType="textCapWords" />
+            android:hint="Email"
+            android:inputType="textEmailAddress" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Contraseña del coordinador -->
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/RoundedInputLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp">
+        android:layout_marginBottom="12dp"
+        app:endIconMode="password_toggle">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etCentroAnimal"
+            android:id="@+id/etPasswordCoordinador"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Centro al que pertenece"
-            android:inputType="textCapWords" />
+            android:hint="Contraseña"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <!-- Spinner para seleccionar el centro -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Centro asignado"
+        android:textSize="13sp"
+        android:textColor="@color/texto_secundario"
+        android:layout_marginBottom="6dp" />
 
-    <!-- Vista previa de la foto de la mascota para que usuario pueda seleccionar a su preferencia-->
-    <ImageView
-        android:id="@+id/ivFotoAnimalDialog"
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:background="@color/morado_claro"
-        android:layout_marginTop="4dp"
-        android:contentDescription="Foto del animal" />
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FFFFFF">
 
-    <!-- Botón para seleccionar foto de la galería -->
-    <Button
-        android:id="@+id/btnSeleccionarFotoAnimal"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:text="Seleccionar foto"
-        android:textAllCaps="false"
-        android:textColor="@color/morado_principal"
-        android:backgroundTint="@color/morado_claro"
-        app:cornerRadius="12dp" />
+        <Spinner
+            android:id="@+id/spCentroCoordinador"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:paddingHorizontal="16dp" />
+
+    </androidx.cardview.widget.CardView>
 
 </LinearLayout>

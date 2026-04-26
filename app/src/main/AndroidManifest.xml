@@ -45,6 +45,8 @@
 
         <activity android:name=".ValorarCitaActivity" android:exported="false" />
 
+        <activity android:name=".GestionCoordinadoresActivity" android:exported="false" />
+        <activity android:name=".AgregarAnimalActivity" android:exported="false" />
 
     </application>
 

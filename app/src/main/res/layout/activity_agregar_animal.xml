@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Cabecera morada -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/morado_principal"
+            android:padding="20dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Añadir animal"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rellena los datos del animal"
+                android:textSize="13sp"
+                android:textColor="@color/morado_claro"
+                android:layout_marginTop="4dp" />
+
+        </LinearLayout>
+
+        <!-- Formulario -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Foto del animal -->
+            <ImageView
+                android:id="@+id/ivFotoAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:scaleType="centerCrop"
+                android:background="@color/morado_claro"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Botón seleccionar foto -->
+            <Button
+                android:id="@+id/btnSeleccionarFotoAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="16dp"
+                android:text="Seleccionar foto"
+                android:textAllCaps="false"
+                android:textColor="@color/morado_principal"
+                android:backgroundTint="@color/morado_claro"
+                app:cornerRadius="12dp" />
+
+            <!-- Nombre -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNombreAnimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nombre del animal"
+                    android:inputType="textCapWords" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Tipo -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etTipoAnimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Tipo (perro, gato, conejo...)"
+                    android:inputType="textCapWords" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Centro -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etCentroAnimal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Centro al que pertenece"
+                    android:inputType="textCapWords" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Botón guardar -->
+            <Button
+                android:id="@+id/btnGuardarAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Guardar animal"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/morado_oscuro"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

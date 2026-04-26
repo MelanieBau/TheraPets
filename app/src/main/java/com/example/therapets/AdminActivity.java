@@ -15,7 +15,7 @@ public class AdminActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
 
         CardView cardCentros = findViewById(R.id.cardCentros);
-        CardView cardAnimales = findViewById(R.id.cardAnimales);
+        CardView cardCoordinadores = findViewById(R.id.cardAnimales);
         CardView cardCitas = findViewById(R.id.cardCitas);
         Button btnCerrarSesion = findViewById(R.id.btnCerrarSesionAdmin);
 
@@ -24,10 +24,9 @@ public class AdminActivity extends AppCompatActivity {
             startActivity(new Intent(this, GestionCentrosActivity.class));
         });
 
-        // Ir a gestionar animales
-        cardAnimales.setOnClickListener(v -> {
-            startActivity(new Intent(this, GestionAnimalesActivity.class));
-        });
+        // Ir a gestionar coordinadores
+        cardCoordinadores.setOnClickListener(v ->
+                startActivity(new Intent(this, GestionCoordinadoresActivity.class)));
 
         // Ir a ver todas las citas
         cardCitas.setOnClickListener(v -> {
