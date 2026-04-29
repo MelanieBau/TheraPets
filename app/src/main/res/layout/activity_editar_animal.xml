@@ -21,7 +21,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Añadir animal"
+                android:text="Editar animal"
                 android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF" />
@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Rellena los datos del animal"
+                android:text="Modifica los datos del animal"
                 android:textSize="13sp"
                 android:textColor="@color/morado_claro"
                 android:layout_marginTop="4dp" />
@@ -45,20 +45,20 @@
 
             <!-- Foto del animal -->
             <ImageView
-                android:id="@+id/ivFotoAnimal"
+                android:id="@+id/ivFotoAnimalEditar"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:background="@color/morado_claro"
                 android:layout_marginBottom="12dp" />
 
-            <!-- Botón seleccionar foto -->
+            <!-- Botón cambiar foto -->
             <Button
-                android:id="@+id/btnSeleccionarFotoAnimal"
+                android:id="@+id/btnSeleccionarFotoEditar"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginBottom="16dp"
-                android:text="Seleccionar foto"
+                android:text="Cambiar foto"
                 android:textAllCaps="false"
                 android:textColor="@color/morado_principal"
                 android:backgroundTint="@color/morado_claro"
@@ -72,7 +72,7 @@
                 android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNombreAnimal"
+                    android:id="@+id/etNombreAnimalEditar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nombre del animal"
@@ -88,7 +88,7 @@
                 android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTipoAnimal"
+                    android:id="@+id/etTipoAnimalEditar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Tipo (perro, gato, conejo...)"
@@ -104,7 +104,7 @@
                 android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etRazaAnimal"
+                    android:id="@+id/etRazaAnimalEditar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Raza (ej: Golden Retriever)"
@@ -120,7 +120,7 @@
                 android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEdadAnimal"
+                    android:id="@+id/etEdadAnimalEditar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Edad (ej: 3 años)"
@@ -136,7 +136,7 @@
                 android:layout_marginBottom="24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etEspecialidadAnimal"
+                    android:id="@+id/etEspecialidadAnimalEditar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Especialidad (ej: Ansiedad y estrés)"
@@ -146,10 +146,10 @@
 
             <!-- Botón guardar -->
             <Button
-                android:id="@+id/btnGuardarAnimal"
+                android:id="@+id/btnGuardarAnimalEditar"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Guardar animal"
+                android:text="Guardar cambios"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"

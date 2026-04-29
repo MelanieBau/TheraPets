@@ -47,6 +47,7 @@
 
         <activity android:name=".GestionCoordinadoresActivity" android:exported="false" />
         <activity android:name=".AgregarAnimalActivity" android:exported="false" />
+        <activity android:name=".EditarAnimalActivity" android:exported="false" />
 
     </application>
 

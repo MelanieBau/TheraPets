@@ -1,23 +1,23 @@
 package com.example.therapets;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder> {
 
     private List<Animal> lista;
-    private OnEditarListener onEditar;
     private OnBorrarListener onBorrar;
-
-    public interface OnEditarListener {
-        void onEditar(Animal animal);
-    }
 
     public interface OnBorrarListener {
         void onBorrar(Animal animal);
@@ -25,8 +25,12 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
 
     public AnimalAdapter(List<Animal> lista, OnEditarListener onEditar, OnBorrarListener onBorrar) {
         this.lista = lista;
-        this.onEditar = onEditar;
         this.onBorrar = onBorrar;
+    }
+
+    // Mantenemos la interfaz para no romper el código existente
+    public interface OnEditarListener {
+        void onEditar(Animal animal);
     }
 
     @NonNull
@@ -45,7 +49,32 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
         holder.tvTipo.setText("Tipo: " + animal.getTipo());
         holder.tvCentro.setText("Centro: " + animal.getCentro());
 
-        holder.btnEditar.setOnClickListener(v -> onEditar.onEditar(animal));
+        // Cargar foto del animal con Glide
+        ImageView ivFoto = holder.itemView.findViewById(R.id.ivFotoAnimalItem);
+        if (animal.getFotoUrl() != null && !animal.getFotoUrl().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(animal.getFotoUrl())
+                    .centerCrop()
+                    .into(ivFoto);
+        } else {
+            ivFoto.setBackgroundColor(holder.itemView.getContext()
+                    .getColor(R.color.morado_claro));
+        }
+
+
+        // Abrimos EditarAnimalActivity pasando los datos del animal
+        holder.btnEditar.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), EditarAnimalActivity.class);
+            intent.putExtra("animalId", animal.getId());
+            intent.putExtra("nombre", animal.getNombre());
+            intent.putExtra("tipo", animal.getTipo());
+            intent.putExtra("raza", animal.getRaza());
+            intent.putExtra("edad", animal.getEdad());
+            intent.putExtra("especialidad", animal.getEspecialidad());
+            intent.putExtra("fotoUrl", animal.getFotoUrl());
+            v.getContext().startActivity(intent);
+        });
+
         holder.btnBorrar.setOnClickListener(v -> onBorrar.onBorrar(animal));
     }
 

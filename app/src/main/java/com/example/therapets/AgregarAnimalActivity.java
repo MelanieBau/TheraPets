@@ -1,5 +1,6 @@
 package com.example.therapets;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,9 @@ import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +27,7 @@ public class AgregarAnimalActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private String centroId;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +38,11 @@ public class AgregarAnimalActivity extends AppCompatActivity {
 
         ImageView ivFoto = findViewById(R.id.ivFotoAnimal);
         Button btnFoto = findViewById(R.id.btnSeleccionarFotoAnimal);
-        TextInputEditText etNombre = findViewById(R.id.etNombreAnimal);
-        TextInputEditText etTipo = findViewById(R.id.etTipoAnimal);
+        TextInputEditText Nombre = findViewById(R.id.etNombreAnimal);
+        TextInputEditText Tipo = findViewById(R.id.etTipoAnimal);
+        TextInputEditText Raza = findViewById(R.id.etRazaAnimal);
+        TextInputEditText Edad = findViewById(R.id.etEdadAnimal);
+        TextInputEditText Especialidad = findViewById(R.id.etEspecialidadAnimal);
         Button btnGuardar = findViewById(R.id.btnGuardarAnimal);
 
         // Ocultamos el campo centro porque se asigna automáticamente
@@ -49,8 +57,8 @@ public class AgregarAnimalActivity extends AppCompatActivity {
 
         // Guardar animal
         btnGuardar.setOnClickListener(v -> {
-            String nombre = etNombre.getText().toString().trim();
-            String tipo = etTipo.getText().toString().trim();
+            String nombre = Nombre.getText().toString().trim();
+            String tipo = Tipo.getText().toString().trim();
 
             if (nombre.isEmpty()) {
                 Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();
