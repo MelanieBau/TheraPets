@@ -51,6 +51,7 @@
         <activity android:name=".EditarAnimal" android:exported="false" />
 
         <activity android:name=".GestionHorarios" android:exported="false" />
+        <activity android:name=".AgregarCentro" android:exported="false" />
 
     </application>
 

@@ -1,6 +1,7 @@
 package com.example.therapets;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,8 +41,7 @@ public class GestionCentros extends AppCompatActivity {
 
         cargarCentros();
 
-        btnAgregar.setOnClickListener(v -> mostrarDialogoAgregar());
-    }
+        btnAgregar.setOnClickListener(v -> startActivity(new Intent(this, AgregarCentro.class)));    }
 
     private void cargarCentros() {
         db.collection("centros")

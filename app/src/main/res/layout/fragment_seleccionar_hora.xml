@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF">
+
+    <!-- Cabecera morada -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/morado_principal"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Agendar cita"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Selecciona una hora disponible"
+            android:textSize="13sp"
+            android:textColor="@color/morado_claro"
+            android:layout_marginTop="4dp" />
+
+    </LinearLayout>
+
+    <!-- Contenido -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- Fecha elegida -->
+            <TextView
+                android:id="@+id/tvFechaPasoHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/texto_principal"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Aquí se añaden los botones de horas dinámicamente -->
+            <LinearLayout
+                android:id="@+id/contenedorHoras"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+
+            <!-- Mensaje si no hay horarios -->
+            <TextView
+                android:id="@+id/tvSinHorarios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No hay horarios disponibles para este día"
+                android:textSize="14sp"
+                android:textColor="@color/texto_secundario"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <!-- Botón siguiente -->
+    <Button
+        android:id="@+id/btnSiguientePasoHora"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="16dp"
+        android:text="Siguiente"
+        android:textAllCaps="false"
+        android:textSize="16sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/morado_oscuro"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

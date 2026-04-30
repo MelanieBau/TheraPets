@@ -32,49 +32,12 @@
 
     </LinearLayout>
 
-    <!-- Contenido -->
-    <LinearLayout
+    <!-- Lista de centros con tarjetas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCentrosSeleccion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Centro disponible"
-            android:textSize="14sp"
-            android:textColor="@color/texto_secundario"
-            android:layout_marginBottom="8dp" />
-
-        <!-- Spinner con borde redondeado -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="#FFFFFF">
-
-            <Spinner
-                android:id="@+id/spCentro"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:paddingHorizontal="16dp" />
-
-        </androidx.cardview.widget.CardView>
-
-        <Button
-            android:id="@+id/btnSiguiente2"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:text="Siguiente"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="@color/morado_oscuro"
-            app:cornerRadius="12dp" />
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:padding="12dp"
+        android:clipToPadding="false" />
 
 </LinearLayout>
