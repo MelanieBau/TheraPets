@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class CoordinadorActivity extends AppCompatActivity {
+public class Coordinador extends AppCompatActivity {
 
     private String centroId;
 
@@ -22,6 +22,7 @@ public class CoordinadorActivity extends AppCompatActivity {
         CardView cardMiCentro = findViewById(R.id.cardMiCentro);
         CardView cardMisAnimales = findViewById(R.id.cardMisAnimales);
         CardView cardCitasCentro = findViewById(R.id.cardCitasCentro);
+        CardView cardHorarios = findViewById(R.id.cardHorarios);
         Button btnCerrarSesion = findViewById(R.id.btnCerrarSesionCoordinador);
 
         // Obtener datos del coordinador desde Firestore
@@ -40,7 +41,7 @@ public class CoordinadorActivity extends AppCompatActivity {
 
         // Ir a gestionar su centro
         cardMiCentro.setOnClickListener(v -> {
-            Intent intent = new Intent(this, GestionCentrosActivity.class);
+            Intent intent = new Intent(this, GestionCentros.class);
             intent.putExtra("centroId", centroId);
             intent.putExtra("soloMiCentro", true);
             startActivity(intent);
@@ -48,17 +49,19 @@ public class CoordinadorActivity extends AppCompatActivity {
 
         // Ir a gestionar sus animales
         cardMisAnimales.setOnClickListener(v -> {
-            Intent intent = new Intent(this, GestionAnimalesActivity.class);
+            Intent intent = new Intent(this, GestionAnimales.class);
             intent.putExtra("centroId", centroId);
             intent.putExtra("soloMiCentro", true);
             startActivity(intent);
         });
 
-        // Cuando el coordinador pulsa "Citas de mi Centro"
-        // va a su pantalla específica con botones de confirmar y cancelar
-        cardCitasCentro.setOnClickListener(v -> {
-            startActivity(new Intent(this, GestionCitasCoordinadorActivity.class));
-        });
+        // Ir a citas de mi centro
+        cardCitasCentro.setOnClickListener(v ->
+                startActivity(new Intent(this, GestionCitasCoordinador.class)));
+
+        // Ir a gestionar horarios
+        cardHorarios.setOnClickListener(v ->
+                startActivity(new Intent(this, GestionHorarios.class)));
 
         // Cerrar sesión
         btnCerrarSesion.setOnClickListener(v -> {

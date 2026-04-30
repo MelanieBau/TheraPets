@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Título -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Añadir horario disponible"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="@color/texto_principal"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Selector de día -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Día de la semana"
+        android:textSize="13sp"
+        android:textColor="@color/texto_secundario"
+        android:layout_marginBottom="6dp" />
+
+    <Spinner
+        android:id="@+id/spDia"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/bg_input"
+        android:paddingHorizontal="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Hora seleccionada -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hora disponible"
+        android:textSize="13sp"
+        android:textColor="@color/texto_secundario"
+        android:layout_marginBottom="6dp" />
+
+    <!-- Muestra la hora elegida -->
+    <TextView
+        android:id="@+id/tvHoraSeleccionada"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Pulsa para elegir hora"
+        android:textSize="15sp"
+        android:textColor="@color/texto_hint"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:background="@drawable/bg_input"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Botón para abrir el TimePicker -->
+    <Button
+        android:id="@+id/btnElegirHora"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="Elegir hora"
+        android:textAllCaps="false"
+        android:textColor="@color/morado_principal"
+        android:backgroundTint="@color/morado_claro"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

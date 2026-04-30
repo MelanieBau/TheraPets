@@ -7,7 +7,7 @@ import androidx.cardview.widget.CardView;
 import android.widget.Button;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class AdminActivity extends AppCompatActivity {
+public class Admin extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,16 +21,16 @@ public class AdminActivity extends AppCompatActivity {
 
         // Ir a gestionar centros
         cardCentros.setOnClickListener(v -> {
-            startActivity(new Intent(this, GestionCentrosActivity.class));
+            startActivity(new Intent(this, GestionCentros.class));
         });
 
         // Ir a gestionar coordinadores
         cardCoordinadores.setOnClickListener(v ->
-                startActivity(new Intent(this, GestionCoordinadoresActivity.class)));
+                startActivity(new Intent(this, GestionCoordinadores.class)));
 
         // Ir a ver todas las citas
         cardCitas.setOnClickListener(v -> {
-            startActivity(new Intent(this, GestionCitasActivity.class));
+            startActivity(new Intent(this, GestionCitas.class));
         });
 
         // Cerrar sesión

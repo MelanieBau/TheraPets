@@ -14,10 +14,6 @@ import androidx.fragment.app.Fragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
 public class ConfirmacionCitaFragment extends Fragment {
 
     public ConfirmacionCitaFragment() {
@@ -74,7 +70,7 @@ public class ConfirmacionCitaFragment extends Fragment {
                 .addOnSuccessListener(documentReference -> {
                     CitaDraftStore.clear();
 
-                    Intent intent = new Intent(requireContext(), HomeActivity.class);
+                    Intent intent = new Intent(requireContext(), Home.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra("open_tab", "inicio");
                     startActivity(intent);

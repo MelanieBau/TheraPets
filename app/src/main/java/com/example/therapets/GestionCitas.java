@@ -10,7 +10,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestionCitasActivity extends AppCompatActivity {
+public class GestionCitas extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private List<Cita> listaCitas;

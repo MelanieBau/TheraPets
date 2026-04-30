@@ -1,11 +1,9 @@
 package com.example.therapets;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -15,38 +13,30 @@ import com.cloudinary.android.callback.ErrorInfo;
 import com.cloudinary.android.callback.UploadCallback;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class AgregarAnimalActivity extends AppCompatActivity {
+public class AgregarAnimal extends AppCompatActivity {
 
     private Uri fotoSeleccionada = null;
     private static final int PICK_IMAGE = 100;
     private String centroId;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_animal);
 
-        // Recibimos el centroId del coordinador automáticamente
         centroId = getIntent().getStringExtra("centroId");
 
         ImageView ivFoto = findViewById(R.id.ivFotoAnimal);
         Button btnFoto = findViewById(R.id.btnSeleccionarFotoAnimal);
-        TextInputEditText Nombre = findViewById(R.id.etNombreAnimal);
-        TextInputEditText Tipo = findViewById(R.id.etTipoAnimal);
-        TextInputEditText Raza = findViewById(R.id.etRazaAnimal);
-        TextInputEditText Edad = findViewById(R.id.etEdadAnimal);
-        TextInputEditText Especialidad = findViewById(R.id.etEspecialidadAnimal);
+        TextInputEditText nombre = findViewById(R.id.etNombreAnimal);
+        TextInputEditText tipo = findViewById(R.id.etTipoAnimal);
+        TextInputEditText raza = findViewById(R.id.etRazaAnimal);
+        TextInputEditText edad = findViewById(R.id.etEdadAnimal);
+        TextInputEditText especialidad = findViewById(R.id.etEspecialidadAnimal);
         Button btnGuardar = findViewById(R.id.btnGuardarAnimal);
-
-        // Ocultamos el campo centro porque se asigna automáticamente
-        findViewById(R.id.etCentroAnimal).setVisibility(View.GONE);
 
         // Abrir galería
         btnFoto.setOnClickListener(v -> {
@@ -57,18 +47,21 @@ public class AgregarAnimalActivity extends AppCompatActivity {
 
         // Guardar animal
         btnGuardar.setOnClickListener(v -> {
-            String nombre = Nombre.getText().toString().trim();
-            String tipo = Tipo.getText().toString().trim();
+            String nombreStr = nombre.getText().toString().trim();
+            String tipoStr = tipo.getText().toString().trim();
+            String razaStr = raza.getText().toString().trim();
+            String edadStr = edad.getText().toString().trim();
+            String especialidadStr = especialidad.getText().toString().trim();
 
-            if (nombre.isEmpty()) {
+            if (nombreStr.isEmpty()) {
                 Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             if (fotoSeleccionada != null) {
-                subirFotoYGuardar(nombre, tipo);
+                subirFotoYGuardar(nombreStr, tipoStr, razaStr, edadStr, especialidadStr);
             } else {
-                guardarAnimal(nombre, tipo, "");
+                guardarAnimal(nombreStr, tipoStr, razaStr, edadStr, especialidadStr, "");
             }
         });
     }
@@ -83,9 +76,8 @@ public class AgregarAnimalActivity extends AppCompatActivity {
         }
     }
 
-    private void subirFotoYGuardar(String nombre, String tipo) {
+    private void subirFotoYGuardar(String nombre, String tipo, String raza, String edad, String especialidad) {
         Toast.makeText(this, "Subiendo foto...", Toast.LENGTH_SHORT).show();
-
         MediaManager.get().upload(fotoSeleccionada)
                 .callback(new UploadCallback() {
                     @Override
@@ -96,13 +88,12 @@ public class AgregarAnimalActivity extends AppCompatActivity {
 
                     @Override
                     public void onSuccess(String requestId, Map resultData) {
-                        String fotoUrl = resultData.get("secure_url").toString();
-                        guardarAnimal(nombre, tipo, fotoUrl);
+                        guardarAnimal(nombre, tipo, raza, edad, especialidad, resultData.get("secure_url").toString());
                     }
 
                     @Override
                     public void onError(String requestId, ErrorInfo error) {
-                        Toast.makeText(AgregarAnimalActivity.this, "Error al subir foto", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AgregarAnimal.this, "Error al subir foto", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -111,11 +102,14 @@ public class AgregarAnimalActivity extends AppCompatActivity {
                 .dispatch();
     }
 
-    private void guardarAnimal(String nombre, String tipo, String fotoUrl) {
+    private void guardarAnimal(String nombre, String tipo, String raza, String edad, String especialidad, String fotoUrl) {
         Map<String, Object> animal = new HashMap<>();
         animal.put("nombre", nombre);
         animal.put("tipo", tipo);
-        animal.put("centro", centroId); // Centro automático del coordinador
+        animal.put("raza", raza);
+        animal.put("edad", edad);
+        animal.put("especialidad", especialidad);
+        animal.put("centro", centroId);
         animal.put("fotoUrl", fotoUrl);
 
         FirebaseFirestore.getInstance()
@@ -125,8 +119,7 @@ public class AgregarAnimalActivity extends AppCompatActivity {
                     Toast.makeText(this, "Animal guardado", Toast.LENGTH_SHORT).show();
                     finish();
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
     }
 }

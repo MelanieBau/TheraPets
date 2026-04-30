@@ -4,11 +4,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class Paso1DatosFragment extends Fragment {
 
@@ -20,39 +25,58 @@ public class Paso1DatosFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        EditText etNombres = view.findViewById(R.id.etNombres);
-        EditText etApellidos = view.findViewById(R.id.etApellidos);
-        EditText etTelefono = view.findViewById(R.id.etTelefono);
-        EditText etFecha = view.findViewById(R.id.etFecha);
-        EditText etHora = view.findViewById(R.id.etHora);
-        Button btn = view.findViewById(R.id.btnSiguiente1);
+        EditText nombres = view.findViewById(R.id.etNombres);
+        EditText apellidos = view.findViewById(R.id.etApellidos);
+        EditText telefono = view.findViewById(R.id.etTelefono);
+        TextView fechaSeleccionada = view.findViewById(R.id.tvFechaSeleccionada);
+        Button elegirFecha = view.findViewById(R.id.btnElegirFecha);
+        Button siguiente = view.findViewById(R.id.btnSiguiente1);
 
-        etNombres.setText(CitaDraftStore.nombres);
-        etApellidos.setText(CitaDraftStore.apellidos);
-        etTelefono.setText(CitaDraftStore.telefono);
-        etFecha.setText(CitaDraftStore.fecha);
-        etHora.setText(CitaDraftStore.hora);
 
-        btn.setOnClickListener(v -> {
-            String nombres = etNombres.getText().toString().trim();
-            String fecha = etFecha.getText().toString().trim();
-            String hora = etHora.getText().toString().trim();
+        //Restaurar los datos del usuario si va para atrás
+        nombres.setText(CitaDraftStore.nombres);
+        apellidos.setText(CitaDraftStore.apellidos);
+        telefono.setText(CitaDraftStore.telefono);
+        if (!CitaDraftStore.fecha.isEmpty()){
+            fechaSeleccionada.setText(CitaDraftStore.fecha);
+            fechaSeleccionada.setTextColor(requireContext().getColor(R.color.texto_principal));
+        }
 
-            if (nombres.isEmpty() || fecha.isEmpty() || hora.isEmpty()) {
-                Toast.makeText(requireContext(), "Completa nombres, fecha y hora", Toast.LENGTH_SHORT).show();
+        //Abrir DatePicker cuando pulsa "elegir la fecha"
+        elegirFecha.setOnClickListener(v -> {
+            MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Selecciona una fecha").build();
+
+            datePicker.addOnPositiveButtonClickListener(selection -> {
+                String fecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date(selection));
+
+                fechaSeleccionada.setText(fecha);
+                fechaSeleccionada.setTextColor(requireContext().getColor(R.color.texto_principal));
+                CitaDraftStore.fecha = fecha;
+            });
+
+            datePicker.show(getParentFragmentManager(), "DATE_PICKER");
+
+        });
+
+        siguiente.setOnClickListener(v -> {
+            String nombreSrt = nombres.getText().toString().trim();
+
+            if (nombreSrt.isEmpty()){
+                Toast.makeText(requireContext(), "Introduce tu nombre", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            CitaDraftStore.nombres = nombres;
-            CitaDraftStore.apellidos = etApellidos.getText().toString().trim();
-            CitaDraftStore.telefono = etTelefono.getText().toString().trim();
-            CitaDraftStore.fecha = fecha;
-            CitaDraftStore.hora = hora;
+            if (CitaDraftStore.fecha.isEmpty()){
+                Toast.makeText(requireContext(), "Selecciona una fecha", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.stepContainer, new Paso2CentroFragment())
-                    .addToBackStack(null)
-                    .commit();
+            CitaDraftStore.nombres = nombreSrt;
+            CitaDraftStore.apellidos = apellidos.getText().toString().trim();
+            CitaDraftStore.telefono = telefono.getText().toString().trim();
+
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new Paso2CentroFragment()).addToBackStack(null).commit();
         });
+
     }
 }

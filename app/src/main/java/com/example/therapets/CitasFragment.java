@@ -43,7 +43,7 @@ public class CitasFragment extends Fragment {
         // Botón agendar nueva cita
         Button btnNuevaCita = view.findViewById(R.id.btnNuevaCita);
         btnNuevaCita.setOnClickListener(v ->
-                startActivity(new Intent(requireContext(), AgendarCitaActivity.class))
+                startActivity(new Intent(requireContext(), AgendarCita.class))
         );
     }
 }

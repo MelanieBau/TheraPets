@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditarAnimalActivity extends AppCompatActivity {
+public class EditarAnimal extends AppCompatActivity {
 
     private Uri fotoSeleccionada = null;
     private static final int PICK_IMAGE = 100;
@@ -116,7 +116,7 @@ public class EditarAnimalActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(String requestId, ErrorInfo error) {
-                        Toast.makeText(EditarAnimalActivity.this, "Error al subir foto", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditarAnimal.this, "Error al subir foto", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

@@ -43,6 +43,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
+            <!-- Nombres -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
@@ -57,6 +58,7 @@
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Apellidos -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
@@ -71,6 +73,7 @@
                     android:inputType="textPersonName" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- Teléfono -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
@@ -85,33 +88,37 @@
                     android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/RoundedInputLayout"
-                android:layout_width="match_parent"
+            <!-- Fecha con DatePicker -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp">
+                android:text="Fecha de la cita"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginBottom="6dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etFecha"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Fecha (ej: 2026-02-26)"
-                    android:inputType="date" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/RoundedInputLayout"
+            <TextView
+                android:id="@+id/tvFechaSeleccionada"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp">
+                android:layout_height="52dp"
+                android:text="Pulsa para elegir fecha"
+                android:textSize="15sp"
+                android:textColor="@color/texto_hint"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:background="@drawable/bg_input"
+                android:layout_marginBottom="8dp" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etHora"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Hora (ej: 10:00)"
-                    android:inputType="time" />
-            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:id="@+id/btnElegirFecha"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="24dp"
+                android:text="Elegir fecha"
+                android:textAllCaps="false"
+                android:textColor="@color/morado_principal"
+                android:backgroundTint="@color/morado_claro"
+                app:cornerRadius="12dp" />
 
             <Button
                 android:id="@+id/btnSiguiente1"

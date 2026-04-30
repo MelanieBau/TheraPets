@@ -3,7 +3,7 @@ package com.example.therapets;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class AgendarCitaActivity extends AppCompatActivity {
+public class AgendarCita extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

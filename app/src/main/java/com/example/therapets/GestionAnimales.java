@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GestionAnimalesActivity extends AppCompatActivity {
+public class GestionAnimales extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private List<Animal> listaAnimales;
@@ -49,7 +49,7 @@ public class GestionAnimalesActivity extends AppCompatActivity {
                 });
 
         btnAgregar.setOnClickListener(v -> {
-            Intent intent = new Intent(this, AgregarAnimalActivity.class);
+            Intent intent = new Intent(this, AgregarAnimal.class);
             intent.putExtra("centroId", centroId);
             startActivity(intent);
         });

@@ -12,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class BienvenidoTherapetsActivity extends AppCompatActivity {
+public class BienvenidoTherapets extends AppCompatActivity {
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,13 +33,13 @@ public class BienvenidoTherapetsActivity extends AppCompatActivity {
 
         //Boton continuar a pantalla IniciarSesion
         botonContinuar.setOnClickListener(v -> {
-            Intent intent = new Intent(BienvenidoTherapetsActivity.this, IniciarSesion.class);
+            Intent intent = new Intent(BienvenidoTherapets.this, IniciarSesion.class);
             startActivity(intent);
         });
 
         //Boton para registrarse en pantalla registro
         botonRegistrarme.setOnClickListener(v -> {
-            Intent intent = new Intent(BienvenidoTherapetsActivity.this, Registro.class);
+            Intent intent = new Intent(BienvenidoTherapets.this, Registro.class);
             startActivity(intent);
         });
     }

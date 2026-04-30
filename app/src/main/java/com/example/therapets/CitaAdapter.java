@@ -74,7 +74,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
                 holder.btnValorarCita.setVisibility(View.VISIBLE);
                 holder.btnValorarCita.setOnClickListener(v -> {
                     // Abrimos la pantalla de valoración pasando los datos de la cita
-                    Intent intent = new Intent(v.getContext(), ValorarCitaActivity.class);
+                    Intent intent = new Intent(v.getContext(), ValorarCita.class);
                     intent.putExtra("citaId", cita.getId());
                     intent.putExtra("centro", cita.getCentro());
                     intent.putExtra("fecha", cita.getFecha());

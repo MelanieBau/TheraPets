@@ -48,16 +48,6 @@
                 android:textColor="@color/morado_principal"
                 android:layout_marginTop="4dp" />
 
-            <!-- Animales disponibles -->
-            <TextView
-                android:id="@+id/tvAnimalesHorario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Animales: Max, Luna"
-                android:textSize="13sp"
-                android:textColor="@color/texto_secundario"
-                android:layout_marginTop="4dp" />
-
             <!-- Separador -->
             <View
                 android:layout_width="match_parent"

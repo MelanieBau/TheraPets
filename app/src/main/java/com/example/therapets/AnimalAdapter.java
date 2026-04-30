@@ -64,7 +64,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
 
         // Abrimos EditarAnimalActivity pasando los datos del animal
         holder.btnEditar.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), EditarAnimalActivity.class);
+            Intent intent = new Intent(v.getContext(), EditarAnimal.class);
             intent.putExtra("animalId", animal.getId());
             intent.putExtra("nombre", animal.getNombre());
             intent.putExtra("tipo", animal.getTipo());

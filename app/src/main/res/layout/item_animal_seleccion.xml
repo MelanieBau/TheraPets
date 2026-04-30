@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginBottom="16dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Foto del animal arriba -->
+        <ImageView
+            android:id="@+id/ivFotoAnimalSeleccion"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:background="@color/morado_claro" />
+
+        <!-- Contenido -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Nombre -->
+            <TextView
+                android:id="@+id/tvNombreAnimalSeleccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Max"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/texto_principal" />
+
+            <!-- Tipo y raza -->
+            <TextView
+                android:id="@+id/tvTipoRazaSeleccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Perro · Golden Retriever"
+                android:textSize="13sp"
+                android:textColor="@color/morado_principal"
+                android:layout_marginTop="4dp" />
+
+            <!-- Edad -->
+            <TextView
+                android:id="@+id/tvEdadSeleccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3 años"
+                android:textSize="13sp"
+                android:textColor="@color/texto_secundario"
+                android:layout_marginTop="4dp" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0"
+                android:layout_marginVertical="12dp" />
+
+            <!-- Especialidad -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Especialidad"
+                android:textSize="11sp"
+                android:textColor="@color/texto_hint"
+                android:textAllCaps="true"
+                android:letterSpacing="0.1" />
+
+            <TextView
+                android:id="@+id/tvEspecialidadSeleccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ansiedad y estrés"
+                android:textSize="14sp"
+                android:textColor="@color/texto_principal"
+                android:layout_marginTop="4dp" />
+
+            <!-- Separador -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#F0F0F0"
+                android:layout_marginVertical="12dp" />
+
+            <!-- Botón seleccionar -->
+            <Button
+                android:id="@+id/btnSeleccionarAnimal"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:text="Seleccionar"
+                android:textAllCaps="false"
+                android:textSize="15sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="@color/morado_oscuro"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -11,7 +11,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GestionCitasCoordinadorActivity extends AppCompatActivity {
+public class GestionCitasCoordinador extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private List<Cita> listaCitas;

@@ -59,7 +59,7 @@ public class IniciarSesion extends AppCompatActivity {
 
         // Interacción "he olvidado mi contraseña"
         tvOlvide.setOnClickListener(v -> {
-            startActivity(new Intent(this, RecuperarContrasenaActivity.class));
+            startActivity(new Intent(this, RecuperarContrasena.class));
         });
     }
 
@@ -72,20 +72,20 @@ public class IniciarSesion extends AppCompatActivity {
                     if (document.exists()) {
                         String rol = document.getString("rol");
                         if ("administrador".equals(rol)) {
-                            startActivity(new Intent(this, AdminActivity.class));
+                            startActivity(new Intent(this, Admin.class));
                         } else if ("coordinador".equals(rol)) {
-                            startActivity(new Intent(this, CoordinadorActivity.class));
+                            startActivity(new Intent(this, Coordinador.class));
                         } else {
-                            startActivity(new Intent(this, HomeActivity.class));
+                            startActivity(new Intent(this, Home.class));
                         }
                         finish();
                     } else {
-                        startActivity(new Intent(this, HomeActivity.class));
+                        startActivity(new Intent(this, Home.class));
                         finish();
                     }
                 })
                 .addOnFailureListener(e -> {
-                    startActivity(new Intent(this, HomeActivity.class));
+                    startActivity(new Intent(this, Home.class));
                     finish();
                 });
     }

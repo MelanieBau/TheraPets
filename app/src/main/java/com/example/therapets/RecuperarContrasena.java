@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class RecuperarContrasenaActivity extends AppCompatActivity {
+public class RecuperarContrasena extends AppCompatActivity {
 
     // Instancia de Firebase Authentication
     private FirebaseAuth mAuth;
@@ -41,7 +41,7 @@ public class RecuperarContrasenaActivity extends AppCompatActivity {
                     .addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Si se envió correctamente vamos a la pantalla de confirmación
-                            Intent intent = new Intent(this, EmailEnviadoActivity.class);
+                            Intent intent = new Intent(this, EmailEnviado.class);
                             intent.putExtra("email", email); // Pasamos el email para mostrarlo
                             startActivity(intent);
                             finish();

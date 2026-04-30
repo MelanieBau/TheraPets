@@ -24,7 +24,6 @@
             android:textStyle="bold"
             android:textColor="#FFFFFF" />
 
-        <!-- Botón añadir horario -->
         <Button
             android:id="@+id/btnAgregarHorario"
             android:layout_width="wrap_content"

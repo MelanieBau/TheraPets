@@ -6,6 +6,8 @@ public class Centro {
     private String nombre;
     private String direccion;
     private String telefono;
+    private String fotoUrl;
+
 
     // Constructor vacío necesario para Firestore
     public Centro() {}
@@ -22,4 +24,7 @@ public class Centro {
 
     public String getTelefono() { return telefono; }
     public void setTelefono(String telefono) { this.telefono = telefono; }
+
+    public String getFotoUrl() { return fotoUrl; }
+    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
 }

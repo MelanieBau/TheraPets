@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class GestionCentrosActivity extends AppCompatActivity {
+public class GestionCentros extends AppCompatActivity {
 
     private FirebaseFirestore db;
     private List<Centro> listaCentros;

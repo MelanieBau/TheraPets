@@ -15,9 +15,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 
-public class ValorarCitaActivity extends AppCompatActivity{
+public class ValorarCita extends AppCompatActivity{
 
     //Variable para guardar la puntuación elegida por el usuario
     private int puntuacionSeleccionada = 0;
@@ -97,7 +96,7 @@ public class ValorarCitaActivity extends AppCompatActivity{
                     .addOnSuccessListener(ref -> {
                         Toast.makeText(this, "Valoracion guardada", Toast.LENGTH_SHORT).show();
                         // Volvemos al Home después de guardar
-                        Intent intent = new Intent(this, HomeActivity.class);
+                        Intent intent = new Intent(this, Home.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                         finish();
