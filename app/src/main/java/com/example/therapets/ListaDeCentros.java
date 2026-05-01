@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -16,16 +18,15 @@ import java.util.List;
 public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHolder> {
 
     private List<Centro> lista;
-    private OnSeleccionarListener onSeleccionar;
+    private OnConfirmarListener onConfirmar;
 
-    // Interface para cuando el usuario pulsa Seleccionar
-    public interface OnSeleccionarListener {
-        void onSeleccionar(Centro centro);
+    public interface OnConfirmarListener {
+        void onConfirmar(Centro centro, String hora);
     }
 
-    public ListaDeCentros(List<Centro> lista, OnSeleccionarListener onSeleccionar) {
+    public ListaDeCentros(List<Centro> lista, OnConfirmarListener onConfirmar) {
         this.lista = lista;
-        this.onSeleccionar = onSeleccionar;
+        this.onConfirmar = onConfirmar;
     }
 
     @NonNull
@@ -39,8 +40,9 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Centro centro = lista.get(position);
+        final String[] horaSeleccionada = {""};
 
-        // Rellenamos los datos
+        // Mostramos los datos del centro
         holder.nombre.setText(centro.getNombre());
         holder.direccion.setText("📍 " + centro.getDireccion());
         holder.telefono.setText("📞 " + centro.getTelefono());
@@ -53,7 +55,7 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
                     .into(holder.foto);
         }
 
-        // Abrir Google Maps con la dirección del centro
+        // Abrimos Google Maps con la dirección
         holder.btnMaps.setOnClickListener(v -> {
             String uri = "geo:0,0?q=" + Uri.encode(centro.getDireccion());
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
@@ -61,19 +63,40 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
             holder.itemView.getContext().startActivity(intent);
         });
 
-        // Cuando pulsa Seleccionar
-        holder.btnSeleccionar.setOnClickListener(v -> onSeleccionar.onSeleccionar(centro));
+        // Cuando pulsa Seleccionar mostramos los horarios
+        holder.btnSeleccionar.setOnClickListener(v -> {
+            holder.seccionHorarios.setVisibility(View.VISIBLE);
+            holder.contenedorDias.removeAllViews();
+            holder.contenedorHoras.removeAllViews();
+
+            // Usamos GestorHorarios para cargar días y horas
+            GestorHorarios gestor = new GestorHorarios(
+                    holder.itemView.getContext(),
+                    holder.contenedorDias,
+                    holder.contenedorHoras,
+                    horaSeleccionada);
+            gestor.cargarDias(centro.getNombre());
+        });
+
+        // Cuando pulsa Confirmar guardamos y vamos al Paso 3
+        holder.btnConfirmar.setOnClickListener(v -> {
+            if (horaSeleccionada[0].isEmpty()) {
+                Toast.makeText(holder.itemView.getContext(),
+                        "Selecciona una hora", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            onConfirmar.onConfirmar(centro, horaSeleccionada[0]);
+        });
     }
 
     @Override
-    public int getItemCount() {
-        return lista.size();
-    }
+    public int getItemCount() { return lista.size(); }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView foto;
         TextView nombre, direccion, telefono;
-        Button btnMaps, btnSeleccionar;
+        Button btnMaps, btnSeleccionar, btnConfirmar;
+        LinearLayout seccionHorarios, contenedorDias, contenedorHoras;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,6 +106,10 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
             telefono = itemView.findViewById(R.id.tvTelefonoCentroSeleccion);
             btnMaps = itemView.findViewById(R.id.btnVerMaps);
             btnSeleccionar = itemView.findViewById(R.id.btnSeleccionarCentro);
+            btnConfirmar = itemView.findViewById(R.id.btnConfirmarHora);
+            seccionHorarios = itemView.findViewById(R.id.seccionHorarios);
+            contenedorDias = itemView.findViewById(R.id.contenedorDias);
+            contenedorHoras = itemView.findViewById(R.id.contenedorHoras);
         }
     }
 }
