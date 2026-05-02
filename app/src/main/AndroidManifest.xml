@@ -53,6 +53,10 @@
         <activity android:name=".GestionHorarios" android:exported="false" />
         <activity android:name=".AgregarCentro" android:exported="false" />
 
+        <activity android:name=".EditarPerfil" android:exported="false" />
+        <activity android:name=".Configuracion" android:exported="false" />
+
+
     </application>
 
 </manifest>

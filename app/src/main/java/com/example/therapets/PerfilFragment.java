@@ -28,8 +28,8 @@ public class PerfilFragment extends Fragment {
         TextView tvEmail = view.findViewById(R.id.tvEmail);
         TextView tvTelefono = view.findViewById(R.id.tvTelefono);
         TextView tvFechaNacimiento = view.findViewById(R.id.tvFechaNacimiento);
-        Button btnCerrarSesion = view.findViewById(R.id.btnCerrarSesion);
         Button btnEditarPerfil = view.findViewById(R.id.btnEditarPerfil);
+        Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
 
         // Obtener el usuario logueado
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -56,16 +56,17 @@ public class PerfilFragment extends Fragment {
                     Toast.makeText(requireContext(), "Error al cargar perfil: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
 
-        // Cerrar sesión
-        btnCerrarSesion.setOnClickListener(v -> {
-            FirebaseAuth.getInstance().signOut();
-            startActivity(new Intent(requireContext(), IniciarSesion.class));
-            requireActivity().finish();
-        });
 
         // Editar perfil (por ahora un Toast)
         btnEditarPerfil.setOnClickListener(v -> {
             Toast.makeText(requireContext(), "Próximamente: editar perfil", Toast.LENGTH_SHORT).show();
         });
+
+        btnEditarPerfil.setOnClickListener(v ->
+                startActivity(new Intent(requireContext(), EditarPerfil.class)));
+
+        //Dirigirse a configuracion
+        btnConfiguracion.setOnClickListener(v ->
+                startActivity(new Intent(requireContext(), Configuracion.class)));
     }
 }

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#A45B7D">
 
 
     <!-- Centrar contenedor de imagen y texto de bienvenida -->
@@ -25,23 +25,13 @@
         <!-- Logo para TheraPets -->
         <ImageView
             android:id="@+id/logoImageTherapets"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
             android:src="@drawable/logo_therapets"
             android:contentDescription="Logo TheraPets" />
 
 
         <!-- Texto de bienvenida a la aplicación -->
-        <TextView
-            android:id="@+id/textoInicio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="THERAPETS"
-            android:textSize="32sp"
-            android:textColor="@color/morado_principal"
-            android:letterSpacing="0.5"
-            android:fontFamily="@font/baloo_bhai_bold"
-            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 

@@ -22,9 +22,9 @@
 
             <!-- Logo TheraPets -->
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:src="@drawable/logo_therapets"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo_therapets_2"
                 android:layout_marginBottom="12dp" />
 
             <!-- Título de la pantalla -->

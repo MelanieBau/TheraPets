@@ -33,6 +33,7 @@ public class AgregarCentro extends AppCompatActivity {
         TextInputEditText direccion = findViewById(R.id.etDireccionCentro);
         TextInputEditText telefono = findViewById(R.id.etTelefonoCentro);
         Button btnGuardar = findViewById(R.id.btnGuardarCentro);
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
 
         // Abre la galería del móvil para elegir una foto
         btnFoto.setOnClickListener(v -> {

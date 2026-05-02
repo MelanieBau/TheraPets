@@ -37,6 +37,8 @@ public class AgregarAnimal extends AppCompatActivity {
         TextInputEditText edad = findViewById(R.id.etEdadAnimal);
         TextInputEditText especialidad = findViewById(R.id.etEspecialidadAnimal);
         Button btnGuardar = findViewById(R.id.btnGuardarAnimal);
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
+
 
         // Abrir galería
         btnFoto.setOnClickListener(v -> {
@@ -52,6 +54,7 @@ public class AgregarAnimal extends AppCompatActivity {
             String razaStr = raza.getText().toString().trim();
             String edadStr = edad.getText().toString().trim();
             String especialidadStr = especialidad.getText().toString().trim();
+
 
             if (nombreStr.isEmpty()) {
                 Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();

@@ -22,31 +22,14 @@
         <!-- Logo -->
         <ImageView
             android:id="@+id/logoImage"
-            android:layout_width="130dp"
-            android:layout_height="130dp"
+            android:layout_width="400dp"
+            android:layout_height="380dp"
             android:src="@drawable/logo_therapets"
             android:contentDescription="Logo" />
 
         <!-- Nombre app -->
-        <TextView
-            android:id="@+id/tituloTexto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="THERAPETS"
-            android:textSize="28sp"
-            android:textColor="#FFFFFF"
-            android:letterSpacing="0.4"
-            android:fontFamily="@font/baloo_bhai_bold"
-            android:layout_marginTop="16dp" />
 
         <!-- Subtítulo -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bienestar emocional con animales"
-            android:textSize="14sp"
-            android:textColor="@color/morado_claro"
-            android:layout_marginTop="8dp" />
 
     </LinearLayout>
 

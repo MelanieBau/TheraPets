@@ -28,7 +28,7 @@
                 android:src="@drawable/ic_arrow_volver"
                 android:contentDescription="Volver" />
 
-            <!-- Título y subtítulo -->
+            <!-- Título y subtítulo juntos -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Añadir centro"
+                    android:text="Editar perfil"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     android:textColor="#FFFFFF" />
@@ -46,7 +46,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Rellena los datos del centro"
+                    android:text="Modifica tus datos personales"
                     android:textSize="13sp"
                     android:textColor="@color/morado_claro"
                     android:layout_marginTop="2dp" />
@@ -55,34 +55,12 @@
 
         </LinearLayout>
 
-
         <!-- Formulario -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp">
-
-            <!-- Foto del centro -->
-            <ImageView
-                android:id="@+id/ivFotoCentro"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:scaleType="centerCrop"
-                android:background="@color/morado_claro"
-                android:layout_marginBottom="12dp" />
-
-            <!-- Botón seleccionar foto -->
-            <Button
-                android:id="@+id/btnSeleccionarFotoCentro"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginBottom="16dp"
-                android:text="Seleccionar foto"
-                android:textAllCaps="false"
-                android:textColor="@color/morado_principal"
-                android:backgroundTint="@color/morado_claro"
-                app:cornerRadius="12dp" />
 
             <!-- Nombre -->
             <com.google.android.material.textfield.TextInputLayout
@@ -92,27 +70,11 @@
                 android:layout_marginBottom="12dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etNombreCentro"
+                    android:id="@+id/etNombreEditar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nombre del centro"
-                    android:inputType="textCapWords" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!-- Dirección -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/RoundedInputLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDireccionCentro"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Dirección"
-                    android:inputType="textCapWords" />
+                    android:hint="Nombre completo"
+                    android:inputType="textPersonName" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -124,7 +86,7 @@
                 android:layout_marginBottom="24dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etTelefonoCentro"
+                    android:id="@+id/etTelefonoEditar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Teléfono"
@@ -134,10 +96,10 @@
 
             <!-- Botón guardar -->
             <Button
-                android:id="@+id/btnGuardarCentro"
+                android:id="@+id/btnGuardarPerfil"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="Guardar centro"
+                android:text="Guardar cambios"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
