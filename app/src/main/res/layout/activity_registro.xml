@@ -150,7 +150,7 @@
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/morado_oscuro"
+                android:backgroundTint="@color/coral_acento"
                 android:radius="24dp"/>
 
 
@@ -162,7 +162,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="24dp"
                 android:text="¿Ya tienes una cuenta? Iniciar sesión"
-                android:textColor="@color/morado_principal" />
+                android:textColor="@color/coral_acento" />
 
         </LinearLayout>
 

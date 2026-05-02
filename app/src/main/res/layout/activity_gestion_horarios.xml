@@ -30,8 +30,8 @@
             android:layout_height="40dp"
             android:text="+ Añadir"
             android:textAllCaps="false"
-            android:textColor="@color/morado_principal"
-            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/coral_acento"
             app:cornerRadius="10dp" />
 
     </LinearLayout>

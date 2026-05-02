@@ -62,8 +62,8 @@
                 android:layout_height="36dp"
                 android:text="Borrar horario"
                 android:textAllCaps="false"
-                android:textColor="@color/coral_acento"
-                android:backgroundTint="@color/coral_claro"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/morado_principal"
                 app:cornerRadius="8dp" />
 
         </LinearLayout>

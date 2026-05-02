@@ -138,8 +138,8 @@
             android:text="Cerrar sesión"
             android:textAllCaps="false"
             android:textSize="15sp"
-            android:textColor="@color/morado_principal"
-            android:backgroundTint="@color/morado_claro"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/coral_acento"
             app:cornerRadius="12dp" />
 
         <!-- Eliminar cuenta -->
@@ -152,7 +152,7 @@
             android:textAllCaps="false"
             android:textSize="15sp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="@color/coral_acento"
+            android:backgroundTint="@color/morado_principal"
             app:cornerRadius="12dp" />
 
     </LinearLayout>

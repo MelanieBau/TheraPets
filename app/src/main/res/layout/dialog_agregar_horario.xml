@@ -62,8 +62,8 @@
         android:layout_height="48dp"
         android:text="Elegir hora"
         android:textAllCaps="false"
-        android:textColor="@color/morado_principal"
-        android:backgroundTint="@color/morado_claro"
+        android:textColor="@color/white"
+        android:backgroundTint="@color/morado_principal"
         app:cornerRadius="12dp" />
 
 </LinearLayout>

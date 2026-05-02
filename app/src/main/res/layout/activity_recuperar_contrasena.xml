@@ -7,33 +7,51 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Cabecera morada igual que el resto de pantallas -->
+    <!-- Cabecera morada -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/morado_principal"
-        android:padding="24dp"
-        android:orientation="vertical">
+        android:padding="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-        <!-- Título de la pantalla -->
-        <TextView
+        <!-- Botón volver -->
+        <ImageButton
+            android:id="@+id/btnVolver"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_boton_volver"
+            android:src="@drawable/ic_arrow_volver"
+            android:contentDescription="Volver" />
+
+        <!-- Título y subtítulo -->
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Recuperar contraseña"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:textColor="#FFFFFF" />
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
 
-        <!-- Subtítulo explicativo -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Te enviaremos un email para recuperarla"
-            android:textSize="13sp"
-            android:textColor="@color/morado_claro"
-            android:layout_marginTop="4dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recuperar contraseña"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Indica tu correo electronico"
+                android:textSize="13sp"
+                android:textColor="@color/morado_claro"
+                android:layout_marginTop="2dp" />
+
+        </LinearLayout>
 
     </LinearLayout>
+
 
     <!-- Contenido del formulario -->
     <LinearLayout
@@ -67,7 +85,7 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="@color/morado_oscuro"
+            android:backgroundTint="@color/morado_principal"
             app:cornerRadius="12dp" />
 
         <!-- Botón para volver al login sin hacer nada -->

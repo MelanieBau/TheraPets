@@ -232,7 +232,7 @@
             android:textAllCaps="false"
             android:textSize="15sp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="@color/morado_oscuro"
+            android:backgroundTint="@color/morado_principal"
             app:cornerRadius="12dp"
             app:layout_constraintTop_toBottomOf="@id/cardDatos"
             app:layout_constraintStart_toStartOf="parent"

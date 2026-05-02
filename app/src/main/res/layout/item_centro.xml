@@ -90,8 +90,8 @@
                     android:layout_weight="1"
                     android:text="Borrar"
                     android:textAllCaps="false"
-                    android:textColor="@color/morado_principal"
-                    android:backgroundTint="@color/morado_claro"
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/morado_principal"
                     app:cornerRadius="8dp" />
 
             </LinearLayout>

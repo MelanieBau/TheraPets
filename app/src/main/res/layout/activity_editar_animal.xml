@@ -16,25 +16,45 @@
             android:layout_height="wrap_content"
             android:background="@color/morado_principal"
             android:padding="20dp"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <TextView
+            <!-- Botón volver -->
+            <ImageButton
+                android:id="@+id/btnVolver"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_boton_volver"
+                android:src="@drawable/ic_arrow_volver"
+                android:contentDescription="Volver" />
+
+            <!-- Título y subtítulo -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Editar animal"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF" />
+                android:orientation="vertical"
+                android:layout_marginStart="16dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Modifica los datos del animal"
-                android:textSize="13sp"
-                android:textColor="@color/morado_claro"
-                android:layout_marginTop="4dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Editar datos del animal"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No olvides modificar y guardar los cambios"
+                    android:textSize="13sp"
+                    android:textColor="@color/morado_claro"
+                    android:layout_marginTop="2dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
+
 
         <!-- Formulario -->
         <LinearLayout
@@ -60,8 +80,8 @@
                 android:layout_marginBottom="16dp"
                 android:text="Cambiar foto"
                 android:textAllCaps="false"
-                android:textColor="@color/morado_principal"
-                android:backgroundTint="@color/morado_claro"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/coral_acento"
                 app:cornerRadius="12dp" />
 
             <!-- Nombre -->

@@ -54,8 +54,8 @@
             android:textAllCaps="false"
             android:textSize="16sp"
             android:fontFamily="@font/baloo_bhai_bold"
-            android:textColor="@color/morado_oscuro"
-            android:backgroundTint="#FFFFFF"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/morado_principal"
             app:cornerRadius="12dp" />
 
         <Button
