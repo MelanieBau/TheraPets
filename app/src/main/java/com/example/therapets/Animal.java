@@ -15,6 +15,10 @@ public class Animal {
 
     private String especialidad;
 
+    private String nombreTerapeuta;
+    private String especialidadTerapeuta;
+    private String fotoDeLaTerapeuta;
+
     public Animal() {}
 
     public String getId() { return id; }
@@ -40,4 +44,13 @@ public class Animal {
 
     public String getEspecialidad() { return especialidad; }
     public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
+
+    public String getNombreTerapeuta() { return nombreTerapeuta; }
+    public void setNombreTerapeuta(String nombreTerapeuta) { this.nombreTerapeuta = nombreTerapeuta; }
+
+    public String getEspecialidadTerapeuta() { return especialidadTerapeuta; }
+    public void setEspecialidadTerapeuta(String especialidadTerapeuta) { this.especialidadTerapeuta = especialidadTerapeuta; }
+
+    public String getFotoTerapeuta() { return fotoDeLaTerapeuta; }
+    public void setFotoTerapeuta(String fotoTerapeuta) { this.fotoDeLaTerapeuta = fotoTerapeuta; }
 }

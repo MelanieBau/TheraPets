@@ -16,7 +16,6 @@ public class AnimalSeleccion extends RecyclerView.Adapter<AnimalSeleccion.ViewHo
     private List<Animal> lista;
     private OnSeleccionarListener onSeleccionar;
 
-    // Interface para cuando el usuario pulsa Seleccionar
     public interface OnSeleccionarListener {
         void onSeleccionar(Animal animal);
     }
@@ -38,18 +37,32 @@ public class AnimalSeleccion extends RecyclerView.Adapter<AnimalSeleccion.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Animal animal = lista.get(position);
 
-        // Rellenamos los datos
+        // Datos del animal
         holder.nombre.setText(animal.getNombre());
         holder.tipoRaza.setText(animal.getTipo() + " · " + animal.getRaza());
         holder.edad.setText(animal.getEdad());
         holder.especialidad.setText(animal.getEspecialidad());
 
-        // Cargamos la foto con Glide
+        // Foto del animal
         if (animal.getFotoUrl() != null && !animal.getFotoUrl().isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(animal.getFotoUrl())
                     .centerCrop()
                     .into(holder.foto);
+        }
+
+        // Datos de la terapeuta
+        holder.nombreTerapeuta.setText(animal.getNombreTerapeuta() != null
+                ? animal.getNombreTerapeuta() : "Sin terapeuta asignada");
+        holder.especialidadTerapeuta.setText(animal.getEspecialidadTerapeuta() != null
+                ? animal.getEspecialidadTerapeuta() : "");
+
+        // Foto de la terapeuta
+        if (animal.getFotoTerapeuta() != null && !animal.getFotoTerapeuta().isEmpty()) {
+            Glide.with(holder.itemView.getContext())
+                    .load(animal.getFotoTerapeuta())
+                    .centerCrop()
+                    .into(holder.fotoTerapeuta);
         }
 
         // Cuando pulsa Seleccionar
@@ -62,8 +75,8 @@ public class AnimalSeleccion extends RecyclerView.Adapter<AnimalSeleccion.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView foto;
-        TextView nombre, tipoRaza, edad, especialidad;
+        ImageView foto, fotoTerapeuta;
+        TextView nombre, tipoRaza, edad, especialidad, nombreTerapeuta, especialidadTerapeuta;
         Button btnSeleccionar;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +86,9 @@ public class AnimalSeleccion extends RecyclerView.Adapter<AnimalSeleccion.ViewHo
             tipoRaza = itemView.findViewById(R.id.tvTipoRazaSeleccion);
             edad = itemView.findViewById(R.id.tvEdadSeleccion);
             especialidad = itemView.findViewById(R.id.tvEspecialidadSeleccion);
+            fotoTerapeuta = itemView.findViewById(R.id.ivFotoTerapeutaSeleccion);
+            nombreTerapeuta = itemView.findViewById(R.id.tvNombreTerapeutaSeleccion);
+            especialidadTerapeuta = itemView.findViewById(R.id.tvEspecialidadTerapeutaSeleccion);
             btnSeleccionar = itemView.findViewById(R.id.btnSeleccionarAnimal);
         }
     }

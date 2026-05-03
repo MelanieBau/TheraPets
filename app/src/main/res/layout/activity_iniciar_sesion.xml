@@ -28,10 +28,11 @@
             android:padding="14dp"
             android:paddingEnd="14dp"
             android:textColor="#3D2A2A"
-            android:textColorHint="#9E9E9E"
+            android:textColorHint="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="267dp" />
+            tools:layout_editor_absoluteY="267dp"
+        tools:ignore="MissingConstraints" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -53,8 +54,8 @@
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:background="@drawable/bg_input"
-                android:textColor="#3D2A2A"
-                android:textColorHint="#9E9E9E" />
+                android:textColor="@color/black"
+                android:textColorHint="@color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

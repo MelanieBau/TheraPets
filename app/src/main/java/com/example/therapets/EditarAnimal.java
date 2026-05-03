@@ -19,70 +19,100 @@ import java.util.Map;
 
 public class EditarAnimal extends AppCompatActivity {
 
-    private Uri fotoSeleccionada = null;
-    private static final int PICK_IMAGE = 100;
+    private Uri fotoAnimal = null;
+    private Uri fotoTerapeuta = null;
+    private static final int PICK_FOTO_ANIMAL = 100;
+    private static final int PICK_FOTO_TERAPEUTA = 101;
     private String animalId;
-    private String fotoUrlActual;
+    private String fotoAnimalActual;
+    private String fotoTerapeutaActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_animal);
 
-        // Recibimos los datos del animal a editar
+        // Recibimos todos los datos del animal
         animalId = getIntent().getStringExtra("animalId");
         String nombre = getIntent().getStringExtra("nombre");
         String tipo = getIntent().getStringExtra("tipo");
         String raza = getIntent().getStringExtra("raza");
         String edad = getIntent().getStringExtra("edad");
         String especialidad = getIntent().getStringExtra("especialidad");
-        fotoUrlActual = getIntent().getStringExtra("fotoUrl");
+        fotoAnimalActual = getIntent().getStringExtra("fotoUrl");
+        String nombreTerapeuta = getIntent().getStringExtra("nombreTerapeuta");
+        String especialidadTerapeuta = getIntent().getStringExtra("especialidadTerapeuta");
+        fotoTerapeutaActual = getIntent().getStringExtra("fotoTerapeuta");
 
-        ImageView ivFoto = findViewById(R.id.ivFotoAnimalEditar);
-        Button btnFoto = findViewById(R.id.btnSeleccionarFotoEditar);
-        TextInputEditText Nombre = findViewById(R.id.etNombreAnimalEditar);
-        TextInputEditText Tipo = findViewById(R.id.etTipoAnimalEditar);
-        TextInputEditText Raza = findViewById(R.id.etRazaAnimalEditar);
-        TextInputEditText Edad = findViewById(R.id.etEdadAnimalEditar);
-        TextInputEditText Especialidad = findViewById(R.id.etEspecialidadAnimalEditar);
+        ImageView ivFotoAnimal = findViewById(R.id.ivFotoAnimalEditar);
+        ImageView ivFotoTerapeuta = findViewById(R.id.ivFotoTerapeutaEditar);
+        Button btnFotoAnimal = findViewById(R.id.btnSeleccionarFotoEditar);
+        Button btnFotoTerapeuta = findViewById(R.id.btnSeleccionarFotoTerapeutaEditar);
+        TextInputEditText etNombre = findViewById(R.id.etNombreAnimalEditar);
+        TextInputEditText etTipo = findViewById(R.id.etTipoAnimalEditar);
+        TextInputEditText etRaza = findViewById(R.id.etRazaAnimalEditar);
+        TextInputEditText etEdad = findViewById(R.id.etEdadAnimalEditar);
+        TextInputEditText etEspecialidad = findViewById(R.id.etEspecialidadAnimalEditar);
+        TextInputEditText etNombreTerapeuta = findViewById(R.id.etNombreTerapeutaEditar);
+        TextInputEditText etEspecialidadTerapeuta = findViewById(R.id.etEspecialidadTerapeutaEditar);
         Button btnGuardar = findViewById(R.id.btnGuardarAnimalEditar);
 
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
+
         // Rellenamos los datos actuales
-        Nombre.setText(nombre);
-        Tipo.setText(tipo);
-        Raza.setText(raza);
-        Edad.setText(edad);
-        Especialidad.setText(especialidad);
+        etNombre.setText(nombre);
+        etTipo.setText(tipo);
+        etRaza.setText(raza);
+        etEdad.setText(edad);
+        etEspecialidad.setText(especialidad);
+        etNombreTerapeuta.setText(nombreTerapeuta);
+        etEspecialidadTerapeuta.setText(especialidadTerapeuta);
 
-        // Mostramos la foto actual si existe
-        if (fotoUrlActual != null && !fotoUrlActual.isEmpty()) {
-            Glide.with(this).load(fotoUrlActual).centerCrop().into(ivFoto);
-        }
+        // Mostramos las fotos actuales
+        if (fotoAnimalActual != null && !fotoAnimalActual.isEmpty())
+            Glide.with(this).load(fotoAnimalActual).centerCrop().into(ivFotoAnimal);
 
-        // Abrir galería
-        btnFoto.setOnClickListener(v -> {
+        if (fotoTerapeutaActual != null && !fotoTerapeutaActual.isEmpty())
+            Glide.with(this).load(fotoTerapeutaActual).centerCrop().into(ivFotoTerapeuta);
+
+        // Abrir galería para foto del animal
+        btnFotoAnimal.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
-            startActivityForResult(intent, PICK_IMAGE);
+            startActivityForResult(intent, PICK_FOTO_ANIMAL);
+        });
+
+        // Abrir galería para foto de la terapeuta
+        btnFotoTerapeuta.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, PICK_FOTO_TERAPEUTA);
         });
 
         // Guardar cambios
         btnGuardar.setOnClickListener(v -> {
-            String nuevoNombre = Nombre.getText().toString().trim();
-            String nuevoTipo = Tipo.getText().toString().trim();
-            String nuevaRaza = Raza.getText().toString().trim();
-            String nuevaEdad = Edad.getText().toString().trim();
-            String nuevaEspecialidad = Especialidad.getText().toString().trim();
+            String nuevoNombre = etNombre.getText().toString().trim();
+            String nuevoTipo = etTipo.getText().toString().trim();
+            String nuevaRaza = etRaza.getText().toString().trim();
+            String nuevaEdad = etEdad.getText().toString().trim();
+            String nuevaEspecialidad = etEspecialidad.getText().toString().trim();
+            String nuevoNombreTerapeuta = etNombreTerapeuta.getText().toString().trim();
+            String nuevaEspecialidadTerapeuta = etEspecialidadTerapeuta.getText().toString().trim();
 
             if (nuevoNombre.isEmpty()) {
                 Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            if (fotoSeleccionada != null) {
-                subirFotoYGuardar(nuevoNombre, nuevoTipo, nuevaRaza, nuevaEdad, nuevaEspecialidad);
+            if (fotoAnimal != null) {
+                subirFotoAnimal(nuevoNombre, nuevoTipo, nuevaRaza, nuevaEdad,
+                        nuevaEspecialidad, nuevoNombreTerapeuta, nuevaEspecialidadTerapeuta);
+            } else if (fotoTerapeuta != null) {
+                subirFotoTerapeuta(nuevoNombre, nuevoTipo, nuevaRaza, nuevaEdad,
+                        nuevaEspecialidad, nuevoNombreTerapeuta, nuevaEspecialidadTerapeuta, fotoAnimalActual);
             } else {
-                guardarCambios(nuevoNombre, nuevoTipo, nuevaRaza, nuevaEdad, nuevaEspecialidad, fotoUrlActual);
+                guardarCambios(nuevoNombre, nuevoTipo, nuevaRaza, nuevaEdad, nuevaEspecialidad,
+                        fotoAnimalActual, nuevoNombreTerapeuta, nuevaEspecialidadTerapeuta, fotoTerapeutaActual);
             }
         });
     }
@@ -90,42 +120,71 @@ public class EditarAnimal extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
-            fotoSeleccionada = data.getData();
-            ImageView ivFoto = findViewById(R.id.ivFotoAnimalEditar);
-            ivFoto.setImageURI(fotoSeleccionada);
+        if (resultCode == Activity.RESULT_OK && data != null) {
+            if (requestCode == PICK_FOTO_ANIMAL) {
+                fotoAnimal = data.getData();
+                ((ImageView) findViewById(R.id.ivFotoAnimalEditar)).setImageURI(fotoAnimal);
+            } else if (requestCode == PICK_FOTO_TERAPEUTA) {
+                fotoTerapeuta = data.getData();
+                ((ImageView) findViewById(R.id.ivFotoTerapeutaEditar)).setImageURI(fotoTerapeuta);
+            }
         }
     }
 
-    private void subirFotoYGuardar(String nombre, String tipo, String raza, String edad, String especialidad) {
+    private void subirFotoAnimal(String nombre, String tipo, String raza, String edad,
+                                 String especialidad, String nombreTerapeuta, String especialidadTerapeuta) {
         Toast.makeText(this, "Subiendo foto...", Toast.LENGTH_SHORT).show();
-
-        MediaManager.get().upload(fotoSeleccionada)
+        MediaManager.get().upload(fotoAnimal)
                 .callback(new UploadCallback() {
-                    @Override
-                    public void onStart(String requestId) {}
-
-                    @Override
-                    public void onProgress(String requestId, long bytes, long totalBytes) {}
+                    @Override public void onStart(String requestId) {}
+                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
 
                     @Override
                     public void onSuccess(String requestId, Map resultData) {
-                        String fotoUrl = resultData.get("secure_url").toString();
-                        guardarCambios(nombre, tipo, raza, edad, especialidad, fotoUrl);
+                        String url = resultData.get("secure_url").toString();
+                        if (fotoTerapeuta != null) {
+                            subirFotoTerapeuta(nombre, tipo, raza, edad,
+                                    especialidad, nombreTerapeuta, especialidadTerapeuta, url);
+                        } else {
+                            guardarCambios(nombre, tipo, raza, edad, especialidad,
+                                    url, nombreTerapeuta, especialidadTerapeuta, fotoTerapeutaActual);
+                        }
                     }
 
                     @Override
                     public void onError(String requestId, ErrorInfo error) {
                         Toast.makeText(EditarAnimal.this, "Error al subir foto", Toast.LENGTH_SHORT).show();
                     }
-
-                    @Override
-                    public void onReschedule(String requestId, ErrorInfo error) {}
-                })
-                .dispatch();
+                    @Override public void onReschedule(String requestId, ErrorInfo error) {}
+                }).dispatch();
     }
 
-    private void guardarCambios(String nombre, String tipo, String raza, String edad, String especialidad, String fotoUrl) {
+    private void subirFotoTerapeuta(String nombre, String tipo, String raza, String edad,
+                                    String especialidad, String nombreTerapeuta,
+                                    String especialidadTerapeuta, String fotoAnimalUrl) {
+        MediaManager.get().upload(fotoTerapeuta)
+                .callback(new UploadCallback() {
+                    @Override public void onStart(String requestId) {}
+                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        String url = resultData.get("secure_url").toString();
+                        guardarCambios(nombre, tipo, raza, edad, especialidad,
+                                fotoAnimalUrl, nombreTerapeuta, especialidadTerapeuta, url);
+                    }
+
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        Toast.makeText(EditarAnimal.this, "Error al subir foto terapeuta", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override public void onReschedule(String requestId, ErrorInfo error) {}
+                }).dispatch();
+    }
+
+    private void guardarCambios(String nombre, String tipo, String raza, String edad,
+                                String especialidad, String fotoUrl, String nombreTerapeuta,
+                                String especialidadTerapeuta, String fotoTerapeutaUrl) {
         Map<String, Object> datos = new HashMap<>();
         datos.put("nombre", nombre);
         datos.put("tipo", tipo);
@@ -133,6 +192,9 @@ public class EditarAnimal extends AppCompatActivity {
         datos.put("edad", edad);
         datos.put("especialidad", especialidad);
         datos.put("fotoUrl", fotoUrl);
+        datos.put("nombreTerapeuta", nombreTerapeuta);
+        datos.put("especialidadTerapeuta", especialidadTerapeuta);
+        datos.put("fotoTerapeuta", fotoTerapeutaUrl);
 
         FirebaseFirestore.getInstance()
                 .collection("animales")
@@ -142,8 +204,7 @@ public class EditarAnimal extends AppCompatActivity {
                     Toast.makeText(this, "Animal actualizado", Toast.LENGTH_SHORT).show();
                     finish();
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e ->
+                        Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
     }
 }

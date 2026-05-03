@@ -72,6 +72,9 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
             intent.putExtra("edad", animal.getEdad());
             intent.putExtra("especialidad", animal.getEspecialidad());
             intent.putExtra("fotoUrl", animal.getFotoUrl());
+            intent.putExtra("nombreTerapeuta", animal.getNombreTerapeuta());
+            intent.putExtra("especialidadTerapeuta", animal.getEspecialidadTerapeuta());
+            intent.putExtra("fotoTerapeuta", animal.getFotoTerapeuta());
             v.getContext().startActivity(intent);
         });
 

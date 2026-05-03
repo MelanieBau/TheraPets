@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="12dp"
     android:layout_marginBottom="16dp"
-    app:cardCornerRadius="16dp"
+    app:cardCornerRadius="20dp"
     app:cardElevation="4dp"
     app:cardBackgroundColor="#FFFFFF">
 
@@ -15,32 +15,31 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Foto del animal arriba -->
+        <!-- Foto grande del animal -->
         <ImageView
             android:id="@+id/ivFotoAnimalSeleccion"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:background="@color/morado_claro" />
 
-        <!-- Contenido -->
+        <!-- Badge especialidad encima de la foto -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Nombre -->
+            <!-- Nombre y tipo -->
             <TextView
                 android:id="@+id/tvNombreAnimalSeleccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Max"
-                android:textSize="20sp"
+                android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@color/texto_principal" />
+                android:textColor="@color/coral_acento" />
 
-            <!-- Tipo y raza -->
             <TextView
                 android:id="@+id/tvTipoRazaSeleccion"
                 android:layout_width="wrap_content"
@@ -50,15 +49,38 @@
                 android:textColor="@color/morado_principal"
                 android:layout_marginTop="4dp" />
 
-            <!-- Edad -->
-            <TextView
-                android:id="@+id/tvEdadSeleccion"
-                android:layout_width="wrap_content"
+            <!-- Edad y especialidad -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3 años"
-                android:textSize="13sp"
-                android:textColor="@color/texto_secundario"
-                android:layout_marginTop="4dp" />
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:id="@+id/tvEdadSeleccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 años"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:background="@color/coral_acento"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tvEspecialidadSeleccion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ansiedad"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:background="@color/coral_acento"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp" />
+
+            </LinearLayout>
 
             <!-- Separador -->
             <View
@@ -67,37 +89,74 @@
                 android:background="#F0F0F0"
                 android:layout_marginVertical="12dp" />
 
-            <!-- Especialidad -->
+            <!-- Sección terapeuta -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Especialidad"
+                android:text="TERAPEUTA ASIGNADA"
                 android:textSize="11sp"
-                android:textColor="@color/texto_hint"
-                android:textAllCaps="true"
-                android:letterSpacing="0.1" />
+                android:textColor="@color/coral_acento"
+                android:letterSpacing="0.08"
+                android:layout_marginBottom="10dp" />
 
-            <TextView
-                android:id="@+id/tvEspecialidadSeleccion"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ansiedad y estrés"
-                android:textSize="14sp"
-                android:textColor="@color/texto_principal"
-                android:layout_marginTop="4dp" />
-
-            <!-- Separador -->
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0"
-                android:layout_marginVertical="12dp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="16dp">
+
+                <!-- Foto circular terapeuta -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="12dp"
+                    app:cardCornerRadius="25dp"
+                    app:cardElevation="2dp">
+
+                    <ImageView
+                        android:id="@+id/ivFotoTerapeutaSeleccion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:background="@color/morado_claro" />
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Info terapeuta -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvNombreTerapeutaSeleccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dra. Ana García"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/coral_acento" />
+
+                    <TextView
+                        android:id="@+id/tvEspecialidadTerapeutaSeleccion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Psicóloga clínica"
+                        android:textSize="12sp"
+                        android:textColor="@color/texto_secundario"
+                        android:layout_marginTop="2dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
 
             <!-- Botón seleccionar -->
             <Button
                 android:id="@+id/btnSeleccionarAnimal"
                 android:layout_width="match_parent"
-                android:layout_height="46dp"
+                android:layout_height="48dp"
                 android:text="Seleccionar"
                 android:textAllCaps="false"
                 android:textSize="15sp"
