@@ -3,149 +3,231 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="@color/fondo_principal">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Cabecera morada -->
+        <!-- Header con foto de perfil a la izquierda -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/morado_principal"
             android:padding="24dp"
-            android:orientation="vertical">
+            android:paddingTop="32dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
 
-            <TextView
-                android:id="@+id/tvSaludo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="¡Hola!"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF" />
+            <!-- Foto de perfil -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="14dp"
+                app:cardCornerRadius="26dp"
+                app:cardElevation="4dp">
 
-            <TextView
-                android:id="@+id/tvFecha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hoy es un buen día"
-                android:textSize="14sp"
-                android:textColor="@color/morado_claro"
-                android:layout_marginTop="4dp" />
+                <ImageView
+                    android:id="@+id/ivFotoPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/logo_therapets"
+                    android:background="@color/morado_principal" />
 
-        </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
-        <!-- Frase motivacional -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/morado_oscuro">
-
+            <!-- Saludo -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvFecha"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Frase del día"
+                    android:text="Miércoles, 6 mayo"
                     android:textSize="12sp"
-                    android:textColor="@color/morado_claro"
-                    android:textAllCaps="true"
-                    android:letterSpacing="0.1" />
+                    android:textColor="@color/texto_hint" />
 
                 <TextView
-                    android:id="@+id/tvFrase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Los animales nos enseñan a vivir el presente"
-                    android:textSize="16sp"
-                    android:textColor="#FFFFFF"
-                    android:textStyle="italic"
-                    android:layout_marginTop="8dp"
-                    android:lineSpacingExtra="4dp" />
+                    android:text="Bienvenida a"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/texto_principal"
+                    android:layout_marginTop="4dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TheraPets 🐾"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/morado_principal" />
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </LinearLayout>
 
-        <!-- Botón agendar cita -->
-        <Button
-            android:id="@+id/btnAgendarCita"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Agendar una cita"
-            android:textAllCaps="false"
-            android:textSize="16sp"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="@color/coral_acento"
-            app:cornerRadius="16dp" />
-
-        <!-- Próxima cita -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tu próxima cita"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/texto_principal"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="24dp" />
-
+        <!-- Como te sientes hoy -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardProximaCita"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="10dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="20dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-                <!-- Barra morada izquierda -->
-                <View
-                    android:layout_width="6dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/morado_principal" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="¿Cómo te sientes hoy?"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/texto_principal"
+                    android:layout_marginBottom="12dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/emoji1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="😔"
+                        android:textSize="28sp"
+                        android:gravity="center"
+                        android:padding="6dp" />
+
+                    <TextView
+                        android:id="@+id/emoji2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="😐"
+                        android:textSize="28sp"
+                        android:gravity="center"
+                        android:padding="6dp" />
+
+                    <TextView
+                        android:id="@+id/emoji3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="🙂"
+                        android:textSize="28sp"
+                        android:gravity="center"
+                        android:padding="6dp" />
+
+                    <TextView
+                        android:id="@+id/emoji4"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="😊"
+                        android:textSize="28sp"
+                        android:gravity="center"
+                        android:padding="6dp" />
+
+                    <TextView
+                        android:id="@+id/emoji5"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="😄"
+                        android:textSize="28sp"
+                        android:gravity="center"
+                        android:padding="6dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <!-- Proxima sesion con terapeuta -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardProximaCita"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="4dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:background="@drawable/bg_gradiente_ginda">
+
+                <!-- Foto terapeuta -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_marginEnd="14dp"
+                    app:cardCornerRadius="28dp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/ivFotoTerapeutaCita"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:background="@color/morado_claro" />
+
+                </androidx.cardview.widget.CardView>
+
+                <!-- Info cita -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="PRÓXIMA SESIÓN"
+                        android:textSize="10sp"
+                        android:textColor="@color/coral_acento"
+                        android:letterSpacing="0.1"
+                        android:layout_marginBottom="4dp" />
 
                     <TextView
                         android:id="@+id/tvProximaCitaFecha"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sin citas próximas"
+                        android:text="Sin sesiones próximas"
                         android:textSize="15sp"
-                        android:textColor="@color/texto_principal"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
 
                     <TextView
                         android:id="@+id/tvProximaCitaDetalle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Agenda tu primera sesión"
-                        android:textSize="13sp"
-                        android:textColor="@color/texto_hint"
+                        android:text="Agenda desde el botón 🐾"
+                        android:textSize="12sp"
+                        android:textColor="@color/morado_claro"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -154,78 +236,78 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Dato curioso -->
+        <!-- Nuestros terapeutas -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nuestros terapeutas"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/texto_principal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="12dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvTerapeutas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:clipToPadding="false"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="24dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <!-- Como surgio TheraPets -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardComoSurgio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="16dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="20dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/coral_claro">
+            app:cardBackgroundColor="@color/morado_oscuro">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Barra coral izquierda -->
-                <View
-                    android:layout_width="6dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/coral_acento" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:padding="20dp">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="¿Sabías que..."
-                        android:textSize="14sp"
+                        android:text="¿Cómo surgió TheraPets?"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:textColor="#FFFFFF" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Conoce nuestra historia →"
+                        android:textSize="12sp"
                         android:textColor="@color/coral_acento"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvDatoCurioso"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Acariciar un perro puede reducir el cortisol hasta un 30%"
-                        android:textSize="14sp"
-                        android:textColor="@color/texto_principal"
-                        android:layout_marginTop="8dp"
-                        android:lineSpacingExtra="4dp" />
+                        android:layout_marginTop="4dp" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🐾"
+                    android:textSize="32sp" />
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
-
-        <!-- Animales disponibles -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Animales disponibles"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/texto_principal"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="24dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvAnimales"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="24dp"
-            android:orientation="horizontal"
-            android:clipToPadding="false"
-            android:paddingHorizontal="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     </LinearLayout>
 

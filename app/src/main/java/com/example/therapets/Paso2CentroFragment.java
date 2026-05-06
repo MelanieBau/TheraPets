@@ -28,11 +28,12 @@ public class Paso2CentroFragment extends Fragment {
 
         List<Centro> listaCentros = new ArrayList<>();
 
-        // Cuando el usuario selecciona un centro va al paso de horas
-        ListaDeCentros adapter = new ListaDeCentros(listaCentros, centro -> {
+        // Cuando el usuario selecciona un centro va al paso de seleccionar el horario
+        ListaDeCentros adapter = new ListaDeCentros(listaCentros, (centro, hora) -> {
             CitaDraftStore.centro = centro.getNombre();
+            CitaDraftStore.hora = hora;
             requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.stepContainer, new SeleccionarHora())
+                    .replace(R.id.stepContainer, new Paso3CuidadorFragment())
                     .addToBackStack(null)
                     .commit();
         });

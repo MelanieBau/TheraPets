@@ -7,9 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
@@ -63,28 +61,24 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
             holder.itemView.getContext().startActivity(intent);
         });
 
-        // Cuando pulsa Seleccionar mostramos los horarios
+        // Cuando pulsa Seleccionar abrimos el dialog de horarios
         holder.btnSeleccionar.setOnClickListener(v -> {
-            holder.seccionHorarios.setVisibility(View.VISIBLE);
-            holder.contenedorDias.removeAllViews();
-            holder.contenedorHoras.removeAllViews();
+            GestorHorarios gestor = new GestorHorarios(holder.itemView.getContext(), horaSeleccionada);
 
-            // Usamos GestorHorarios para cargar días y horas
-            GestorHorarios gestor = new GestorHorarios(
-                    holder.itemView.getContext(),
-                    holder.contenedorDias,
-                    holder.contenedorHoras,
-                    horaSeleccionada);
-            gestor.cargarDias(centro.getNombre());
+            gestor.mostrarHorasDisponibles(centro.getNombre(), hora -> {
+                horaSeleccionada[0] = hora;
+                // Mostramos la hora seleccionada en el botón confirmar
+                holder.btnConfirmar.setText("Confirmar — " + hora);
+                holder.btnConfirmar.setVisibility(View.VISIBLE);
+            });
         });
 
-        // Cuando pulsa Confirmar guardamos y vamos al Paso 3
+        // Botón confirmar oculto hasta que se elige una hora
+        holder.btnConfirmar.setVisibility(View.GONE);
+
+        // Cuando pulsa Confirmar vamos al Paso 3
         holder.btnConfirmar.setOnClickListener(v -> {
-            if (horaSeleccionada[0].isEmpty()) {
-                Toast.makeText(holder.itemView.getContext(),
-                        "Selecciona una hora", Toast.LENGTH_SHORT).show();
-                return;
-            }
+            if (horaSeleccionada[0].isEmpty()) return;
             onConfirmar.onConfirmar(centro, horaSeleccionada[0]);
         });
     }
@@ -96,7 +90,6 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
         ImageView foto;
         TextView nombre, direccion, telefono;
         Button btnMaps, btnSeleccionar, btnConfirmar;
-        LinearLayout seccionHorarios, contenedorDias, contenedorHoras;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -107,9 +100,6 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
             btnMaps = itemView.findViewById(R.id.btnVerMaps);
             btnSeleccionar = itemView.findViewById(R.id.btnSeleccionarCentro);
             btnConfirmar = itemView.findViewById(R.id.btnConfirmarHora);
-            seccionHorarios = itemView.findViewById(R.id.seccionHorarios);
-            contenedorDias = itemView.findViewById(R.id.contenedorDias);
-            contenedorHoras = itemView.findViewById(R.id.contenedorHoras);
         }
     }
 }

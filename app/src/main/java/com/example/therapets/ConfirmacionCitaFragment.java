@@ -34,7 +34,8 @@ public class ConfirmacionCitaFragment extends Fragment {
                         "Fecha: " + CitaDraftStore.fecha + "\n" +
                         "Hora: " + CitaDraftStore.hora + "\n\n" +
                         "Centro: " + CitaDraftStore.centro + "\n" +
-                        "Cuidador: " + CitaDraftStore.cuidador + "\n\n" +
+                        "Animal: " + CitaDraftStore.cuidador + "\n" +
+                        "Terapeuta: " + CitaDraftStore.nombreTerapeuta + "\n\n" +
                         "Motivo: " + CitaDraftStore.motivo + "\n" +
                         (CitaDraftStore.otroMotivo.isEmpty() ? "" : ("Otros: " + CitaDraftStore.otroMotivo + "\n"));
 
@@ -62,7 +63,9 @@ public class ConfirmacionCitaFragment extends Fragment {
                         : CitaDraftStore.motivo + " - " + CitaDraftStore.otroMotivo
         );
         cita.setEstado("pendiente");
+        cita.setNombreTerapeuta(CitaDraftStore.nombreTerapeuta);
         cita.setUsuarioId(uid);
+
 
         FirebaseFirestore.getInstance()
                 .collection("citas")

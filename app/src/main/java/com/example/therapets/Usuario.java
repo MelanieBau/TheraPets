@@ -8,6 +8,8 @@ public class Usuario {
     private String rol;
     private String centroId;
 
+    private int telefono;
+
     // Constructor vacío necesario para Firestore
     public Usuario() {}
 
@@ -26,4 +28,12 @@ public class Usuario {
 
     public String getCentroId() { return centroId; }
     public void setCentroId(String centroId) { this.centroId = centroId; }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
 }

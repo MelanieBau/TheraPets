@@ -7,7 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
@@ -24,13 +23,11 @@ public class TestimoniosFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         RecyclerView rvTestimonios = view.findViewById(R.id.rvTestimonios);
-        FloatingActionButton fabAgregar = view.findViewById(R.id.fabAgregarTestimonio);
-
-        // Configurar RecyclerView
         rvTestimonios.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         List<Testimonio> lista = new ArrayList<>();
-        TestimonioAdapter adapter = new TestimonioAdapter(lista, requireActivity().getSupportFragmentManager());
+        TestimonioAdapter adapter = new TestimonioAdapter(lista,
+                requireActivity().getSupportFragmentManager());
         rvTestimonios.setAdapter(adapter);
 
         // Cargar testimonios desde Firestore
@@ -48,13 +45,12 @@ public class TestimoniosFragment extends Fragment {
                     adapter.notifyDataSetChanged();
                 });
 
-        // Botón flotante para agregar testimonio
-        fabAgregar.setOnClickListener(v -> {
-            requireActivity().getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.fragmentContainer, new AgregarTestimoniosFragment())
-                    .addToBackStack(null)
-                    .commit();
-        });
+        // Botón agregar testimonio en cabecera
+        view.findViewById(R.id.btnAgregarTestimonio).setOnClickListener(v ->
+                requireActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new AgregarTestimoniosFragment())
+                        .addToBackStack(null)
+                        .commit());
     }
 }

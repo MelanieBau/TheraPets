@@ -13,6 +13,8 @@ public class Cita {
     private String motivo;
     private String estado;
     private String usuarioId;
+    private String nombreTerapeuta;
+
 
     // Constructor vacío necesario para Firestore
     public Cita() {}
@@ -50,4 +52,7 @@ public class Cita {
 
     public String getUsuarioId() { return usuarioId; }
     public void setUsuarioId(String usuarioId) { this.usuarioId = usuarioId; }
+
+    public String getNombreTerapeuta() { return nombreTerapeuta; }
+    public void setNombreTerapeuta(String nombreTerapeuta) { this.nombreTerapeuta = nombreTerapeuta; }
 }

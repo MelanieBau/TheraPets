@@ -6,10 +6,9 @@
     <!-- Paleta principal TheraPets -->
     <color name="morado_principal">#A45B7D</color>
     <color name="morado_claro">#F7E4EB</color>
-    <color name="morado_oscuro">#D89EB2</color>
+    <color name="morado_oscuro">#3B2F3A</color>
+    <color name="coral_acento">#D89EB2</color>
 
-    <color name="coral_acento">#3B2F3A</color>
-    <color name="coral_claro">#FFF0F0</color>
 
     <color name="fondo_principal">#FFF5F0</color>
     <color name="fondo_secundario">#F8F4FF</color>

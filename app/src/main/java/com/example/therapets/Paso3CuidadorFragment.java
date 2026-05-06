@@ -32,6 +32,7 @@ public class Paso3CuidadorFragment extends Fragment {
         AnimalSeleccion seleccion = new AnimalSeleccion(listaAnimales, animal -> {
             // Guardamos el animal elegido y vamos al Paso 4
             CitaDraftStore.cuidador = animal.getNombre() + " (" + animal.getTipo() + ")";
+            CitaDraftStore.nombreTerapeuta = animal.getNombreTerapeuta() != null ? animal.getNombreTerapeuta() : "";
             requireActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.stepContainer, new Paso4MotivoFragment())
                     .addToBackStack(null)

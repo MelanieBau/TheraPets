@@ -10,6 +10,7 @@ public class CitaDraftStore {
     public static String cuidador = "";
     public static String motivo = "";
     public static String otroMotivo = "";
+    public static String nombreTerapeuta;
 
     public static void clear() {
         nombres = apellidos = telefono = fecha = hora = "";
@@ -17,6 +18,7 @@ public class CitaDraftStore {
         cuidador = "";
         motivo = "";
         otroMotivo = "";
+        nombreTerapeuta = "";
 
     }
 }

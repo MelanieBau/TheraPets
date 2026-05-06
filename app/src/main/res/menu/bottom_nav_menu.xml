@@ -4,20 +4,28 @@
     <item
         android:id="@+id/nav_inicio"
         android:title="Inicio"
-        android:icon="@android:drawable/ic_menu_view"/>
+        android:icon="@drawable/perro"/>
 
     <item
         android:id="@+id/nav_citas"
         android:title="Citas"
-        android:icon="@android:drawable/ic_menu_agenda"/>
+        android:icon="@drawable/cronograma"/>
+
+    <!-- Espacio vacío para el FAB -->
+    <item
+        android:id="@+id/nav_vacio"
+        android:title=""
+        android:enabled="false"
+        android:icon="@drawable/agendar"/>
 
     <item
         android:id="@+id/nav_testimonios"
         android:title="Testimonios"
-        android:icon="@android:drawable/ic_menu_gallery"/>
+        android:icon="@drawable/testimonios"/>
 
     <item
         android:id="@+id/nav_perfil"
         android:title="Perfil"
-        android:icon="@android:drawable/ic_menu_myplaces"/>
+        android:icon="@drawable/perfil_usuario"/>
+
 </menu>

@@ -14,22 +14,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageView logo = findViewById(R.id.logoImageTherapets);
-        TextView titulo = findViewById(R.id.textoInicio);
 
         // Estado inicial del logo (invisible)
         logo.setAlpha(0f);
         logo.setScaleX(85f);
         logo.setScaleY(85f);
 
-        // Estado inicial del titulo (invisible)
-        titulo.setAlpha(0f);
-        titulo.setTranslationY(12f);
-
         // Animación del logo (fade + zoom suave)
         logo.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(700).setStartDelay(150).start();
-
-        // Animación del texto
-        titulo.animate().alpha(1f).translationY(0f).setDuration(600).setStartDelay(400).start();
 
         // Cambiar al Bienvenido luego de la animación
         new android.os.Handler(android.os.Looper.getMainLooper())

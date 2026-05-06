@@ -1,38 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/morado_principal">
+    android:background="@color/white">
 
     <!-- Contenedor de fragments -->
     <FrameLayout
         android:id="@+id/fragmentContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="56dp"
+        android:clipToPadding="false"
+        android:background="@color/white" />
 
-    <!-- Barra inferior con estilo personalizado -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <!-- Barra inferior con hueco curvo -->
+    <com.example.therapets.BottomNavCurved
         android:id="@+id/bottomNav"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp"
-        android:background="@drawable/bg_estado_cita"
-        android:elevation="8dp"
+        android:layout_gravity="bottom"
+        android:background="@android:color/transparent"
         app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="@color/white"
-        app:itemTextColor="@color/morado_principal"
-        app:labelVisibilityMode="unlabeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:itemIconTint="@null"
+        app:itemTextColor="@color/texto_principal"
+        app:labelVisibilityMode="labeled"
+        app:itemIconSize="28dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- Botón central flotante -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="28dp"
+        android:src="@drawable/agendar"
+        android:contentDescription="Agendar cita"
+        app:backgroundTint="@color/coral_acento"
+        app:tint="@null"
+        app:fabSize="auto"
+        app:maxImageSize="36dp"
+        app:elevation="12dp"
+        app:borderWidth="0dp"
+        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

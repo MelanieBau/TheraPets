@@ -17,6 +17,7 @@
 
     <!-- Título de confirmación -->
     <TextView
+        android:id="@+id/tvEmailEnviado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Email enviado"

@@ -3,6 +3,7 @@
     <style name="Base.Theme.TheraPets" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="fontFamily">@font/poppins</item>
         <item name="android:fontFamily">@font/poppins</item>
+        <item name="colorSecondaryContainer">@color/coral_acento</item>
     </style>
 
     <style name="ShapeAppearance.TheraPets.TopRounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
@@ -20,4 +21,7 @@
     </style>
 
     <style name="Theme.TheraPets" parent="Base.Theme.TheraPets" />
+
+
+
 </resources>

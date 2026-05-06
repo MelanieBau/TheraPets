@@ -6,15 +6,10 @@ public class Animal {
     private String nombre;
     private String tipo;
     private String centro;
-
     private String fotoUrl;
-
     private String raza;
-
     private String edad;
-
     private String especialidad;
-
     private String nombreTerapeuta;
     private String especialidadTerapeuta;
     private String fotoDeLaTerapeuta;
