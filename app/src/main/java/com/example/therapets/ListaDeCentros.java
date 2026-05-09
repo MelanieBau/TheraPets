@@ -11,7 +11,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.FirebaseFirestore;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHolder> {
 
@@ -40,12 +44,10 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
         Centro centro = lista.get(position);
         final String[] horaSeleccionada = {""};
 
-        // Mostramos los datos del centro
         holder.nombre.setText(centro.getNombre());
         holder.direccion.setText("📍 " + centro.getDireccion());
         holder.telefono.setText("📞 " + centro.getTelefono());
 
-        // Cargamos la foto con Glide
         if (centro.getFotoUrl() != null && !centro.getFotoUrl().isEmpty()) {
             Glide.with(holder.itemView.getContext())
                     .load(centro.getFotoUrl())
@@ -53,7 +55,6 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
                     .into(holder.foto);
         }
 
-        // Abrimos Google Maps con la dirección
         holder.btnMaps.setOnClickListener(v -> {
             String uri = "geo:0,0?q=" + Uri.encode(centro.getDireccion());
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
@@ -61,26 +62,63 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
             holder.itemView.getContext().startActivity(intent);
         });
 
+        // Verificamos si hay horarios disponibles para el día elegido
+        verificarDisponibilidad(centro.getNombre(), holder);
+
         // Cuando pulsa Seleccionar abrimos el dialog de horarios
         holder.btnSeleccionar.setOnClickListener(v -> {
-            GestorHorarios gestor = new GestorHorarios(holder.itemView.getContext(), horaSeleccionada);
+            GestorHorarios gestor = new GestorHorarios(
+                    holder.itemView.getContext(), horaSeleccionada);
 
             gestor.mostrarHorasDisponibles(centro.getNombre(), hora -> {
                 horaSeleccionada[0] = hora;
-                // Mostramos la hora seleccionada en el botón confirmar
                 holder.btnConfirmar.setText("Confirmar — " + hora);
                 holder.btnConfirmar.setVisibility(View.VISIBLE);
             });
         });
 
-        // Botón confirmar oculto hasta que se elige una hora
         holder.btnConfirmar.setVisibility(View.GONE);
 
-        // Cuando pulsa Confirmar vamos al Paso 3
         holder.btnConfirmar.setOnClickListener(v -> {
             if (horaSeleccionada[0].isEmpty()) return;
             onConfirmar.onConfirmar(centro, horaSeleccionada[0]);
         });
+    }
+
+    private void verificarDisponibilidad(String centroNombre, ViewHolder holder) {
+        // Obtenemos el día de la semana de la fecha elegida
+        try {
+            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                    .parse(CitaDraftStore.fecha);
+            String dia = new SimpleDateFormat("EEEE", new Locale("es", "ES")).format(date);
+            dia = dia.substring(0, 1).toUpperCase() + dia.substring(1);
+            final String diaFinal = dia;
+
+            FirebaseFirestore.getInstance()
+                    .collection("horarios")
+                    .whereEqualTo("centroId", centroNombre)
+                    .whereEqualTo("dia", diaFinal)
+                    .get()
+                    .addOnSuccessListener(snap -> {
+                        if (snap.isEmpty()) {
+                            // No hay horarios ese día
+                            holder.btnSeleccionar.setText("Sin horarios");
+                            holder.btnSeleccionar.setEnabled(false);
+                            holder.btnSeleccionar.setBackgroundTintList(
+                                    android.content.res.ColorStateList.valueOf(
+                                            holder.itemView.getContext().getColor(android.R.color.darker_gray)));
+                        } else {
+                            // Hay horarios disponibles
+                            holder.btnSeleccionar.setText("Seleccionar");
+                            holder.btnSeleccionar.setEnabled(true);
+                            holder.btnSeleccionar.setBackgroundTintList(
+                                    android.content.res.ColorStateList.valueOf(
+                                            holder.itemView.getContext().getColor(R.color.morado_principal)));
+                        }
+                    });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
