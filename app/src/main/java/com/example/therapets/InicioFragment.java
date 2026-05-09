@@ -1,5 +1,6 @@
 package com.example.therapets;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InicioFragment extends Fragment {
 
@@ -63,8 +69,14 @@ public class InicioFragment extends Fragment {
                 .get()
                 .addOnSuccessListener(document -> {
                     if (document.exists()) {
-                        // Foto de perfil si existe
-                        // String fotoUrl = document.getString("fotoUrl");
+                        // Cargar foto de perfil si existe
+                        String fotoUrl = document.getString("fotoUrl");
+                        if (fotoUrl != null && !fotoUrl.isEmpty()) {
+                            com.bumptech.glide.Glide.with(requireContext())
+                                    .load(fotoUrl)
+                                    .centerCrop()
+                                    .into((android.widget.ImageView) view.findViewById(R.id.ivFotoPerfil));
+                        }
                     }
                 });
 
@@ -92,9 +104,31 @@ public class InicioFragment extends Fragment {
                     tvProximaCitaDetalle.setText("Agenda desde el botón 🐾");
                 });
 
+
+        // Cargar animales en la home
+        RecyclerView rvAnimales = view.findViewById(R.id.rvAnimales);
+        rvAnimales.setLayoutManager(new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        List<Animal> listaAnimales = new ArrayList<>();
+        AnimalHome animalAdapter = new AnimalHome(listaAnimales);
+        rvAnimales.setAdapter(animalAdapter);
+
+        FirebaseFirestore.getInstance()
+                .collection("animales")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!isAdded()) return;
+                    listaAnimales.clear();
+                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                        Animal animal = doc.toObject(Animal.class);
+                        animal.setId(doc.getId());
+                        listaAnimales.add(animal);
+                    }
+                    animalAdapter.notifyDataSetChanged();
+                });
+
         // Botón cómo surgió TheraPets
-        cardComoSurgio.setOnClickListener(v -> {
-            // Abrir pantalla de historia
-        });
+        cardComoSurgio.setOnClickListener(v ->
+                startActivity(new Intent(requireContext(), HistoriaTherapets.class)));
     }
 }

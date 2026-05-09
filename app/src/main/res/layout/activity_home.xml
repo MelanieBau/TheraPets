@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
         android:layout_marginBottom="28dp"
-        android:src="@drawable/agendar"
+        android:src="@drawable/boton_agregar"
         android:contentDescription="Agendar cita"
         app:backgroundTint="@color/coral_acento"
         app:tint="@null"

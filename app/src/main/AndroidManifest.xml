@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- Permiso para acceder a la galería de imágenes -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Permiso para acceder a la galería de imágenes -->
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
 
     <application
+        android:name=".TherapetsApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,47 +16,82 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheraPets"
-        android:name=".TherapetsApp"
         tools:targetApi="31">
-
+        <activity
+            android:name=".HistoriaTherapets"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".RecuperarContrasena" android:exported="false" />
-        <activity android:name=".EmailEnviado" android:exported="false" />
-
-        <activity android:name=".BienvenidoTherapets" android:exported="false" />
-        <activity android:name=".IniciarSesion" android:exported="false" />
-        <activity android:name=".Registro" android:exported="false" />
-        <activity android:name=".Home" android:exported="false" />
-        <activity android:name=".AgendarCita" android:exported="false" />
-        <activity android:name=".Admin" android:exported="false" />
-        <activity android:name=".GestionCentros" android:exported="false" />
-        <activity android:name=".GestionAnimales" android:exported="false" />
-        <activity android:name=".GestionCitas" android:exported="false" />
-        <activity android:name=".Coordinador" android:exported="false" />
-
-        <activity android:name=".GestionCitasCoordinador" android:exported="false" />
-
-        <activity android:name=".ValorarCita" android:exported="false" />
-
-        <activity android:name=".GestionCoordinadores" android:exported="false" />
-        <activity android:name=".AgregarAnimal" android:exported="false" />
-        <activity android:name=".EditarAnimal" android:exported="false" />
-
-        <activity android:name=".GestionHorarios" android:exported="false" />
-        <activity android:name=".AgregarCentro" android:exported="false" />
-
-        <activity android:name=".EditarPerfil" android:exported="false" />
-        <activity android:name=".Configuracion" android:exported="false" />
-
-
+        <activity
+            android:name=".RecuperarContrasena"
+            android:exported="false" />
+        <activity
+            android:name=".EmailEnviado"
+            android:exported="false" />
+        <activity
+            android:name=".BienvenidoTherapets"
+            android:exported="false" />
+        <activity
+            android:name=".IniciarSesion"
+            android:exported="false" />
+        <activity
+            android:name=".Registro"
+            android:exported="false" />
+        <activity
+            android:name=".Home"
+            android:exported="false" />
+        <activity
+            android:name=".AgendarCita"
+            android:exported="false" />
+        <activity
+            android:name=".Admin"
+            android:exported="false" />
+        <activity
+            android:name=".GestionCentros"
+            android:exported="false" />
+        <activity
+            android:name=".GestionAnimales"
+            android:exported="false" />
+        <activity
+            android:name=".GestionCitas"
+            android:exported="false" />
+        <activity
+            android:name=".Coordinador"
+            android:exported="false" />
+        <activity
+            android:name=".GestionCitasCoordinador"
+            android:exported="false" />
+        <activity
+            android:name=".ValorarCita"
+            android:exported="false" />
+        <activity
+            android:name=".GestionCoordinadores"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarAnimal"
+            android:exported="false" />
+        <activity
+            android:name=".EditarAnimal"
+            android:exported="false" />
+        <activity
+            android:name=".GestionHorarios"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarCentro"
+            android:exported="false" />
+        <activity
+            android:name=".EditarPerfil"
+            android:exported="false" />
+        <activity
+            android:name=".Configuracion"
+            android:exported="false" />
     </application>
 
 </manifest>

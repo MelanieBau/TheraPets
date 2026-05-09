@@ -10,6 +10,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 public class Home extends AppCompatActivity {
 
     private void openFragment(Fragment fragment) {
+        Fragment current = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
+        if (current != null && current.getClass().equals(fragment.getClass())) return;
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragmentContainer, fragment)
                 .commit();

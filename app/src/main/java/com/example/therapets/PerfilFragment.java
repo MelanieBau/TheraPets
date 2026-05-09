@@ -1,20 +1,31 @@
 package com.example.therapets;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import com.bumptech.glide.Glide;
+import com.cloudinary.android.MediaManager;
+import com.cloudinary.android.callback.ErrorInfo;
+import com.cloudinary.android.callback.UploadCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PerfilFragment extends Fragment {
+
+    private static final int PICK_IMAGE = 100;
+    private ImageView ivFotoPerfil;
+    private String uid;
 
     public PerfilFragment() {
         super(R.layout.fragment_perfil);
@@ -24,49 +35,105 @@ public class PerfilFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ivFotoPerfil = view.findViewById(R.id.ivFotoPerfil);
         TextView tvNombre = view.findViewById(R.id.tvNombre);
+        TextView tvNombreHeader = view.findViewById(R.id.tvNombreHeader);
         TextView tvEmail = view.findViewById(R.id.tvEmail);
+        TextView tvEmailHeader = view.findViewById(R.id.tvEmailHeader);
         TextView tvTelefono = view.findViewById(R.id.tvTelefono);
         TextView tvFechaNacimiento = view.findViewById(R.id.tvFechaNacimiento);
         Button btnEditarPerfil = view.findViewById(R.id.btnEditarPerfil);
         Button btnConfiguracion = view.findViewById(R.id.btnConfiguracion);
 
-        // Obtener el usuario logueado
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        // El email lo tenemos directo de Authentication
         tvEmail.setText(email);
+        tvEmailHeader.setText(email);
 
-        // Leer el resto de datos desde Firestore
+        // Cargar datos desde Firestore
         FirebaseFirestore.getInstance()
                 .collection("usuarios")
                 .document(uid)
                 .get()
                 .addOnSuccessListener(document -> {
+                    if (!isAdded()) return;
                     if (document.exists()) {
-                        tvNombre.setText(document.getString("nombre"));
+                        String nombre = document.getString("nombre");
+                        tvNombre.setText(nombre);
+                        tvNombreHeader.setText(nombre);
                         tvTelefono.setText(document.getString("telefono"));
                         tvFechaNacimiento.setText(document.getString("fechaNacimiento"));
-                    } else {
-                        Toast.makeText(requireContext(), "No se encontraron datos del perfil", Toast.LENGTH_SHORT).show();
+
+                        String fotoUrl = document.getString("fotoUrl");
+                        if (fotoUrl != null && !fotoUrl.isEmpty()) {
+                            Glide.with(requireContext())
+                                    .load(fotoUrl)
+                                    .centerCrop()
+                                    .into(ivFotoPerfil);
+                        }
                     }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(requireContext(), "Error al cargar perfil: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                    if (!isAdded()) return;
+                    Toast.makeText(requireContext(), "Error al cargar perfil", Toast.LENGTH_SHORT).show();
                 });
 
-
-        // Editar perfil (por ahora un Toast)
-        btnEditarPerfil.setOnClickListener(v -> {
-            Toast.makeText(requireContext(), "Próximamente: editar perfil", Toast.LENGTH_SHORT).show();
+        // Al pulsar la foto abrimos la galería
+        ivFotoPerfil.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setType("image/*");
+            startActivityForResult(intent, PICK_IMAGE);
         });
 
         btnEditarPerfil.setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), EditarPerfil.class)));
 
-        //Dirigirse a configuracion
         btnConfiguracion.setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), Configuracion.class)));
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+            Uri fotoSeleccionada = data.getData();
+            ivFotoPerfil.setImageURI(fotoSeleccionada);
+            subirFoto(fotoSeleccionada);
+        }
+    }
+
+    private void subirFoto(Uri uri) {
+        if (!isAdded()) return;
+        Toast.makeText(requireContext(), "Subiendo foto...", Toast.LENGTH_SHORT).show();
+        MediaManager.get().upload(uri)
+                .callback(new UploadCallback() {
+                    @Override public void onStart(String requestId) {}
+                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
+
+                    @Override
+                    public void onSuccess(String requestId, Map resultData) {
+                        if (!isAdded()) return;
+                        String fotoUrl = resultData.get("secure_url").toString();
+
+                        Map<String, Object> datos = new HashMap<>();
+                        datos.put("fotoUrl", fotoUrl);
+                        FirebaseFirestore.getInstance()
+                                .collection("usuarios")
+                                .document(uid)
+                                .update(datos)
+                                .addOnSuccessListener(a -> {
+                                    if (!isAdded()) return;
+                                    Toast.makeText(requireContext(), "Foto actualizada", Toast.LENGTH_SHORT).show();
+                                });
+                    }
+
+                    @Override
+                    public void onError(String requestId, ErrorInfo error) {
+                        if (!isAdded()) return;
+                        Toast.makeText(requireContext(), "Error al subir foto", Toast.LENGTH_SHORT).show();
+                    }
+                    @Override public void onReschedule(String requestId, ErrorInfo error) {}
+                }).dispatch();
     }
 }

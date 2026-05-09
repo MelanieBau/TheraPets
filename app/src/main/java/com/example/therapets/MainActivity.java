@@ -2,8 +2,10 @@ package com.example.therapets;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -14,20 +16,31 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         ImageView logo = findViewById(R.id.logoImageTherapets);
+        ProgressBar progressBar = findViewById(R.id.progressBar);
 
-        // Estado inicial del logo (invisible)
+        // Logo aparece con fade simple
         logo.setAlpha(0f);
-        logo.setScaleX(85f);
-        logo.setScaleY(85f);
+        logo.animate().alpha(1f).setDuration(600).start();
 
-        // Animación del logo (fade + zoom suave)
-        logo.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(700).setStartDelay(150).start();
+        // Animamos la barra de progreso
+        Handler handler = new Handler(Looper.getMainLooper());
+        int[] progress = {0};
 
-        // Cambiar al Bienvenido luego de la animación
-        new android.os.Handler(android.os.Looper.getMainLooper())
-                .postDelayed(() -> {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (progress[0] <= 100) {
+                    progressBar.setProgress(progress[0]);
+                    progress[0] += 2;
+                    handler.postDelayed(this, 30);
+                } else {
+                    // Cuando llega al 100% va a la siguiente pantalla
                     startActivity(new Intent(MainActivity.this, BienvenidoTherapets.class));
                     finish();
-                }, 1800);
+                }
+            }
+        };
+
+        handler.postDelayed(runnable, 600);
     }
 }

@@ -6,11 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,12 +39,12 @@ public class ConfirmacionCitaFragment extends Fragment {
 
         tvResumen.setText(resumen);
 
-        btnVolverCitas.setOnClickListener(v -> requireActivity().finish());
-
-        btnIrInicio.setOnClickListener(v -> guardarCitaEIrInicio());
+        // Ambos botones guardan la cita, solo cambia el destino
+        btnIrInicio.setOnClickListener(v -> guardarCita(false));
+        btnVolverCitas.setOnClickListener(v -> guardarCita(true));
     }
 
-    private void guardarCitaEIrInicio() {
+    private void guardarCita(boolean irACitas) {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Cita cita = new Cita();
@@ -66,7 +64,6 @@ public class ConfirmacionCitaFragment extends Fragment {
         cita.setNombreTerapeuta(CitaDraftStore.nombreTerapeuta);
         cita.setUsuarioId(uid);
 
-
         FirebaseFirestore.getInstance()
                 .collection("citas")
                 .add(cita)
@@ -75,12 +72,15 @@ public class ConfirmacionCitaFragment extends Fragment {
 
                     Intent intent = new Intent(requireContext(), Home.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    intent.putExtra("open_tab", "inicio");
+                    if (irACitas) {
+                        intent.putExtra("open_tab", "citas");
+                    } else {
+                        intent.putExtra("open_tab", "inicio");
+                    }
                     startActivity(intent);
                     requireActivity().finish();
                 })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(requireContext(), "Error al guardar la cita", Toast.LENGTH_SHORT).show();
-                });
+                .addOnFailureListener(e ->
+                        Toast.makeText(requireContext(), "Error al guardar la cita", Toast.LENGTH_SHORT).show());
     }
 }

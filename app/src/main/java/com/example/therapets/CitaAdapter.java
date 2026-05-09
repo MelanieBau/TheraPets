@@ -34,23 +34,36 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cita cita = lista.get(position);
 
-        holder.tvFechaCita.setText("Fecha " + cita.getFecha() + " a las " + cita.getHora());
-        holder.tvEstado.setText(cita.getEstado());
+        // Fecha y la hora
+        holder.tvFechaCita.setText(cita.getFecha() + " · " + cita.getHora());
 
-        // Cambiar color según el estado
+        // Estado con colores
+        holder.tvEstado.setText(cita.getEstado());
         if (cita.getEstado().equals("pendiente")) {
-            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cita); // coral
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cita);
         } else if (cita.getEstado().equals("confirmada")) {
-            holder.tvEstado.setBackgroundResource(R.drawable.bg_cita_confirmada); // verde
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_cita_confirmada);
         }
 
-        holder.tvCentroCita.setText("Centro" + cita.getCentro());
-        holder.tvCuidadorCita.setText("Cuidador: " + cita.getCuidador());
-        holder.tvMotivoCita.setText("Motivo: " + cita.getMotivo());
+        //Informacion en la tarjeta
+        holder.tvCentroCita.setText("📍 " + cita.getCentro());
+        holder.tvCuidadorCita.setText("🐾 " + cita.getCuidador());
 
-        // Mostrar o esconder botón cancelar
+        // Añadimos la terapeuta de la cita
+        if (cita.getNombreTerapeuta() != null && !cita.getNombreTerapeuta().isEmpty()) {
+            holder.tvTerapeutaCita.setVisibility(View.VISIBLE);
+            holder.tvTerapeutaCita.setText("👩‍⚕️ " + cita.getNombreTerapeuta());
+        } else {
+            holder.tvTerapeutaCita.setVisibility(View.GONE);
+        }
+
+        holder.tvMotivoCita.setText("📋 " + cita.getMotivo());
+
+        // Botón cancelar solo en próximas
         if (mostrarBotonCancelar) {
             holder.btnCancelarCita.setVisibility(View.VISIBLE);
+            holder.btnValorarCita.setVisibility(View.GONE);
+
             holder.btnCancelarCita.setOnClickListener(v -> {
                 FirebaseFirestore.getInstance()
                         .collection("citas")
@@ -61,19 +74,16 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
                             notifyItemRemoved(position);
                             Toast.makeText(v.getContext(), "Cita cancelada", Toast.LENGTH_SHORT).show();
                         })
-                        .addOnFailureListener(e -> {
-                            Toast.makeText(v.getContext(), "Error al cancelar: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                        });
+                        .addOnFailureListener(e ->
+                                Toast.makeText(v.getContext(), "Error al cancelar", Toast.LENGTH_SHORT).show());
             });
         } else {
-            //En el apartado de citas pasadas mostramos el boton de valoracion
             holder.btnCancelarCita.setVisibility(View.GONE);
 
-            // Si la cita está completada mostramos el botón valorar
+            // Botón valorar solo si está completada
             if (cita.getEstado().equals("completada")) {
                 holder.btnValorarCita.setVisibility(View.VISIBLE);
                 holder.btnValorarCita.setOnClickListener(v -> {
-                    // Abrimos la pantalla de valoración pasando los datos de la cita
                     Intent intent = new Intent(v.getContext(), ValorarCita.class);
                     intent.putExtra("citaId", cita.getId());
                     intent.putExtra("centro", cita.getCentro());
@@ -92,7 +102,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvFechaCita, tvEstado, tvCentroCita, tvCuidadorCita, tvMotivoCita;
+        TextView tvFechaCita, tvEstado, tvCentroCita, tvCuidadorCita, tvMotivoCita, tvTerapeutaCita;
         Button btnCancelarCita, btnValorarCita;
 
         public ViewHolder(@NonNull View itemView) {
@@ -102,9 +112,9 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
             tvCentroCita = itemView.findViewById(R.id.tvCentroCita);
             tvCuidadorCita = itemView.findViewById(R.id.tvCuidadorCita);
             tvMotivoCita = itemView.findViewById(R.id.tvMotivoCita);
+            tvTerapeutaCita = itemView.findViewById(R.id.tvTerapeutaCita);
             btnCancelarCita = itemView.findViewById(R.id.btnCancelarCita);
             btnValorarCita = itemView.findViewById(R.id.btnValorarCita);
-
         }
     }
 }
