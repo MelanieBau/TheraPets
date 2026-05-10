@@ -24,7 +24,7 @@
         android:background="@android:color/transparent"
         app:menu="@menu/bottom_nav_menu"
         app:itemIconTint="@null"
-        app:itemTextColor="@color/texto_principal"
+        app:itemTextColor="@color/nav_colors"
         app:labelVisibilityMode="labeled"
         app:itemIconSize="28dp" />
 
@@ -37,7 +37,7 @@
         android:layout_marginBottom="28dp"
         android:src="@drawable/boton_agregar"
         android:contentDescription="Agendar cita"
-        app:backgroundTint="@color/coral_acento"
+        app:backgroundTint="#4CAF82"
         app:tint="@null"
         app:fabSize="auto"
         app:maxImageSize="36dp"

@@ -22,7 +22,7 @@
             android:scaleType="centerCrop"
             android:background="@color/morado_claro" />
 
-        <!-- Nombre -->
+        <!-- Nombre de los animales -->
         <TextView
             android:id="@+id/tvNombreAnimalHome"
             android:layout_width="match_parent"
@@ -31,9 +31,10 @@
             android:text="Luna"
             android:textSize="13sp"
             android:textStyle="bold"
-            android:textColor="@color/texto_principal"
+            android:textColor="#FFFFFF"
             android:gravity="center"
-            android:padding="4dp" />
+            android:padding="4dp"
+            android:background="#4CAF82" />
 
     </LinearLayout>
 
