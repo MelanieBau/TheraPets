@@ -24,6 +24,7 @@ public class Paso1DatosFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         EditText nombres = view.findViewById(R.id.etNombres);
         EditText apellidos = view.findViewById(R.id.etApellidos);
@@ -37,7 +38,8 @@ public class Paso1DatosFragment extends Fragment {
         nombres.setText(CitaDraftStore.nombres);
         apellidos.setText(CitaDraftStore.apellidos);
         telefono.setText(CitaDraftStore.telefono);
-        if (!CitaDraftStore.fecha.isEmpty()){
+        if (!CitaDraftStore.fecha.isEmpty()) {
+
             fechaSeleccionada.setText(CitaDraftStore.fecha);
             fechaSeleccionada.setTextColor(requireContext().getColor(R.color.texto_principal));
         }

@@ -76,13 +76,13 @@
             <Button
                 android:id="@+id/btnSeleccionarFotoEditar"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:layout_marginBottom="16dp"
                 android:text="Cambiar foto"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/coral_acento"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="30dp" />
 
             <!-- Nombre -->
             <com.google.android.material.textfield.TextInputLayout
@@ -249,7 +249,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/coral_acento"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="30dp" />
             <!-- Botón guardar -->
             <Button
                 android:id="@+id/btnGuardarAnimalEditar"
@@ -260,7 +260,7 @@
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="@color/morado_oscuro"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 

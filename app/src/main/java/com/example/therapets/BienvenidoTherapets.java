@@ -18,6 +18,7 @@ public class BienvenidoTherapets extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_bienvenido_therapets);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -26,7 +27,7 @@ public class BienvenidoTherapets extends AppCompatActivity {
             return insets;
         });
 
-        //Botones del Layout
+        //Botones del Layout del login
         Button botonContinuar = findViewById(R.id.btnContinuar);
         Button botonRegistrarme = findViewById(R.id.btnRegistrarme);
 

@@ -43,8 +43,7 @@ public class IniciarSesion extends AppCompatActivity {
                 return;
             }
 
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             String uid = mAuth.getCurrentUser().getUid();
                             verificarRolYRedirigir(uid);
@@ -58,17 +57,12 @@ public class IniciarSesion extends AppCompatActivity {
         //Interación "he olvidado mi contraseña"
 
         // Interacción "he olvidado mi contraseña"
-        tvOlvide.setOnClickListener(v -> {
-            startActivity(new Intent(this, RecuperarContrasena.class));
+        tvOlvide.setOnClickListener(v -> {startActivity(new Intent(this, RecuperarContrasena.class));
         });
     }
 
     private void verificarRolYRedirigir(String uid) {
-        FirebaseFirestore.getInstance()
-                .collection("usuarios")
-                .document(uid)
-                .get()
-                .addOnSuccessListener(document -> {
+        FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
                     if (document.exists()) {
                         String rol = document.getString("rol");
                         if ("administrador".equals(rol)) {
@@ -84,8 +78,7 @@ public class IniciarSesion extends AppCompatActivity {
                         finish();
                     }
                 })
-                .addOnFailureListener(e -> {
-                    startActivity(new Intent(this, Home.class));
+                .addOnFailureListener(e -> {startActivity(new Intent(this, Home.class));
                     finish();
                 });
     }

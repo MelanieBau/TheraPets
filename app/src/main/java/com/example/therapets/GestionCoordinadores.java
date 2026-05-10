@@ -53,10 +53,7 @@ public class GestionCoordinadores extends AppCompatActivity {
 
     private void cargarCoordinadores() {
         // Buscamos en Firestore todos los usuarios con rol coordinador
-        db.collection("usuarios")
-                .whereEqualTo("rol", "coordinador")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        db.collection("usuarios").whereEqualTo("rol", "coordinador").get().addOnSuccessListener(queryDocumentSnapshots -> {
                     listaCoordinadores.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Usuario usuario = doc.toObject(Usuario.class);
@@ -64,9 +61,7 @@ public class GestionCoordinadores extends AppCompatActivity {
                         listaCoordinadores.add(usuario);
                     }
                     adapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al cargar coordinadores", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(e -> {Toast.makeText(this, "Error al cargar coordinadores", Toast.LENGTH_SHORT).show();
                 });
     }
 
@@ -86,9 +81,7 @@ public class GestionCoordinadores extends AppCompatActivity {
         // Cargamos los centros en el spinner
         List<String> centros = new ArrayList<>();
         centros.add("Selecciona un centro");
-        db.collection("centros")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        db.collection("centros").get().addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         centros.add(doc.getString("nombre"));
                     }
@@ -115,8 +108,7 @@ public class GestionCoordinadores extends AppCompatActivity {
             }
 
             // Creamos el coordinador en Firebase Authentication
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password)
-                    .addOnSuccessListener(authResult -> {
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, password).addOnSuccessListener(authResult -> {
                         String uid = authResult.getUser().getUid();
 
                         // Guardamos los datos del coordinador en Firestore
@@ -126,16 +118,13 @@ public class GestionCoordinadores extends AppCompatActivity {
                         coordinador.put("rol", "coordinador");
                         coordinador.put("centroId", centro);
 
-                        db.collection("usuarios")
-                                .document(uid)
-                                .set(coordinador)
-                                .addOnSuccessListener(a -> {
+                        db.collection("usuarios").document(uid).set(coordinador).addOnSuccessListener(a -> {
                                     Toast.makeText(this, "Coordinador creado correctamente", Toast.LENGTH_SHORT).show();
                                     cargarCoordinadores();
                                 });
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
+
+
+                    }).addOnFailureListener(e -> { Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
                     });
         });
 
@@ -145,20 +134,12 @@ public class GestionCoordinadores extends AppCompatActivity {
 
     private void mostrarDialogoBorrar(Usuario usuario) {
         // Confirmamos antes de borrar
-        new AlertDialog.Builder(this)
-                .setTitle("Borrar coordinador")
-                .setMessage("¿Estás segura de que quieres borrar a " + usuario.getNombre() + "?")
-                .setPositiveButton("Borrar", (dialog, which) -> {
+        new AlertDialog.Builder(this).setTitle("Borrar coordinador").setMessage("¿Estás segura de que quieres borrar a " + usuario.getNombre() + "?").setPositiveButton("Borrar", (dialog, which) -> {
                     // Borramos el documento de Firestore
-                    db.collection("usuarios")
-                            .document(usuario.getId())
-                            .delete()
-                            .addOnSuccessListener(a -> {
+                    db.collection("usuarios").document(usuario.getId()).delete().addOnSuccessListener(a -> {
                                 Toast.makeText(this, "Coordinador eliminado", Toast.LENGTH_SHORT).show();
                                 cargarCoordinadores();
                             });
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
+                }).setNegativeButton("Cancelar", null).show();
     }
 }

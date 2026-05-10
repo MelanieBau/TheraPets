@@ -14,21 +14,26 @@ public class Admin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_admin);
 
+        //Tarjeta de centros
         CardView cardCentros = findViewById(R.id.cardCentros);
+
+        //Tarjeta de los coordinadores
         CardView cardCoordinadores = findViewById(R.id.cardAnimales);
+
+        //Tarjetas de todas las citas de TODOS los centros
         CardView cardCitas = findViewById(R.id.cardCitas);
         Button btnCerrarSesion = findViewById(R.id.btnCerrarSesionAdmin);
 
-        // Ir a gestionar centros
+        // Ir a tarjeta gestionar centros
         cardCentros.setOnClickListener(v -> {
             startActivity(new Intent(this, GestionCentros.class));
         });
 
-        // Ir a gestionar coordinadores
+        // Ir a tarjeta gestionar coordinadores
         cardCoordinadores.setOnClickListener(v ->
                 startActivity(new Intent(this, GestionCoordinadores.class)));
 
-        // Ir a ver todas las citas
+        // Ir a todas las citas
         cardCitas.setOnClickListener(v -> {
             startActivity(new Intent(this, GestionCitas.class));
         });

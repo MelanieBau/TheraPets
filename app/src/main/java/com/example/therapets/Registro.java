@@ -43,8 +43,7 @@ public class Registro extends AppCompatActivity {
             String fechaNacimiento = etFechaNacimiento.getText().toString().trim();
 
             // Validaciones
-            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()
-                    || nombre.isEmpty() || telefono.isEmpty() || fechaNacimiento.isEmpty()) {
+            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || fechaNacimiento.isEmpty()) {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
                 return;
             }
@@ -58,8 +57,7 @@ public class Registro extends AppCompatActivity {
             }
 
             // Crear usuario en Firebase Authentication
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
+            mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             String uid = mAuth.getCurrentUser().getUid();
 
@@ -71,10 +69,7 @@ public class Registro extends AppCompatActivity {
                             usuario.put("fechaNacimiento", fechaNacimiento);
                             usuario.put("rol", "usuario");
 
-                            db.collection("usuarios")
-                                    .document(uid)
-                                    .set(usuario)
-                                    .addOnSuccessListener(a -> {
+                            db.collection("usuarios").document(uid).set(usuario).addOnSuccessListener(a -> {
                                         Toast.makeText(this, "¡Cuenta creada con éxito! 🐾", Toast.LENGTH_SHORT).show();
                                         startActivity(new Intent(this, IniciarSesion.class));
                                         finish();
@@ -90,6 +85,7 @@ public class Registro extends AppCompatActivity {
         });
 
         tvGoLogin.setOnClickListener(v -> {
+
             startActivity(new Intent(this, IniciarSesion.class));
             finish();
         });

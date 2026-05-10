@@ -28,7 +28,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
         this.onBorrar = onBorrar;
     }
 
-    // Mantenemos la interfaz para no romper el código existente
+    // Mantener la interfaz para evitar problemas
     public interface OnEditarListener {
         void onEditar(Animal animal);
     }
@@ -36,8 +36,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_animal, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_animal, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,24 +44,23 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Animal animal = lista.get(position);
 
+        //Nombre del animal
         holder.tvNombre.setText(animal.getNombre());
-        holder.tvTipo.setText("Tipo: " + animal.getTipo());
-        holder.tvCentro.setText("Centro: " + animal.getCentro());
 
-        // Cargar foto del animal con Glide
+        //Tipo(perro, gaot, conejo, etc)
+        holder.tvTipo.setText("Tipo: " + animal.getTipo());
+
+
+        //Cargar la foto del animal  con Glide
         ImageView ivFoto = holder.itemView.findViewById(R.id.ivFotoAnimalItem);
         if (animal.getFotoUrl() != null && !animal.getFotoUrl().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(animal.getFotoUrl())
-                    .centerCrop()
-                    .into(ivFoto);
+            Glide.with(holder.itemView.getContext()).load(animal.getFotoUrl()).centerCrop().into(ivFoto);
         } else {
-            ivFoto.setBackgroundColor(holder.itemView.getContext()
-                    .getColor(R.color.morado_claro));
+            ivFoto.setBackgroundColor(holder.itemView.getContext().getColor(R.color.morado_claro));
         }
 
 
-        // Abrimos EditarAnimalActivity pasando los datos del animal
+        // Se abre el EditarAnimalActivity, si en caso se necesita hacer una modificación
         holder.btnEditar.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), EditarAnimal.class);
             intent.putExtra("animalId", animal.getId());
@@ -87,14 +85,15 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.ViewHolder
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvNombre, tvTipo, tvCentro;
+
+        //Tarjeta del animal para coordinador
+        TextView tvNombre, tvTipo;
         Button btnEditar, btnBorrar;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvNombre = itemView.findViewById(R.id.tvNombreAnimal);
             tvTipo = itemView.findViewById(R.id.tvTipoAnimal);
-            tvCentro = itemView.findViewById(R.id.tvCentroAnimal);
             btnEditar = itemView.findViewById(R.id.btnEditarAnimal);
             btnBorrar = itemView.findViewById(R.id.btnBorrarAnimal);
         }

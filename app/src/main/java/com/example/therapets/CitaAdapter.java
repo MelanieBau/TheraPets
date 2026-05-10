@@ -1,16 +1,20 @@
 package com.example.therapets;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.FirebaseFirestore;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
 
@@ -25,8 +29,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_cita, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cita, parent, false);
         return new ViewHolder(view);
     }
 
@@ -34,22 +37,28 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Cita cita = lista.get(position);
 
-        // Fecha y la hora
         holder.tvFechaCita.setText(cita.getFecha() + " · " + cita.getHora());
 
-        // Estado con colores
         holder.tvEstado.setText(cita.getEstado());
+        //Estado de la cita en pendiente
         if (cita.getEstado().equals("pendiente")) {
             holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cita);
+            holder.tvEstado.setText("Pendiente");
+
+            //Si en caso se confirma
         } else if (cita.getEstado().equals("confirmada")) {
             holder.tvEstado.setBackgroundResource(R.drawable.bg_cita_confirmada);
+            holder.tvEstado.setText("Confirmada");
+
+            //Si en caso el usuario la cancela por un motivo  o la cancela el coordinador del centro
+        } else if (cita.getEstado().equals("cancelada_usuario") || cita.getEstado().equals("cancelada_coordinador")) {
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cancelada);
+            holder.tvEstado.setText("Cancelada");
         }
 
-        //Informacion en la tarjeta
         holder.tvCentroCita.setText("📍 " + cita.getCentro());
         holder.tvCuidadorCita.setText("🐾 " + cita.getCuidador());
 
-        // Añadimos la terapeuta de la cita
         if (cita.getNombreTerapeuta() != null && !cita.getNombreTerapeuta().isEmpty()) {
             holder.tvTerapeutaCita.setVisibility(View.VISIBLE);
             holder.tvTerapeutaCita.setText("👩‍⚕️ " + cita.getNombreTerapeuta());
@@ -59,28 +68,53 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
 
         holder.tvMotivoCita.setText("📋 " + cita.getMotivo());
 
-        // Botón cancelar solo en próximas
+        // Mostrar motivo de cancelación si existe
+        if (cita.getMotivoCancelacion() != null && !cita.getMotivoCancelacion().isEmpty()) {
+            holder.tvMotivoCancelacion.setVisibility(View.VISIBLE);
+            holder.tvMotivoCancelacion.setText("❌ Cancelada: " + cita.getMotivoCancelacion());
+        } else {
+            holder.tvMotivoCancelacion.setVisibility(View.GONE);
+        }
+
         if (mostrarBotonCancelar) {
             holder.btnCancelarCita.setVisibility(View.VISIBLE);
             holder.btnValorarCita.setVisibility(View.GONE);
 
-            holder.btnCancelarCita.setOnClickListener(v -> {
-                FirebaseFirestore.getInstance()
-                        .collection("citas")
-                        .document(cita.getId())
-                        .delete()
-                        .addOnSuccessListener(a -> {
-                            lista.remove(position);
-                            notifyItemRemoved(position);
-                            Toast.makeText(v.getContext(), "Cita cancelada", Toast.LENGTH_SHORT).show();
+            holder.btnCancelarCita.setOnClickListener(v -> { EditText etMotivo = new EditText(v.getContext()); etMotivo.setHint("Motivo de cancelación");etMotivo.setPadding(40, 20, 40, 20);
+                //Se pide el motivo de cancelación
+
+                new AlertDialog.Builder(v.getContext()).setTitle("Cancelar cita").setMessage("¿Por qué quieres cancelar esta cita?").setView(etMotivo).setPositiveButton("Cancelar cita", (dialog, which) -> {
+                            String motivo = etMotivo.getText().toString().trim();
+
+                            if (motivo.isEmpty()) {
+                                //El usuario puede indicar el motivo
+                                Toast.makeText(v.getContext(), "Indica el motivo de la cancelación", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            Map<String, Object> datos = new HashMap<>();
+
+                            //Estado de la cita (cancelado)
+                            datos.put("estado", "cancelada_usuario");
+
+                            //Indicar motivo de la cancelación
+                            datos.put("motivoCancelacion", motivo);
+
+                            FirebaseFirestore.getInstance().collection("citas").document(cita.getId()).update(datos).addOnSuccessListener(a -> {
+                                lista.remove(position);
+                                        notifyItemRemoved(position);
+                                        Toast.makeText(v.getContext(), "Cita cancelada", Toast.LENGTH_SHORT).show();
+                                    })
+                                    .addOnFailureListener(e ->
+                                            Toast.makeText(v.getContext(), "Error al cancelar", Toast.LENGTH_SHORT).show());
                         })
-                        .addOnFailureListener(e ->
-                                Toast.makeText(v.getContext(), "Error al cancelar", Toast.LENGTH_SHORT).show());
+                        .setNegativeButton("Volver", null)
+                        .show();
             });
         } else {
             holder.btnCancelarCita.setVisibility(View.GONE);
 
-            // Botón valorar solo si está completada
+            //Si en caso la cita fue completada
             if (cita.getEstado().equals("completada")) {
                 holder.btnValorarCita.setVisibility(View.VISIBLE);
                 holder.btnValorarCita.setOnClickListener(v -> {
@@ -102,7 +136,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvFechaCita, tvEstado, tvCentroCita, tvCuidadorCita, tvMotivoCita, tvTerapeutaCita;
+        TextView tvFechaCita, tvEstado, tvCentroCita, tvCuidadorCita, tvMotivoCita, tvTerapeutaCita, tvMotivoCancelacion;
         Button btnCancelarCita, btnValorarCita;
 
         public ViewHolder(@NonNull View itemView) {
@@ -113,6 +147,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
             tvCuidadorCita = itemView.findViewById(R.id.tvCuidadorCita);
             tvMotivoCita = itemView.findViewById(R.id.tvMotivoCita);
             tvTerapeutaCita = itemView.findViewById(R.id.tvTerapeutaCita);
+            tvMotivoCancelacion = itemView.findViewById(R.id.tvMotivoCancelacion);
             btnCancelarCita = itemView.findViewById(R.id.btnCancelarCita);
             btnValorarCita = itemView.findViewById(R.id.btnValorarCita);
         }

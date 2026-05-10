@@ -27,11 +27,7 @@ public class EditarPerfil extends AppCompatActivity {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         // Cargamos los datos actuales del usuario
-        FirebaseFirestore.getInstance()
-                .collection("usuarios")
-                .document(uid)
-                .get()
-                .addOnSuccessListener(document -> {
+        FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
                     nombre.setText(document.getString("nombre"));
                     telefono.setText(document.getString("telefono"));
                 });
@@ -50,16 +46,10 @@ public class EditarPerfil extends AppCompatActivity {
             datos.put("nombre", nombreStr);
             datos.put("telefono", telefonoStr);
 
-            FirebaseFirestore.getInstance()
-                    .collection("usuarios")
-                    .document(uid)
-                    .update(datos)
-                    .addOnSuccessListener(a -> {
+            FirebaseFirestore.getInstance().collection("usuarios").document(uid).update(datos).addOnSuccessListener(a -> {
                         Toast.makeText(this, "Perfil actualizado", Toast.LENGTH_SHORT).show();
                         finish();
-                    })
-                    .addOnFailureListener(e ->
-                            Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
+            }).addOnFailureListener(e -> Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
         });
     }
 }

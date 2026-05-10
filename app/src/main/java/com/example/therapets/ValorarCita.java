@@ -90,10 +90,7 @@ public class ValorarCita extends AppCompatActivity{
             valoracion.put("nota", nota);
 
             //Guardar la valoración en FireStore
-            FirebaseFirestore.getInstance()
-                    .collection("valoraciones")
-                    .add(valoracion)
-                    .addOnSuccessListener(ref -> {
+            FirebaseFirestore.getInstance().collection("valoraciones").add(valoracion).addOnSuccessListener(ref -> {
                         Toast.makeText(this, "Valoracion guardada", Toast.LENGTH_SHORT).show();
                         // Volvemos al Home después de guardar
                         Intent intent = new Intent(this, Home.class);

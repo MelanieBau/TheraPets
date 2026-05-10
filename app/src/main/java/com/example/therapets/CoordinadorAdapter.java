@@ -32,8 +32,7 @@ public class CoordinadorAdapter extends RecyclerView.Adapter<CoordinadorAdapter.
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Inflamos el layout de cada tarjeta de coordinador
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_coordinador, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_coordinador, parent, false);
         return new ViewHolder(view);
     }
 

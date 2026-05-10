@@ -27,11 +27,7 @@ public class Coordinador extends AppCompatActivity {
 
         // Obtener datos del coordinador desde Firestore
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseFirestore.getInstance()
-                .collection("usuarios")
-                .document(uid)
-                .get()
-                .addOnSuccessListener(document -> {
+        FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
                     if (document.exists()) {
                         String nombre = document.getString("nombre");
                         centroId = document.getString("centroId");
@@ -56,12 +52,10 @@ public class Coordinador extends AppCompatActivity {
         });
 
         // Ir a citas de mi centro
-        cardCitasCentro.setOnClickListener(v ->
-                startActivity(new Intent(this, GestionCitasCoordinador.class)));
+        cardCitasCentro.setOnClickListener(v -> startActivity(new Intent(this, GestionCitasCoordinador.class)));
 
         // Ir a gestionar horarios
-        cardHorarios.setOnClickListener(v ->
-                startActivity(new Intent(this, GestionHorarios.class)));
+        cardHorarios.setOnClickListener(v -> startActivity(new Intent(this, GestionHorarios.class)));
 
         // Cerrar sesión
         btnCerrarSesion.setOnClickListener(v -> {

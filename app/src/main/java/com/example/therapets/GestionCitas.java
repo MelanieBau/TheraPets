@@ -34,9 +34,7 @@ public class GestionCitas extends AppCompatActivity {
     }
 
     private void cargarTodasLasCitas() {
-        db.collection("citas")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        db.collection("citas").get().addOnSuccessListener(queryDocumentSnapshots -> {
                     listaCitas.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Cita cita = doc.toObject(Cita.class);
@@ -44,9 +42,7 @@ public class GestionCitas extends AppCompatActivity {
                         listaCitas.add(cita);
                     }
                     adapter.notifyDataSetChanged();
-                })
-                .addOnFailureListener(e -> {
-                    Toast.makeText(this, "Error al cargar citas: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                }).addOnFailureListener(e -> {Toast.makeText(this, "Error al cargar citas: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 });
     }
 }

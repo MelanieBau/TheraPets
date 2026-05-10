@@ -42,8 +42,7 @@ public class InicioFragment extends Fragment {
         TextView emoji5 = view.findViewById(R.id.emoji5);
 
         // Fecha del día
-        String fecha = new SimpleDateFormat("EEEE, dd 'de' MMMM",
-                new Locale("es", "ES")).format(new Date());
+        String fecha = new SimpleDateFormat("EEEE, dd 'de' MMMM", new Locale("es", "ES")).format(new Date());
         tvFecha.setText(fecha.substring(0, 1).toUpperCase() + fecha.substring(1));
 
         // Emojis seleccionables
@@ -63,31 +62,18 @@ public class InicioFragment extends Fragment {
 
         // Datos del usuario
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseFirestore.getInstance()
-                .collection("usuarios")
-                .document(uid)
-                .get()
-                .addOnSuccessListener(document -> {
+        FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
                     if (document.exists()) {
                         // Cargar foto de perfil si existe
                         String fotoUrl = document.getString("fotoUrl");
                         if (fotoUrl != null && !fotoUrl.isEmpty()) {
-                            com.bumptech.glide.Glide.with(requireContext())
-                                    .load(fotoUrl)
-                                    .centerCrop()
-                                    .into((android.widget.ImageView) view.findViewById(R.id.ivFotoPerfil));
+                            com.bumptech.glide.Glide.with(requireContext()).load(fotoUrl).centerCrop().into((android.widget.ImageView) view.findViewById(R.id.ivFotoPerfil));
                         }
                     }
                 });
 
         // Próxima cita
-        FirebaseFirestore.getInstance()
-                .collection("citas")
-                .whereEqualTo("usuarioId", uid)
-                .whereIn("estado", java.util.Arrays.asList("pendiente", "confirmada"))
-                .limit(1)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("citas").whereEqualTo("usuarioId", uid).whereIn("estado", java.util.Arrays.asList("pendiente", "confirmada")).limit(1).get().addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!queryDocumentSnapshots.isEmpty()) {
                         String fechaCita = queryDocumentSnapshots.getDocuments().get(0).getString("fecha");
                         String hora = queryDocumentSnapshots.getDocuments().get(0).getString("hora");
@@ -98,8 +84,7 @@ public class InicioFragment extends Fragment {
                         tvProximaCitaFecha.setText("Sin sesiones próximas");
                         tvProximaCitaDetalle.setText("Agenda desde el botón 🐾");
                     }
-                })
-                .addOnFailureListener(e -> {
+                }).addOnFailureListener(e -> {
                     tvProximaCitaFecha.setText("Sin sesiones próximas");
                     tvProximaCitaDetalle.setText("Agenda desde el botón 🐾");
                 });
@@ -113,10 +98,7 @@ public class InicioFragment extends Fragment {
         AnimalHome animalAdapter = new AnimalHome(listaAnimales);
         rvAnimales.setAdapter(animalAdapter);
 
-        FirebaseFirestore.getInstance()
-                .collection("animales")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("animales").get().addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!isAdded()) return;
                     listaAnimales.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
@@ -128,7 +110,6 @@ public class InicioFragment extends Fragment {
                 });
 
         // Botón cómo surgió TheraPets
-        cardComoSurgio.setOnClickListener(v ->
-                startActivity(new Intent(requireContext(), HistoriaTherapets.class)));
+        cardComoSurgio.setOnClickListener(v -> startActivity(new Intent(requireContext(), HistoriaTherapets.class)));
     }
 }

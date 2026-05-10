@@ -8,7 +8,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 public class CitasPagerAdapter extends FragmentStateAdapter {
 
-    //Esta clase conecta las pestañas con su contenido.
+    //Esta clase conecta las pestañas con su contenido
 
     public CitasPagerAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
         super(fragmentManager, lifecycle);

@@ -1,5 +1,7 @@
 package com.example.therapets;
 
+
+//Datos para la cita
 public class Cita {
 
     private String id;
@@ -14,45 +16,105 @@ public class Cita {
     private String estado;
     private String usuarioId;
     private String nombreTerapeuta;
+    private String motivoCancelacion;
 
+    public Cita() {
 
-    // Constructor vacío necesario para Firestore
-    public Cita() {}
+    }
 
-    // Getters y Setters
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id; }
 
-    public String getNombres() { return nombres; }
-    public void setNombres(String nombres) { this.nombres = nombres; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getApellidos() { return apellidos; }
-    public void setApellidos(String apellidos) { this.apellidos = apellidos; }
+    public String getNombres() {
+        return nombres;
+    }
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
+    }
 
-    public String getTelefono() { return telefono; }
-    public void setTelefono(String telefono) { this.telefono = telefono; }
+    public String getApellidos() {
+        return apellidos;
+    }
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
 
-    public String getFecha() { return fecha; }
-    public void setFecha(String fecha) { this.fecha = fecha; }
+    public String getTelefono() {
+        return telefono;
+    }
 
-    public String getHora() { return hora; }
-    public void setHora(String hora) { this.hora = hora; }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
-    public String getCentro() { return centro; }
-    public void setCentro(String centro) { this.centro = centro; }
+    public String getFecha() {
+        return fecha;
+    }
 
-    public String getCuidador() { return cuidador; }
-    public void setCuidador(String cuidador) { this.cuidador = cuidador; }
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
-    public String getMotivo() { return motivo; }
-    public void setMotivo(String motivo) { this.motivo = motivo; }
+    public String getHora() {
+        return hora;
+    }
 
-    public String getEstado() { return estado; }
-    public void setEstado(String estado) { this.estado = estado; }
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
 
-    public String getUsuarioId() { return usuarioId; }
-    public void setUsuarioId(String usuarioId) { this.usuarioId = usuarioId; }
+    public String getCentro() {
+        return centro;
+    }
 
-    public String getNombreTerapeuta() { return nombreTerapeuta; }
-    public void setNombreTerapeuta(String nombreTerapeuta) { this.nombreTerapeuta = nombreTerapeuta; }
+    public void setCentro(String centro) {
+        this.centro = centro;
+    }
+
+    public String getCuidador() {
+        return cuidador;
+    }
+    public void setCuidador(String cuidador) {
+        this.cuidador = cuidador;
+    }
+
+    public String getMotivo() {
+        return motivo;
+    }
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getUsuarioId() {
+        return usuarioId;
+    }
+    public void setUsuarioId(String usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public String getNombreTerapeuta() {
+        return nombreTerapeuta;
+    }
+
+    public void setNombreTerapeuta(String nombreTerapeuta) {
+        this.nombreTerapeuta = nombreTerapeuta;
+    }
+
+    public String getMotivoCancelacion() {
+        return motivoCancelacion;
+    }
+    public void setMotivoCancelacion(String motivoCancelacion) {
+        this.motivoCancelacion = motivoCancelacion;
+    }
 }

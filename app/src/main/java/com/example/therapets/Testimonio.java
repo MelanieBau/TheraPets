@@ -1,5 +1,7 @@
 package com.example.therapets;
 
+import java.util.List;
+
 public class Testimonio {
 
     private String id;
@@ -9,11 +11,12 @@ public class Testimonio {
     private String fecha;
     private long meGusta;
     private String fotoUrl;
+    private String fotoUsuarioUrl;
+    private float estrellas;
+    private List<String> likesUsuarios;
 
-    // Constructor vacío necesario para Firestore
     public Testimonio() {}
 
-    // Getters y Setters
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -34,4 +37,13 @@ public class Testimonio {
 
     public String getFotoUrl() { return fotoUrl; }
     public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
+
+    public String getFotoUsuarioUrl() { return fotoUsuarioUrl; }
+    public void setFotoUsuarioUrl(String fotoUsuarioUrl) { this.fotoUsuarioUrl = fotoUsuarioUrl; }
+
+    public float getEstrellas() { return estrellas; }
+    public void setEstrellas(float estrellas) { this.estrellas = estrellas; }
+
+    public List<String> getLikesUsuarios() { return likesUsuarios; }
+    public void setLikesUsuarios(List<String> likesUsuarios) { this.likesUsuarios = likesUsuarios; }
 }

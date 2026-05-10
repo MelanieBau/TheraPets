@@ -21,9 +21,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:background="@color/morado_claro" />
+            android:background="#E8F5E9" />
 
-        <!-- Badge especialidad encima de la foto -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
                 android:text="Max"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="@color/coral_acento" />
+                android:textColor="#2D5F4F" />
 
             <TextView
                 android:id="@+id/tvTipoRazaSeleccion"
@@ -46,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="Perro · Golden Retriever"
                 android:textSize="13sp"
-                android:textColor="@color/morado_principal"
+                android:textColor="#4CAF82"
                 android:layout_marginTop="4dp" />
 
             <!-- Edad y especialidad -->
@@ -63,8 +62,8 @@
                     android:layout_height="wrap_content"
                     android:text="3 años"
                     android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:background="@color/coral_acento"
+                    android:textColor="#FFFFFF"
+                    android:background="#4CAF82"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp"
                     android:layout_marginEnd="8dp" />
@@ -75,8 +74,8 @@
                     android:layout_height="wrap_content"
                     android:text="Ansiedad"
                     android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:background="@color/coral_acento"
+                    android:textColor="#FFFFFF"
+                    android:background="#2D5F4F"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="4dp" />
 
@@ -95,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="TERAPEUTA ASIGNADA"
                 android:textSize="11sp"
-                android:textColor="@color/coral_acento"
+                android:textColor="#4CAF82"
                 android:letterSpacing="0.08"
                 android:layout_marginBottom="10dp" />
 
@@ -119,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:background="@color/morado_claro" />
+                        android:background="#E8F5E9" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -137,7 +136,7 @@
                         android:text="Dra. Ana García"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@color/coral_acento" />
+                        android:textColor="#2D5F4F" />
 
                     <TextView
                         android:id="@+id/tvEspecialidadTerapeutaSeleccion"
@@ -145,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:text="Psicóloga clínica"
                         android:textSize="12sp"
-                        android:textColor="@color/texto_secundario"
+                        android:textColor="#9E9E9E"
                         android:layout_marginTop="2dp" />
 
                 </LinearLayout>
@@ -156,13 +155,13 @@
             <Button
                 android:id="@+id/btnSeleccionarAnimal"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:text="Seleccionar"
                 android:textAllCaps="false"
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/morado_principal"
-                app:cornerRadius="12dp" />
+                android:backgroundTint="#4CAF82"
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 

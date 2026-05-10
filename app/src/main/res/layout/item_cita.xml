@@ -106,6 +106,15 @@
                 android:textColor="@color/texto_secundario"
                 android:layout_marginTop="4dp" />
 
+            <TextView
+                android:id="@+id/tvMotivoCancelacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#E53935"
+                android:layout_marginTop="4dp"
+                android:visibility="gone" />
+
             <!-- Separador -->
             <View
                 android:layout_width="match_parent"
@@ -117,26 +126,26 @@
             <Button
                 android:id="@+id/btnCancelarCita"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="46dp"
                 android:text="Cancelar cita"
                 android:textAllCaps="false"
                 android:textSize="13sp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="@color/morado_oscuro"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="30dp" />
 
             <!-- Botón valorar sesión, solo visible en citas completadas -->
             <Button
                 android:id="@+id/btnValorarCita"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="46dp"
                 android:layout_marginTop="8dp"
                 android:text="Valorar sesion"
                 android:textAllCaps="false"
                 android:textSize="13sp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="@color/coral_acento"
-                app:cornerRadius="8dp" />
+                app:cornerRadius="30dp" />
 
 
         </LinearLayout>

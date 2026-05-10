@@ -3,23 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="#F5F5F5">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Cabecera morada -->
+        <!-- Cabecera verde -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/cabecera"
+            android:background="#2D5F4F"
             android:padding="20dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-            <!-- Botón volver -->
             <ImageButton
                 android:id="@+id/btnVolver"
                 android:layout_width="36dp"
@@ -28,7 +27,6 @@
                 android:src="@drawable/ic_arrow_volver"
                 android:contentDescription="Volver" />
 
-            <!-- Título y subtítulo -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -46,15 +44,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Dejanos tu comentario"
+                    android:text="Déjanos tu comentario"
                     android:textSize="13sp"
-                    android:textColor="@color/morado_claro"
+                    android:textColor="#AAFFFFFF"
                     android:layout_marginTop="2dp" />
 
             </LinearLayout>
 
         </LinearLayout>
-
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +59,7 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Foto con el animal -->
+            <!-- Foto -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardFotoTestimonio"
                 android:layout_width="match_parent"
@@ -76,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
                     android:src="@drawable/logo_therapets"
-                    android:background="@color/morado_claro" />
+                    android:background="#E8F5E9" />
 
             </androidx.cardview.widget.CardView>
 
@@ -84,13 +81,13 @@
             <Button
                 android:id="@+id/btnSeleccionarFoto"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:layout_marginTop="12dp"
                 android:text="Seleccionar foto"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:backgroundTint="@color/morado_principal"
-                app:cornerRadius="12dp" />
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#4CAF82"
+                app:cornerRadius="30dp" />
 
             <!-- Comentario -->
             <com.google.android.material.textfield.TextInputLayout
@@ -110,6 +107,25 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¿Cómo valorarías tu experiencia?"
+                android:textSize="14sp"
+                android:textColor="#2E2E2E"
+                android:textStyle="bold"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:rating="0"
+                android:layout_marginBottom="16dp" />
             <!-- Botón publicar -->
             <Button
                 android:id="@+id/btnPublicarTestimonio"
@@ -121,8 +137,8 @@
                 android:textAllCaps="false"
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/morado_oscuro"
-                app:cornerRadius="12dp" />
+                android:backgroundTint="#2D5F4F"
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 

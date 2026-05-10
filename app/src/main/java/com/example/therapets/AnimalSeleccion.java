@@ -28,8 +28,7 @@ public class AnimalSeleccion extends RecyclerView.Adapter<AnimalSeleccion.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_animal_seleccion, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_animal_seleccion, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,24 +44,16 @@ public class AnimalSeleccion extends RecyclerView.Adapter<AnimalSeleccion.ViewHo
 
         // Foto del animal
         if (animal.getFotoUrl() != null && !animal.getFotoUrl().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(animal.getFotoUrl())
-                    .centerCrop()
-                    .into(holder.foto);
+            Glide.with(holder.itemView.getContext()).load(animal.getFotoUrl()).centerCrop().into(holder.foto);
         }
 
         // Datos de la terapeuta
-        holder.nombreTerapeuta.setText(animal.getNombreTerapeuta() != null
-                ? animal.getNombreTerapeuta() : "Sin terapeuta asignada");
-        holder.especialidadTerapeuta.setText(animal.getEspecialidadTerapeuta() != null
-                ? animal.getEspecialidadTerapeuta() : "");
+        holder.nombreTerapeuta.setText(animal.getNombreTerapeuta() != null ? animal.getNombreTerapeuta() : "Sin terapeuta asignada");
+        holder.especialidadTerapeuta.setText(animal.getEspecialidadTerapeuta() != null ? animal.getEspecialidadTerapeuta() : "");
 
         // Foto de la terapeuta
         if (animal.getFotoTerapeuta() != null && !animal.getFotoTerapeuta().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(animal.getFotoTerapeuta())
-                    .centerCrop()
-                    .into(holder.fotoTerapeuta);
+            Glide.with(holder.itemView.getContext()).load(animal.getFotoTerapeuta()).centerCrop().into(holder.fotoTerapeuta);
         }
 
         // Cuando pulsa Seleccionar

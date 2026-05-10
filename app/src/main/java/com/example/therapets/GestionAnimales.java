@@ -42,8 +42,7 @@ public class GestionAnimales extends AppCompatActivity {
 
         // Obtenemos el centroId del coordinador logueado
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db.collection("usuarios").document(uid).get()
-                .addOnSuccessListener(document -> {
+        db.collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
                     centroId = document.getString("centroId");
                     cargarAnimales();
                 });
@@ -57,10 +56,7 @@ public class GestionAnimales extends AppCompatActivity {
 
     private void cargarAnimales() {
         // Solo cargamos los animales del centro del coordinador
-        db.collection("animales")
-                .whereEqualTo("centro", centroId)
-                .get()
-                .addOnSuccessListener(snap -> {
+        db.collection("animales").whereEqualTo("centro", centroId).get().addOnSuccessListener(snap -> {
                     listaAnimales.clear();
                     for (QueryDocumentSnapshot doc : snap) {
                         Animal animal = doc.toObject(Animal.class);
@@ -80,18 +76,13 @@ public class GestionAnimales extends AppCompatActivity {
         etNombre.setText(animal.getNombre());
         etTipo.setText(animal.getTipo());
 
-        new AlertDialog.Builder(this)
-                .setTitle("Editar animal")
-                .setView(dialogView)
-                .setPositiveButton("Guardar", (dialog, which) -> {
+        new AlertDialog.Builder(this).setTitle("Editar animal").setView(dialogView).setPositiveButton("Guardar", (dialog, which) -> {
                     Map<String, Object> datos = new HashMap<>();
                     datos.put("nombre", etNombre.getText().toString().trim());
                     datos.put("tipo", etTipo.getText().toString().trim());
                     datos.put("centro", centroId); // Centro automático
 
-                    db.collection("animales").document(animal.getId())
-                            .update(datos)
-                            .addOnSuccessListener(a -> {
+                    db.collection("animales").document(animal.getId()).update(datos).addOnSuccessListener(a -> {
                                 Toast.makeText(this, "Animal actualizado", Toast.LENGTH_SHORT).show();
                                 cargarAnimales();
                             });
@@ -101,17 +92,11 @@ public class GestionAnimales extends AppCompatActivity {
     }
 
     private void borrarAnimal(Animal animal) {
-        new AlertDialog.Builder(this)
-                .setTitle("Borrar animal")
-                .setMessage("¿Borrar a " + animal.getNombre() + "?")
-                .setPositiveButton("Borrar", (dialog, which) ->
-                        db.collection("animales").document(animal.getId())
-                                .delete()
-                                .addOnSuccessListener(a -> {
+        new AlertDialog.Builder(this).setTitle("Borrar animal").setMessage("¿Borrar a " + animal.getNombre() + "?").setPositiveButton("Borrar", (dialog, which) ->
+                        db.collection("animales").document(animal.getId()).delete().addOnSuccessListener(a -> {
                                     Toast.makeText(this, "Animal eliminado", Toast.LENGTH_SHORT).show();
                                     cargarAnimales();
-                                }))
-                .setNegativeButton("Cancelar", null)
-                .show();
+
+                        })).setNegativeButton("Cancelar", null).show();
     }
 }

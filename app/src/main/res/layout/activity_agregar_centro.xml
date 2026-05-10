@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/cabecera"
+            android:background="#2E2E2E"
             android:padding="20dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:text="Rellena los datos del centro"
                     android:textSize="13sp"
-                    android:textColor="@color/morado_claro"
+                    android:textColor="@color/white"
                     android:layout_marginTop="2dp" />
 
             </LinearLayout>
@@ -69,20 +69,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:background="@color/morado_claro"
+                android:background="#BFBFBF"
                 android:layout_marginBottom="12dp" />
 
             <!-- Botón seleccionar foto -->
             <Button
                 android:id="@+id/btnSeleccionarFotoCentro"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:layout_marginBottom="16dp"
                 android:text="Seleccionar foto"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/coral_acento"
-                app:cornerRadius="12dp" />
+                android:backgroundTint="#BFBFBF"
+                app:cornerRadius="30dp" />
 
             <!-- Nombre -->
             <com.google.android.material.textfield.TextInputLayout
@@ -136,13 +136,13 @@
             <Button
                 android:id="@+id/btnGuardarCentro"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="46dp"
                 android:text="Guardar centro"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/morado_oscuro"
-                app:cornerRadius="12dp" />
+                android:backgroundTint="#2E2E2E"
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 

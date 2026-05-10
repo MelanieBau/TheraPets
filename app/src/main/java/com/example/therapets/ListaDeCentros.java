@@ -34,8 +34,7 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_centro_seleccion, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_centro_seleccion, parent, false);
         return new ViewHolder(view);
     }
 
@@ -49,10 +48,7 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
         holder.telefono.setText("📞 " + centro.getTelefono());
 
         if (centro.getFotoUrl() != null && !centro.getFotoUrl().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(centro.getFotoUrl())
-                    .centerCrop()
-                    .into(holder.foto);
+            Glide.with(holder.itemView.getContext()).load(centro.getFotoUrl()).centerCrop().into(holder.foto);
         }
 
         holder.btnMaps.setOnClickListener(v -> {
@@ -66,9 +62,8 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
         verificarDisponibilidad(centro.getNombre(), holder);
 
         // Cuando pulsa Seleccionar abrimos el dialog de horarios
-        holder.btnSeleccionar.setOnClickListener(v -> {
-            GestorHorarios gestor = new GestorHorarios(
-                    holder.itemView.getContext(), horaSeleccionada);
+        holder.btnSeleccionar.setOnClickListener(v -> {GestorHorarios gestor = new GestorHorarios(
+                holder.itemView.getContext(), horaSeleccionada);
 
             gestor.mostrarHorasDisponibles(centro.getNombre(), hora -> {
                 horaSeleccionada[0] = hora;
@@ -88,18 +83,12 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
     private void verificarDisponibilidad(String centroNombre, ViewHolder holder) {
         // Obtenemos el día de la semana de la fecha elegida
         try {
-            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    .parse(CitaDraftStore.fecha);
+            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(CitaDraftStore.fecha);
             String dia = new SimpleDateFormat("EEEE", new Locale("es", "ES")).format(date);
             dia = dia.substring(0, 1).toUpperCase() + dia.substring(1);
             final String diaFinal = dia;
 
-            FirebaseFirestore.getInstance()
-                    .collection("horarios")
-                    .whereEqualTo("centroId", centroNombre)
-                    .whereEqualTo("dia", diaFinal)
-                    .get()
-                    .addOnSuccessListener(snap -> {
+            FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", centroNombre).whereEqualTo("dia", diaFinal).get().addOnSuccessListener(snap -> {
                         if (snap.isEmpty()) {
                             // No hay horarios ese día
                             holder.btnSeleccionar.setText("Sin horarios");

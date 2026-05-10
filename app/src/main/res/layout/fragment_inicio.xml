@@ -3,25 +3,24 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_gradiente_ginda">
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Header con gradiente -->
+        <!-- Header verde oscuro -->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="112dp"
-            android:background="@drawable/bg_gradiente_ginda"
+            android:layout_height="wrap_content"
+            android:background="#2D5F4F"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="24dp"
             android:paddingTop="40dp"
             android:paddingBottom="40dp">
 
-            <!-- Saludo a la izquierda -->
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -48,7 +47,7 @@
 
             </LinearLayout>
 
-            <!-- Foto de perfil a la derecha -->
+            <!-- Foto de perfil -->
             <androidx.cardview.widget.CardView
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -59,7 +58,7 @@
                     android:id="@+id/ivFotoPerfil"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/morado_principal"
+                    android:background="#4CAF82"
                     android:scaleType="centerCrop"
                     android:src="@drawable/logo_therapets" />
 
@@ -73,7 +72,8 @@
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
             android:src="@drawable/dog_paw_pana"
             android:scaleType="fitCenter" />
 
@@ -89,7 +89,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="115dp"
+                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:text="¿Cómo te sientes hoy?"
-                    android:textColor="@color/texto_principal"
+                    android:textColor="#2E2E2E"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
@@ -180,7 +180,7 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:padding="20dp"
-                android:background="@drawable/bg_gradiente_ginda">
+                android:background="#2D5F4F">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="56dp"
@@ -194,7 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:background="@color/morado_claro" />
+                        android:background="#4CAF82" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -209,7 +209,7 @@
                         android:layout_height="wrap_content"
                         android:text="PRÓXIMA SESIÓN"
                         android:textSize="10sp"
-                        android:textColor="@color/coral_acento"
+                        android:textColor="#4CAF82"
                         android:letterSpacing="0.1"
                         android:layout_marginBottom="4dp" />
 
@@ -228,7 +228,7 @@
                         android:layout_height="wrap_content"
                         android:text="Agenda desde el botón 🐾"
                         android:textSize="12sp"
-                        android:textColor="@color/morado_claro"
+                        android:textColor="#AAFFFFFF"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
@@ -244,9 +244,9 @@
             android:text="Nuestros animales"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginBottom="12dp" />
+            android:textColor="#2E2E2E"
+            android:layout_marginHorizontal="18dp"
+            android:layout_marginBottom="14dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAnimales"
@@ -255,7 +255,7 @@
             android:orientation="horizontal"
             android:clipToPadding="false"
             android:paddingHorizontal="16dp"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="25dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <!-- Como surgio TheraPets -->
@@ -267,7 +267,7 @@
             android:layout_marginBottom="32dp"
             app:cardCornerRadius="20dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/morado_oscuro">
+            app:cardBackgroundColor="#2D5F4F">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -295,7 +295,7 @@
                         android:layout_height="wrap_content"
                         android:text="Conoce nuestra historia →"
                         android:textSize="12sp"
-                        android:textColor="@color/coral_acento"
+                        android:textColor="#4CAF82"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>

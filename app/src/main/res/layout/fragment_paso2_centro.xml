@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#F5F5F5">
 
-    <!-- Cabecera morada -->
+    <!-- Cabecera verde -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/morado_principal"
+        android:background="#2D5F4F"
         android:padding="20dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Botón volver -->
         <ImageButton
             android:id="@+id/btnVolver"
             android:layout_width="36dp"
@@ -24,7 +23,6 @@
             android:src="@drawable/ic_arrow_volver"
             android:contentDescription="Volver" />
 
-        <!-- Título y subtítulo -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,15 +42,14 @@
                 android:layout_height="wrap_content"
                 android:text="Selecciona un centro"
                 android:textSize="13sp"
-                android:textColor="@color/morado_claro"
+                android:textColor="#AAFFFFFF"
                 android:layout_marginTop="2dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
-    <!-- Lista de centros con tarjetas -->
+    <!-- Lista de centros -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvCentrosSeleccion"
         android:layout_width="match_parent"

@@ -26,8 +26,7 @@ public class GestorHorarios {
     // Obtiene el día de la semana de la fecha elegida en el Paso 1
     private String obtenerDiaSemana() {
         try {
-            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                    .parse(CitaDraftStore.fecha);
+            Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(CitaDraftStore.fecha);
             String dia = new SimpleDateFormat("EEEE", new Locale("es", "ES")).format(date);
             return dia.substring(0, 1).toUpperCase() + dia.substring(1);
         } catch (Exception e) {
@@ -45,12 +44,7 @@ public class GestorHorarios {
             return;
         }
 
-        FirebaseFirestore.getInstance()
-                .collection("horarios")
-                .whereEqualTo("centroId", centroNombre)
-                .whereEqualTo("dia", dia)
-                .get()
-                .addOnSuccessListener(snap -> {
+        FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", centroNombre).whereEqualTo("dia", dia).get().addOnSuccessListener(snap -> {
                     if (snap.isEmpty()) {
                         Toast.makeText(context, "No hay horarios disponibles para este día", Toast.LENGTH_SHORT).show();
                         return;
@@ -64,26 +58,17 @@ public class GestorHorarios {
 
                     // Verificamos cuáles están ocupadas y mostramos el dialog
                     verificarHorasYMostrarDialog(centroNombre, horas, dia, listener);
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(context, "Error al cargar horarios", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(context, "Error al cargar horarios", Toast.LENGTH_SHORT).show());
     }
 
     // Verifica qué horas están ocupadas y muestra el AlertDialog
-    private void verificarHorasYMostrarDialog(String centroNombre, List<String> horas,
-                                              String dia, OnHoraConfirmadaListener listener) {
+    private void verificarHorasYMostrarDialog(String centroNombre, List<String> horas, String dia, OnHoraConfirmadaListener listener) {
         List<String> horasLibres = new ArrayList<>();
         List<String> horasOcupadas = new ArrayList<>();
         final int[] pendientes = {horas.size()};
 
         for (String hora : horas) {
-            FirebaseFirestore.getInstance()
-                    .collection("citas")
-                    .whereEqualTo("centro", centroNombre)
-                    .whereEqualTo("fecha", CitaDraftStore.fecha)
-                    .whereEqualTo("hora", hora)
-                    .get()
-                    .addOnSuccessListener(citasSnap -> {
+            FirebaseFirestore.getInstance().collection("citas").whereEqualTo("centro", centroNombre).whereEqualTo("fecha", CitaDraftStore.fecha).whereEqualTo("hora", hora).get().addOnSuccessListener(citasSnap -> {
                         if (citasSnap.isEmpty()) {
                             horasLibres.add(hora);
                         } else {
@@ -127,10 +112,7 @@ public class GestorHorarios {
             radioGroup.addView(rb);
         }
 
-        new AlertDialog.Builder(context)
-                .setTitle("Horarios disponibles — " + dia)
-                .setView(radioGroup)
-                .setPositiveButton("Confirmar", (dialog, which) -> {
+        new AlertDialog.Builder(context).setTitle("Horarios disponibles — " + dia).setView(radioGroup).setPositiveButton("Confirmar", (dialog, which) -> {
                     int selectedId = radioGroup.getCheckedRadioButtonId();
                     if (selectedId == -1) {
                         Toast.makeText(context, "Selecciona una hora", Toast.LENGTH_SHORT).show();
@@ -140,9 +122,7 @@ public class GestorHorarios {
                     String hora = selected.getTag().toString();
                     horaSeleccionada[0] = hora;
                     listener.onHoraConfirmada(hora);
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
+                }).setNegativeButton("Cancelar", null).show();
     }
 
     // Interface para cuando se confirma la hora

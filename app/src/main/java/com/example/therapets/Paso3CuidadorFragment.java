@@ -22,6 +22,8 @@ public class Paso3CuidadorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.btnVolver).setOnClickListener(v ->
+                requireActivity().getSupportFragmentManager().popBackStack());
 
         RecyclerView rv = view.findViewById(R.id.rvAnimalesSeleccion);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -33,20 +35,13 @@ public class Paso3CuidadorFragment extends Fragment {
             // Guardamos el animal elegido y vamos al Paso 4
             CitaDraftStore.cuidador = animal.getNombre() + " (" + animal.getTipo() + ")";
             CitaDraftStore.nombreTerapeuta = animal.getNombreTerapeuta() != null ? animal.getNombreTerapeuta() : "";
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.stepContainer, new Paso4MotivoFragment())
-                    .addToBackStack(null)
-                    .commit();
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new Paso4MotivoFragment()).addToBackStack(null).commit();
         });
 
         rv.setAdapter(seleccion);
 
         // Cargamos los animales del centro elegido en el Paso 2
-        FirebaseFirestore.getInstance()
-                .collection("animales")
-                .whereEqualTo("centro", CitaDraftStore.centro)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("animales").whereEqualTo("centro", CitaDraftStore.centro).get().addOnSuccessListener(queryDocumentSnapshots -> {
                     listaAnimales.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Animal animal = doc.toObject(Animal.class);

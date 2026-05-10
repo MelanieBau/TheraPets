@@ -45,8 +45,7 @@ public class GestionHorarios extends AppCompatActivity {
 
         // Obtenemos el centroId del coordinador logueado
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        db.collection("usuarios").document(uid).get()
-                .addOnSuccessListener(document -> {
+        db.collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
                     centroId = document.getString("centroId");
                     cargarHorarios();
                 });
@@ -55,10 +54,7 @@ public class GestionHorarios extends AppCompatActivity {
     }
 
     private void cargarHorarios() {
-        db.collection("horarios")
-                .whereEqualTo("centroId", centroId)
-                .get()
-                .addOnSuccessListener(snap -> {
+        db.collection("horarios").whereEqualTo("centroId", centroId).get().addOnSuccessListener(snap -> {
                     listaHorarios.clear();
                     for (QueryDocumentSnapshot doc : snap) {
                         Horario horario = doc.toObject(Horario.class);
@@ -92,10 +88,7 @@ public class GestionHorarios extends AppCompatActivity {
             }, 9, 0, true).show();
         });
 
-        new AlertDialog.Builder(this)
-                .setTitle("Añadir horario")
-                .setView(dialogView)
-                .setPositiveButton("Guardar", (dialog, which) -> {
+        new AlertDialog.Builder(this).setTitle("Añadir horario").setView(dialogView).setPositiveButton("Guardar", (dialog, which) -> {
                     String dia = spDia.getSelectedItem().toString();
 
                     if (horaSeleccionada[0].isEmpty()) {
@@ -108,28 +101,16 @@ public class GestionHorarios extends AppCompatActivity {
                     horario.put("dia", dia);
                     horario.put("hora", horaSeleccionada[0]);
 
-                    db.collection("horarios").add(horario)
-                            .addOnSuccessListener(ref -> {
-                                Toast.makeText(this, "Horario añadido", Toast.LENGTH_SHORT).show();
-                                cargarHorarios();
-                            });
-                })
-                .setNegativeButton("Cancelar", null)
-                .show();
+                    db.collection("horarios").add(horario).addOnSuccessListener(ref -> {Toast.makeText(this, "Horario añadido", Toast.LENGTH_SHORT).show();cargarHorarios();
+
+                    });
+
+                }).setNegativeButton("Cancelar", null).show();
     }
 
     private void borrarHorario(Horario horario) {
-        new AlertDialog.Builder(this)
-                .setTitle("Borrar horario")
-                .setMessage("¿Borrar el horario del " + horario.getDia() + " a las " + horario.getHora() + "?")
-                .setPositiveButton("Borrar", (dialog, which) ->
-                        db.collection("horarios").document(horario.getId())
-                                .delete()
-                                .addOnSuccessListener(a -> {
-                                    Toast.makeText(this, "Horario eliminado", Toast.LENGTH_SHORT).show();
-                                    cargarHorarios();
-                                }))
-                .setNegativeButton("Cancelar", null)
-                .show();
+        new AlertDialog.Builder(this).setTitle("Borrar horario").setMessage("¿Borrar el horario del " + horario.getDia() + " a las " + horario.getHora() + "?").setPositiveButton("Borrar", (dialog, which) ->
+                        db.collection("horarios").document(horario.getId()).delete().addOnSuccessListener(a -> {Toast.makeText(this, "Horario eliminado", Toast.LENGTH_SHORT).show();cargarHorarios();
+                        })).setNegativeButton("Cancelar", null).show();
     }
 }

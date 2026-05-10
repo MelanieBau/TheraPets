@@ -21,13 +21,13 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#44000000"
+        android:background="#55000000"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Logo centrado -->
+    <!-- Logo y texto centrado -->
     <LinearLayout
         android:id="@+id/brandContainer"
         android:layout_width="wrap_content"
@@ -47,8 +47,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:background="@color/morado_oscuro"
+        android:padding="28dp"
+        android:paddingBottom="40dp"
+        android:background="#CC517C68"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -56,25 +57,27 @@
         <Button
             android:id="@+id/btnContinuar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="12dp"
+            android:layout_height="46dp"
+            android:layout_marginBottom="14dp"
             android:text="Iniciar sesión"
             android:textAllCaps="false"
-            android:textSize="16sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/morado_principal"
-            app:cornerRadius="12dp" />
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF82"
+            app:cornerRadius="30dp" />
 
         <Button
             android:id="@+id/btnRegistrarme"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="46dp"
             android:text="Registrarme"
             android:textAllCaps="false"
-            android:textSize="16sp"
+            android:textSize="17sp"
+            android:textStyle="bold"
             android:textColor="#FFFFFF"
-            android:backgroundTint="@color/coral_acento"
-            app:cornerRadius="12dp" />
+            android:backgroundTint="#2D5F4F"
+            app:cornerRadius="30dp" />
 
     </LinearLayout>
 

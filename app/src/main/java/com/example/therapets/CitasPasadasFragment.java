@@ -24,7 +24,7 @@ public class CitasPasadasFragment extends Fragment {
     //Lo que hace es ir a Firestore y buscar
     //todas las citas del usuario logueado que tengan el estado "completada"
     //o sea las sesiones que ya se realizaron. Las muestra en una lista de tarjetas
-    // usando el CitaAdapter con el botón de cancelar oculto, porque no tiene sentido cancelar una cita que ya pasó.
+    //usando el CitaAdapter con el botón de cancelar oculto, porque no tiene sentido cancelar una cita que ya pasó.
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -39,17 +39,19 @@ public class CitasPasadasFragment extends Fragment {
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        // Mostramos completadas y canceladas (por usuario o coordinador)
         FirebaseFirestore.getInstance()
                 .collection("citas")
                 .whereEqualTo("usuarioId", uid)
-                .whereEqualTo("estado", "completada")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    lista.clear();
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                        Cita cita = doc.toObject(Cita.class);
-                        cita.setId(doc.getId());
-                        lista.add(cita);
+                .whereIn("estado", java.util.Arrays.asList(
+                        "completada",
+                        "cancelada_usuario",
+                        "cancelada_coordinador")).get().addOnSuccessListener(queryDocumentSnapshots -> {lista.clear();
+
+                            for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                            Cita cita = doc.toObject(Cita.class);
+                            cita.setId(doc.getId());
+                            lista.add(cita);
                     }
                     adapter.notifyDataSetChanged();
                 });

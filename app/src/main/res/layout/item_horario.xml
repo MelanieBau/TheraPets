@@ -15,11 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Barra morada izquierda -->
-        <View
-            android:layout_width="6dp"
-            android:layout_height="match_parent"
-            android:background="@color/morado_principal" />
 
         <!-- Contenido -->
         <LinearLayout
@@ -59,12 +54,12 @@
             <Button
                 android:id="@+id/btnBorrarHorario"
                 android:layout_width="match_parent"
-                android:layout_height="36dp"
+                android:layout_height="46dp"
                 android:text="Borrar horario"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/morado_principal"
-                app:cornerRadius="8dp" />
+                android:backgroundTint="#616161"
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 

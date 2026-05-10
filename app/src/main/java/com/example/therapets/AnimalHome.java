@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import java.util.List;
 
+
+//Mostrar animales en la home para que el usuario tenga una experiencia más agradable
 public class AnimalHome extends RecyclerView.Adapter<AnimalHome.ViewHolder> {
 
     private List<Animal> lista;
@@ -21,8 +23,7 @@ public class AnimalHome extends RecyclerView.Adapter<AnimalHome.ViewHolder> {
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_animal_home, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_animal_home, parent, false);
         return new ViewHolder(view);
     }
 
@@ -32,10 +33,7 @@ public class AnimalHome extends RecyclerView.Adapter<AnimalHome.ViewHolder> {
         holder.tvNombre.setText(animal.getNombre());
 
         if (animal.getFotoUrl() != null && !animal.getFotoUrl().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(animal.getFotoUrl())
-                    .centerCrop()
-                    .into(holder.ivFoto);
+            Glide.with(holder.itemView.getContext()).load(animal.getFotoUrl()).centerCrop().into(holder.ivFoto);
         }
     }
 

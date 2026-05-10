@@ -27,7 +27,7 @@
         <View
             android:layout_width="4dp"
             android:layout_height="match_parent"
-            android:background="@color/coral_acento" />
+            android:background="#616161" />
 
         <!-- Contenido -->
         <LinearLayout
@@ -56,16 +56,6 @@
                 android:textColor="@color/texto_secundario"
                 android:layout_marginTop="4dp" />
 
-            <!-- Centro -->
-            <TextView
-                android:id="@+id/tvCentroAnimal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Centro"
-                android:textSize="13sp"
-                android:textColor="@color/texto_secundario"
-                android:layout_marginTop="2dp" />
-
             <!-- Separador -->
             <View
                 android:layout_width="match_parent"
@@ -90,7 +80,7 @@
                     android:textSize="12sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/morado_oscuro"
-                    app:cornerRadius="8dp" />
+                    app:cornerRadius="30dp" />
 
                 <Button
                     android:id="@+id/btnBorrarAnimal"
@@ -101,8 +91,8 @@
                     android:textAllCaps="false"
                     android:textSize="12sp"
                     android:textColor="@color/white"
-                    android:backgroundTint="@color/morado_principal"
-                    app:cornerRadius="8dp" />
+                    android:backgroundTint="#616161"
+                    app:cornerRadius="30dp" />
 
             </LinearLayout>
 

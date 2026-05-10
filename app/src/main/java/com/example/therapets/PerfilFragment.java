@@ -52,11 +52,7 @@ public class PerfilFragment extends Fragment {
         tvEmailHeader.setText(email);
 
         // Cargar datos desde Firestore
-        FirebaseFirestore.getInstance()
-                .collection("usuarios")
-                .document(uid)
-                .get()
-                .addOnSuccessListener(document -> {
+        FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
                     if (!isAdded()) return;
                     if (document.exists()) {
                         String nombre = document.getString("nombre");
@@ -67,10 +63,7 @@ public class PerfilFragment extends Fragment {
 
                         String fotoUrl = document.getString("fotoUrl");
                         if (fotoUrl != null && !fotoUrl.isEmpty()) {
-                            Glide.with(requireContext())
-                                    .load(fotoUrl)
-                                    .centerCrop()
-                                    .into(ivFotoPerfil);
+                            Glide.with(requireContext()).load(fotoUrl).centerCrop().into(ivFotoPerfil);
                         }
                     }
                 })
@@ -106,8 +99,7 @@ public class PerfilFragment extends Fragment {
     private void subirFoto(Uri uri) {
         if (!isAdded()) return;
         Toast.makeText(requireContext(), "Subiendo foto...", Toast.LENGTH_SHORT).show();
-        MediaManager.get().upload(uri)
-                .callback(new UploadCallback() {
+        MediaManager.get().upload(uri).callback(new UploadCallback() {
                     @Override public void onStart(String requestId) {}
                     @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
 
@@ -118,11 +110,7 @@ public class PerfilFragment extends Fragment {
 
                         Map<String, Object> datos = new HashMap<>();
                         datos.put("fotoUrl", fotoUrl);
-                        FirebaseFirestore.getInstance()
-                                .collection("usuarios")
-                                .document(uid)
-                                .update(datos)
-                                .addOnSuccessListener(a -> {
+                        FirebaseFirestore.getInstance().collection("usuarios").document(uid).update(datos).addOnSuccessListener(a -> {
                                     if (!isAdded()) return;
                                     Toast.makeText(requireContext(), "Foto actualizada", Toast.LENGTH_SHORT).show();
                                 });

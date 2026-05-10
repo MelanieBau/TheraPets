@@ -9,15 +9,33 @@ public class Horario {
 
     public Horario() {}
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getCentroId() { return centroId; }
-    public void setCentroId(String centroId) { this.centroId = centroId; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getDia() { return dia; }
-    public void setDia(String dia) { this.dia = dia; }
+    public String getCentroId() {
+        return centroId;
+    }
 
-    public String getHora() { return hora; }
-    public void setHora(String hora) { this.hora = hora; }
+    public void setCentroId(String centroId) {
+        this.centroId = centroId;
+    }
+
+    public String getDia() {
+        return dia;
+    }
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getHora() {
+        return hora;
+    }
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
 }

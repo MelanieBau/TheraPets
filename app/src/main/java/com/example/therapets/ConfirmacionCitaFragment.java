@@ -64,10 +64,7 @@ public class ConfirmacionCitaFragment extends Fragment {
         cita.setNombreTerapeuta(CitaDraftStore.nombreTerapeuta);
         cita.setUsuarioId(uid);
 
-        FirebaseFirestore.getInstance()
-                .collection("citas")
-                .add(cita)
-                .addOnSuccessListener(documentReference -> {
+        FirebaseFirestore.getInstance().collection("citas").add(cita).addOnSuccessListener(documentReference -> {
                     CitaDraftStore.clear();
 
                     Intent intent = new Intent(requireContext(), Home.class);

@@ -84,7 +84,7 @@
                     android:textSize="13sp"
                     android:textColor="@color/white"
                     android:backgroundTint="@color/morado_oscuro"
-                    app:cornerRadius="12dp" />
+                    app:cornerRadius="30dp" />
 
                 <Button
                     android:id="@+id/btnSeleccionarCentro"
@@ -96,7 +96,7 @@
                     android:textSize="13sp"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="@color/morado_principal"
-                    app:cornerRadius="12dp" />
+                    app:cornerRadius="30dp" />
 
             </LinearLayout>
 
@@ -112,7 +112,7 @@
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="@color/coral_acento"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 

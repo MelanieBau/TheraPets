@@ -2,6 +2,7 @@ package com.example.therapets;
 
 public class Animal {
 
+    //Atributos del animal
     private String id;
     private String nombre;
     private String tipo;
@@ -16,36 +17,86 @@ public class Animal {
 
     public Animal() {}
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id;
+    }
 
-    public String getNombre() { return nombre; }
-    public void setNombre(String nombre) { this.nombre = nombre; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getTipo() { return tipo; }
-    public void setTipo(String tipo) { this.tipo = tipo; }
+    public String getNombre() {
+        return nombre;
+    }
 
-    public String getCentro() { return centro; }
-    public void setCentro(String centro) { this.centro = centro; }
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
 
-    public String getFotoUrl() { return fotoUrl; }
-    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
+    public String getTipo() {
+        return tipo;
+    }
 
-    public String getRaza() { return raza; }
-    public void setRaza(String raza) { this.raza = raza; }
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-    public String getEdad() { return edad; }
-    public void setEdad(String edad) { this.edad = edad; }
+    public String getCentro() {
+        return centro;
+    }
 
-    public String getEspecialidad() { return especialidad; }
-    public void setEspecialidad(String especialidad) { this.especialidad = especialidad; }
+    public void setCentro(String centro) {
+        this.centro = centro;
+    }
 
-    public String getNombreTerapeuta() { return nombreTerapeuta; }
-    public void setNombreTerapeuta(String nombreTerapeuta) { this.nombreTerapeuta = nombreTerapeuta; }
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
 
-    public String getEspecialidadTerapeuta() { return especialidadTerapeuta; }
-    public void setEspecialidadTerapeuta(String especialidadTerapeuta) { this.especialidadTerapeuta = especialidadTerapeuta; }
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
 
-    public String getFotoTerapeuta() { return fotoDeLaTerapeuta; }
-    public void setFotoTerapeuta(String fotoTerapeuta) { this.fotoDeLaTerapeuta = fotoTerapeuta; }
+    public String getRaza() {
+        return raza;
+    }
+    public void setRaza(String raza) {
+        this.raza = raza;
+    }
+
+    public String getEdad() {
+        return edad;
+    }
+    public void setEdad(String edad) {
+        this.edad = edad;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    public String getNombreTerapeuta() {
+        return nombreTerapeuta;
+    }
+
+    public void setNombreTerapeuta(String nombreTerapeuta) {
+        this.nombreTerapeuta = nombreTerapeuta;
+    }
+
+    public String getEspecialidadTerapeuta() {
+        return especialidadTerapeuta;
+    }
+    public void setEspecialidadTerapeuta(String especialidadTerapeuta) {
+         this.especialidadTerapeuta = especialidadTerapeuta;
+    }
+
+    public String getFotoTerapeuta() {
+        return fotoDeLaTerapeuta;
+    }
+    public void setFotoTerapeuta(String fotoTerapeuta) {
+        this.fotoDeLaTerapeuta = fotoTerapeuta;
+    }
 }

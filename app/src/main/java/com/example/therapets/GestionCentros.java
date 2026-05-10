@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,8 @@ public class GestionCentros extends AppCompatActivity {
     private FirebaseFirestore db;
     private List<Centro> listaCentros;
     private CentroAdapter adapter;
+    private boolean soloMiCentro;
+    private String centroId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +34,25 @@ public class GestionCentros extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        // Recibimos si viene del coordinador
+        soloMiCentro = getIntent().getBooleanExtra("soloMiCentro", false);
+        TextView tvTitulo = findViewById(R.id.tvTituloGestionCentros);
+
+
+        if (soloMiCentro) {
+            tvTitulo.setText("Mi Centro");
+        } else {
+            tvTitulo.setText("Gestionar Centros");
+        }
+        centroId = getIntent().getStringExtra("centroId");
+
         RecyclerView rvCentros = findViewById(R.id.rvCentros);
         Button btnAgregar = findViewById(R.id.btnAgregarCentro);
+
+        // Si es coordinador ocultamos el botón de añadir
+        if (soloMiCentro) {
+            btnAgregar.setVisibility(View.GONE);
+        }
 
         rvCentros.setLayoutManager(new LinearLayoutManager(this));
         listaCentros = new ArrayList<>();
@@ -41,58 +61,34 @@ public class GestionCentros extends AppCompatActivity {
 
         cargarCentros();
 
-        btnAgregar.setOnClickListener(v -> startActivity(new Intent(this, AgregarCentro.class)));    }
-
-    private void cargarCentros() {
-        db.collection("centros")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    listaCentros.clear();
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                        Centro centro = doc.toObject(Centro.class);
-                        centro.setId(doc.getId());
-                        listaCentros.add(centro);
-                    }
-                    adapter.notifyDataSetChanged();
-                });
+        btnAgregar.setOnClickListener(v ->
+                startActivity(new Intent(this, AgregarCentro.class)));
     }
 
-    private void mostrarDialogoAgregar() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Añadir centro");
-
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_centro, null);
-        builder.setView(dialogView);
-
-        EditText etNombre = dialogView.findViewById(R.id.etNombreCentro);
-        EditText etDireccion = dialogView.findViewById(R.id.etDireccionCentro);
-        EditText etTelefono = dialogView.findViewById(R.id.etTelefonoCentro);
-
-        builder.setPositiveButton("Guardar", (dialog, which) -> {
-            String nombre = etNombre.getText().toString().trim();
-            String direccion = etDireccion.getText().toString().trim();
-            String telefono = etTelefono.getText().toString().trim();
-
-            if (nombre.isEmpty()) {
-                Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();
-                return;
-            }
-
-            Map<String, Object> centro = new HashMap<>();
-            centro.put("nombre", nombre);
-            centro.put("direccion", direccion);
-            centro.put("telefono", telefono);
-
-            db.collection("centros")
-                    .add(centro)
-                    .addOnSuccessListener(ref -> {
-                        Toast.makeText(this, "Centro añadido", Toast.LENGTH_SHORT).show();
-                        cargarCentros();
+    private void cargarCentros() {
+        if (soloMiCentro && centroId != null) {
+            // Si es coordinador solo cargamos su centro
+            db.collection("centros").whereEqualTo("nombre", centroId).get().addOnSuccessListener(queryDocumentSnapshots -> {
+                        listaCentros.clear();
+                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                            Centro centro = doc.toObject(Centro.class);
+                            centro.setId(doc.getId());
+                            listaCentros.add(centro);
+                        }
+                        adapter.notifyDataSetChanged();
                     });
-        });
-
-        builder.setNegativeButton("Cancelar", null);
-        builder.show();
+        } else {
+            // Si es admin cargamos todos
+            db.collection("centros").get().addOnSuccessListener(queryDocumentSnapshots -> {
+                        listaCentros.clear();
+                        for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                            Centro centro = doc.toObject(Centro.class);
+                            centro.setId(doc.getId());
+                            listaCentros.add(centro);
+                        }
+                        adapter.notifyDataSetChanged();
+                    });
+        }
     }
 
     private void mostrarDialogoEditar(Centro centro) {
@@ -116,10 +112,7 @@ public class GestionCentros extends AppCompatActivity {
             datos.put("direccion", etDireccion.getText().toString().trim());
             datos.put("telefono", etTelefono.getText().toString().trim());
 
-            db.collection("centros")
-                    .document(centro.getId())
-                    .update(datos)
-                    .addOnSuccessListener(a -> {
+            db.collection("centros").document(centro.getId()).update(datos).addOnSuccessListener(a -> {
                         Toast.makeText(this, "Centro actualizado", Toast.LENGTH_SHORT).show();
                         cargarCentros();
                     });
@@ -130,14 +123,14 @@ public class GestionCentros extends AppCompatActivity {
     }
 
     private void borrarCentro(Centro centro) {
-        new AlertDialog.Builder(this)
-                .setTitle("Borrar centro")
-                .setMessage("¿Estás segura de que quieres borrar " + centro.getNombre() + "?")
-                .setPositiveButton("Borrar", (dialog, which) -> {
-                    db.collection("centros")
-                            .document(centro.getId())
-                            .delete()
-                            .addOnSuccessListener(a -> {
+        // Si es coordinador no puede borrar su centro
+        if (soloMiCentro) {
+            Toast.makeText(this, "No tienes permisos para borrar el centro", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        new AlertDialog.Builder(this).setTitle("Borrar centro").setMessage("¿Estás segura de que quieres borrar " + centro.getNombre() + "?").setPositiveButton("Borrar", (dialog, which) -> {
+                    db.collection("centros").document(centro.getId()).delete().addOnSuccessListener(a -> {
                                 Toast.makeText(this, "Centro eliminado", Toast.LENGTH_SHORT).show();
                                 cargarCentros();
                             });

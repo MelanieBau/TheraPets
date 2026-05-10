@@ -83,13 +83,13 @@
             <Button
                 android:id="@+id/btnSeleccionarFotoAnimal"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:layout_marginBottom="20dp"
                 android:text="Seleccionar foto del animal"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/coral_acento"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="30dp" />
 
             <!-- Campos del animal -->
             <com.google.android.material.textfield.TextInputLayout
@@ -238,25 +238,25 @@
             <Button
                 android:id="@+id/btnSeleccionarFotoTerapeuta"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="46dp"
                 android:layout_marginBottom="24dp"
                 android:text="Seleccionar foto terapeuta"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:backgroundTint="@color/coral_acento"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="30dp" />
 
             <!-- Botón guardar -->
             <Button
                 android:id="@+id/btnGuardarAnimal"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Guardar animal"
+                android:layout_height="46dp"
+                android:text="Guardar"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="@color/morado_oscuro"
-                app:cornerRadius="12dp" />
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 

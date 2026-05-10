@@ -9,7 +9,7 @@ public class Centro {
     private String fotoUrl;
 
 
-    // Constructor vacío necesario para Firestore
+    // Constructor vacío para Firestore (necesario)
     public Centro() {}
 
     // Getters y Setters

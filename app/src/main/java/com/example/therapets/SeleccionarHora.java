@@ -42,12 +42,7 @@ public class SeleccionarHora extends Fragment {
         String diaSemana = obtenerDiaSemana(CitaDraftStore.fecha);
 
         // Buscamos los horarios del centro elegido para ese día
-        FirebaseFirestore.getInstance()
-                .collection("horarios")
-                .whereEqualTo("centroId", CitaDraftStore.centro)
-                .whereEqualTo("dia", diaSemana)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", CitaDraftStore.centro).whereEqualTo("dia", diaSemana).get().addOnSuccessListener(queryDocumentSnapshots -> {
 
                     if (queryDocumentSnapshots.isEmpty()) {
                         // No hay horarios disponibles
@@ -116,7 +111,6 @@ public class SeleccionarHora extends Fragment {
         });
     }
 
-    // Convierte la fecha en el día de la semana en español
     private String obtenerDiaSemana(String fecha) {
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(fecha);

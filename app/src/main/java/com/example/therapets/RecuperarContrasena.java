@@ -37,8 +37,7 @@ public class RecuperarContrasena extends AppCompatActivity {
             }
 
             // Firebase manda el email de recuperación
-            mAuth.sendPasswordResetEmail(email)
-                    .addOnCompleteListener(task -> {
+            mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
                         if (task.isSuccessful()) {
                             // Si se envió correctamente vamos a la pantalla de confirmación
                             Intent intent = new Intent(this, EmailEnviado.class);
@@ -54,6 +53,8 @@ public class RecuperarContrasena extends AppCompatActivity {
 
         // Cuando el usuario pulsa "Volver al login"
         btnVolver.setOnClickListener(v -> {
+
+
             finish(); // Cierra esta pantalla y vuelve al login
         });
     }

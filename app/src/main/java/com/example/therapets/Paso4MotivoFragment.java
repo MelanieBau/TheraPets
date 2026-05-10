@@ -21,6 +21,8 @@ public class Paso4MotivoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.btnVolver).setOnClickListener(v ->
+                requireActivity().getSupportFragmentManager().popBackStack());
 
         Spinner spMotivo = view.findViewById(R.id.spMotivo);
         EditText etOtro = view.findViewById(R.id.etOtroMotivo);
@@ -64,10 +66,7 @@ public class Paso4MotivoFragment extends Fragment {
             CitaDraftStore.otroMotivo = etOtro.getText().toString().trim();
 
             // Ir a confirmación con resumen
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.stepContainer, new ConfirmacionCitaFragment())
-                    .addToBackStack(null)
-                    .commit();
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new ConfirmacionCitaFragment()).addToBackStack(null).commit();
         });
     }
 }

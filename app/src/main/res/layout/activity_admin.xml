@@ -6,25 +6,26 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Cabecera morada -->
+    <!-- Cabecera gris oscuro -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/morado_principal"
+        android:background="#2E2E2E"
         android:padding="24dp"
+        android:paddingTop="40dp"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="90dp"
-            android:layout_height="100dp"
-            android:src="@drawable/logo_therapets_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/administrador"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Panel Administrador"
+            android:text="Administradora"
             android:textSize="22sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
@@ -34,8 +35,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TheraPets"
-            android:textSize="14sp"
-            android:textColor="@color/morado_claro"
+            android:textSize="13sp"
+            android:textColor="#AAFFFFFF"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="4dp" />
 
@@ -49,7 +50,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Tarjeta Centros -->
+        <!-- Tarjeta Gestionar Centros -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardCentros"
             android:layout_width="match_parent"
@@ -57,7 +58,7 @@
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/morado_oscuro">
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -66,33 +67,32 @@
                 android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <!-- Barra morada izquierda -->
                 <View
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
-                    android:background="@color/morado_principal"
+                    android:background="#4CAF82"
                     android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Gestionar Centros"
+                    android:text="Gestionar centros"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="#2E2E2E" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
                     android:textSize="20sp"
-                    android:textColor="@color/coral_acento" />
+                    android:textColor="#4CAF82" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta Animales -->
+        <!-- Tarjeta Gestionar Coordinadores -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAnimales"
             android:layout_width="match_parent"
@@ -100,7 +100,7 @@
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/morado_oscuro">
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -112,29 +112,29 @@
                 <View
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
-                    android:background="@color/morado_principal"
+                    android:background="#4CAF82"
                     android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Gestionar Coordinadores"
+                    android:text="Gestionar coordinadores de la app"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="#2E2E2E" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
                     android:textSize="20sp"
-                    android:textColor="@color/coral_acento" />
+                    android:textColor="#4CAF82" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta Citas -->
+        <!-- Tarjeta Ver todas las Citas -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardCitas"
             android:layout_width="match_parent"
@@ -142,7 +142,7 @@
             android:layout_marginBottom="16dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/morado_oscuro">
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,24 +154,24 @@
                 <View
                     android:layout_width="4dp"
                     android:layout_height="match_parent"
-                    android:background="@color/morado_principal"
+                    android:background="#4CAF82"
                     android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Ver todas las Citas"
+                    android:text="Ver todas las citas"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/white" />
+                    android:textColor="#2E2E2E" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
                     android:textSize="20sp"
-                    android:textColor="@color/coral_acento" />
+                    android:textColor="#4CAF82" />
 
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -182,13 +182,15 @@
     <Button
         android:id="@+id/btnCerrarSesionAdmin"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="46dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:text="Cerrar sesión"
         android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/coral_acento"
-        app:cornerRadius="12dp" />
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#2E2E2E"
+        app:cornerRadius="30dp" />
 
 </LinearLayout>

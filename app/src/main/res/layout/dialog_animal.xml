@@ -64,12 +64,12 @@
     <Button
         android:id="@+id/btnSeleccionarFotoAnimal"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="46dp"
         android:layout_marginTop="8dp"
         android:text="Seleccionar foto"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:backgroundTint="@color/morado_principal"
-        app:cornerRadius="12dp" />
+        app:cornerRadius="30dp" />
 
 </LinearLayout>

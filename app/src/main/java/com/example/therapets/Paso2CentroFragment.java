@@ -22,6 +22,8 @@ public class Paso2CentroFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        view.findViewById(R.id.btnVolver).setOnClickListener(v ->
+                requireActivity().getSupportFragmentManager().popBackStack());
 
         RecyclerView rv = view.findViewById(R.id.rvCentrosSeleccion);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -32,19 +34,13 @@ public class Paso2CentroFragment extends Fragment {
         ListaDeCentros adapter = new ListaDeCentros(listaCentros, (centro, hora) -> {
             CitaDraftStore.centro = centro.getNombre();
             CitaDraftStore.hora = hora;
-            requireActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.stepContainer, new Paso3CuidadorFragment())
-                    .addToBackStack(null)
-                    .commit();
+            requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new Paso3CuidadorFragment()).addToBackStack(null).commit();
         });
 
         rv.setAdapter(adapter);
 
         // Cargamos los centros desde Firestore
-        FirebaseFirestore.getInstance()
-                .collection("centros")
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("centros").get().addOnSuccessListener(queryDocumentSnapshots -> {
                     listaCentros.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Centro centro = doc.toObject(Centro.class);
@@ -56,8 +52,6 @@ public class Paso2CentroFragment extends Fragment {
                     if (listaCentros.isEmpty()) {
                         Toast.makeText(requireContext(), "No hay centros disponibles", Toast.LENGTH_SHORT).show();
                     }
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(requireContext(), "Error al cargar centros", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> Toast.makeText(requireContext(), "Error al cargar centros", Toast.LENGTH_SHORT).show());
     }
 }

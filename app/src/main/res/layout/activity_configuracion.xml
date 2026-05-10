@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FFFFFF">
+    android:background="#F5F5F5">
 
-    <!-- Cabecera morada -->
+    <!-- Cabecera verde -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/morado_principal"
+        android:background="#2D5F4F"
         android:padding="20dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!-- Botón volver -->
         <ImageButton
             android:id="@+id/btnVolver"
             android:layout_width="36dp"
@@ -24,7 +23,6 @@
             android:src="@drawable/ic_arrow_volver"
             android:contentDescription="Volver" />
 
-        <!-- Título y subtítulo -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,18 +42,18 @@
                 android:layout_height="wrap_content"
                 android:text="Gestiona tu cuenta"
                 android:textSize="13sp"
-                android:textColor="@color/morado_claro"
+                android:textColor="#AAFFFFFF"
                 android:layout_marginTop="2dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
-
     <!-- Opciones -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:padding="20dp">
 
@@ -65,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="12dp"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="16dp"
             app:cardElevation="2dp"
             app:cardBackgroundColor="#FFFFFF">
 
@@ -82,14 +80,14 @@
                     android:layout_weight="1"
                     android:text="Cambiar contraseña"
                     android:textSize="15sp"
-                    android:textColor="@color/texto_principal" />
+                    android:textColor="#2E2E2E" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=">"
                     android:textSize="18sp"
-                    android:textColor="@color/morado_principal" />
+                    android:textColor="#4CAF82" />
 
             </LinearLayout>
 
@@ -100,7 +98,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginBottom="12dp"
-            app:cardCornerRadius="12dp"
+            app:cardCornerRadius="16dp"
             app:cardElevation="2dp"
             app:cardBackgroundColor="#FFFFFF">
 
@@ -117,7 +115,8 @@
                     android:layout_weight="1"
                     android:text="Notificaciones"
                     android:textSize="15sp"
-                    android:textColor="@color/texto_principal" />
+                    android:textColor="#2E2E2E" />
+
                 <Switch
                     android:id="@+id/switchNotificaciones"
                     android:layout_width="wrap_content"
@@ -130,31 +129,38 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Cerrar sesión -->
+    </LinearLayout>
+
+    <!-- Botones abajo -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp"
+        android:paddingBottom="32dp">
+
         <Button
             android:id="@+id/btnCerrarSesion"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:text="Cerrar sesión"
             android:textAllCaps="false"
             android:textSize="15sp"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/coral_acento"
-            app:cornerRadius="12dp" />
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#4CAF82"
+            app:cornerRadius="30dp" />
 
-        <!-- Eliminar cuenta -->
         <Button
             android:id="@+id/btnEliminarCuenta"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginTop="8dp"
             android:text="Eliminar cuenta"
             android:textAllCaps="false"
             android:textSize="15sp"
             android:textColor="#FFFFFF"
-            android:backgroundTint="@color/morado_principal"
-            app:cornerRadius="12dp" />
+            android:backgroundTint="#C62828"
+            app:cornerRadius="30dp" />
 
     </LinearLayout>
 

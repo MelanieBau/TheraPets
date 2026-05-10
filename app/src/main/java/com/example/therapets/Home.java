@@ -12,9 +12,7 @@ public class Home extends AppCompatActivity {
     private void openFragment(Fragment fragment) {
         Fragment current = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
         if (current != null && current.getClass().equals(fragment.getClass())) return;
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, fragment)
-                .commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, fragment).commit();
     }
 
     @Override
@@ -53,7 +51,6 @@ public class Home extends AppCompatActivity {
         });
 
         // FAB central abre la pantalla de agendar cita
-        fab.setOnClickListener(v ->
-                startActivity(new Intent(this, AgendarCita.class)));
+        fab.setOnClickListener(v -> startActivity(new Intent(this, AgendarCita.class)));
     }
 }

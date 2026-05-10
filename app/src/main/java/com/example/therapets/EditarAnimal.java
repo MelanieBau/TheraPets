@@ -44,6 +44,7 @@ public class EditarAnimal extends AppCompatActivity {
         String especialidadTerapeuta = getIntent().getStringExtra("especialidadTerapeuta");
         fotoTerapeutaActual = getIntent().getStringExtra("fotoTerapeuta");
 
+        //Editar campo animal y terapeuta
         ImageView ivFotoAnimal = findViewById(R.id.ivFotoAnimalEditar);
         ImageView ivFotoTerapeuta = findViewById(R.id.ivFotoTerapeutaEditar);
         Button btnFotoAnimal = findViewById(R.id.btnSeleccionarFotoEditar);
@@ -131,13 +132,18 @@ public class EditarAnimal extends AppCompatActivity {
         }
     }
 
-    private void subirFotoAnimal(String nombre, String tipo, String raza, String edad,
-                                 String especialidad, String nombreTerapeuta, String especialidadTerapeuta) {
+    private void subirFotoAnimal(String nombre, String tipo, String raza, String edad, String especialidad, String nombreTerapeuta, String especialidadTerapeuta) {
         Toast.makeText(this, "Subiendo foto...", Toast.LENGTH_SHORT).show();
         MediaManager.get().upload(fotoAnimal)
                 .callback(new UploadCallback() {
-                    @Override public void onStart(String requestId) {}
-                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
+
+                    @Override public void onStart(String requestId) {
+
+                    }
+
+                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {
+
+                    }
 
                     @Override
                     public void onSuccess(String requestId, Map resultData) {
@@ -159,13 +165,17 @@ public class EditarAnimal extends AppCompatActivity {
                 }).dispatch();
     }
 
-    private void subirFotoTerapeuta(String nombre, String tipo, String raza, String edad,
-                                    String especialidad, String nombreTerapeuta,
-                                    String especialidadTerapeuta, String fotoAnimalUrl) {
+    private void subirFotoTerapeuta(String nombre, String tipo, String raza, String edad, String especialidad, String nombreTerapeuta, String especialidadTerapeuta, String fotoAnimalUrl) {
         MediaManager.get().upload(fotoTerapeuta)
                 .callback(new UploadCallback() {
-                    @Override public void onStart(String requestId) {}
-                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
+
+                    @Override public void onStart(String requestId) {
+
+                    }
+
+                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {
+
+                    }
 
                     @Override
                     public void onSuccess(String requestId, Map resultData) {
@@ -182,9 +192,7 @@ public class EditarAnimal extends AppCompatActivity {
                 }).dispatch();
     }
 
-    private void guardarCambios(String nombre, String tipo, String raza, String edad,
-                                String especialidad, String fotoUrl, String nombreTerapeuta,
-                                String especialidadTerapeuta, String fotoTerapeutaUrl) {
+    private void guardarCambios(String nombre, String tipo, String raza, String edad, String especialidad, String fotoUrl, String nombreTerapeuta, String especialidadTerapeuta, String fotoTerapeutaUrl) {
         Map<String, Object> datos = new HashMap<>();
         datos.put("nombre", nombre);
         datos.put("tipo", tipo);
@@ -196,15 +204,9 @@ public class EditarAnimal extends AppCompatActivity {
         datos.put("especialidadTerapeuta", especialidadTerapeuta);
         datos.put("fotoTerapeuta", fotoTerapeutaUrl);
 
-        FirebaseFirestore.getInstance()
-                .collection("animales")
-                .document(animalId)
-                .update(datos)
-                .addOnSuccessListener(a -> {
+        FirebaseFirestore.getInstance().collection("animales").document(animalId).update(datos).addOnSuccessListener(a -> {
                     Toast.makeText(this, "Animal actualizado", Toast.LENGTH_SHORT).show();
                     finish();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
+        }).addOnFailureListener(e -> Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
     }
 }

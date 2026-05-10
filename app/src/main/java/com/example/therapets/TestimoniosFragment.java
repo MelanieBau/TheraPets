@@ -31,11 +31,7 @@ public class TestimoniosFragment extends Fragment {
         rvTestimonios.setAdapter(adapter);
 
         // Cargar testimonios desde Firestore
-        FirebaseFirestore.getInstance()
-                .collection("testimonios")
-                .orderBy("fecha", com.google.firebase.firestore.Query.Direction.DESCENDING)
-                .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("testimonios").orderBy("fecha", com.google.firebase.firestore.Query.Direction.DESCENDING).get().addOnSuccessListener(queryDocumentSnapshots -> {
                     lista.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Testimonio t = doc.toObject(Testimonio.class);
@@ -47,10 +43,6 @@ public class TestimoniosFragment extends Fragment {
 
         // Botón agregar testimonio en cabecera
         view.findViewById(R.id.btnAgregarTestimonio).setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentContainer, new AgregarTestimoniosFragment())
-                        .addToBackStack(null)
-                        .commit());
+                requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainer, new AgregarTestimoniosFragment()).addToBackStack(null).commit());
     }
 }
