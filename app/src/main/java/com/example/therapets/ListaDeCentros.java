@@ -81,8 +81,16 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
     }
 
     private void verificarDisponibilidad(String centroNombre, ViewHolder holder) {
-        // Obtenemos el día de la semana de la fecha elegida
+
+        // El botón se desactiva hasta que sepamos si hay horarios
+        holder.btnSeleccionar.setText("Comprobando si hay citas...");
+        holder.btnSeleccionar.setEnabled(false);
+        holder.btnSeleccionar.setBackgroundTintList(android.content.res.ColorStateList.valueOf(holder.itemView.getContext().getColor(android.R.color.darker_gray)));
+
         try {
+
+            //Se convierte la fecha en el día de la semana (con mayúscula inicial)
+            //para que coindica con el formato guardado en Firestore.
             Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(CitaDraftStore.fecha);
             String dia = new SimpleDateFormat("EEEE", new Locale("es", "ES")).format(date);
             dia = dia.substring(0, 1).toUpperCase() + dia.substring(1);
@@ -90,14 +98,11 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
 
             FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", centroNombre).whereEqualTo("dia", diaFinal).get().addOnSuccessListener(snap -> {
                         if (snap.isEmpty()) {
-                            // No hay horarios ese día
                             holder.btnSeleccionar.setText("Sin horarios");
                             holder.btnSeleccionar.setEnabled(false);
                             holder.btnSeleccionar.setBackgroundTintList(
-                                    android.content.res.ColorStateList.valueOf(
-                                            holder.itemView.getContext().getColor(android.R.color.darker_gray)));
+                                    android.content.res.ColorStateList.valueOf(holder.itemView.getContext().getColor(android.R.color.darker_gray)));
                         } else {
-                            // Hay horarios disponibles
                             holder.btnSeleccionar.setText("Seleccionar");
                             holder.btnSeleccionar.setEnabled(true);
                             holder.btnSeleccionar.setBackgroundTintList(

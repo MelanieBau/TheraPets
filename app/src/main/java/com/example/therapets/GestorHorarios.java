@@ -45,10 +45,9 @@ public class GestorHorarios {
         }
 
         FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", centroNombre).whereEqualTo("dia", dia).get().addOnSuccessListener(snap -> {
-                    if (snap.isEmpty()) {
-                        Toast.makeText(context, "No hay horarios disponibles para este día", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
+            if (snap.isEmpty()) {
+                return;
+            }
 
                     List<String> horas = new ArrayList<>();
                     for (QueryDocumentSnapshot doc : snap) {
