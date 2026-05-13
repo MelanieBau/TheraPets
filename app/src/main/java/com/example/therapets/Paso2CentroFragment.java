@@ -41,6 +41,7 @@ public class Paso2CentroFragment extends Fragment {
 
         // Cargamos los centros desde Firestore
         FirebaseFirestore.getInstance().collection("centros").get().addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!isAdded()) return;
                     listaCentros.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Centro centro = doc.toObject(Centro.class);
@@ -52,6 +53,9 @@ public class Paso2CentroFragment extends Fragment {
                     if (listaCentros.isEmpty()) {
                         Toast.makeText(requireContext(), "No hay centros disponibles", Toast.LENGTH_SHORT).show();
                     }
-                }).addOnFailureListener(e -> Toast.makeText(requireContext(), "Error al cargar centros", Toast.LENGTH_SHORT).show());
+                }).addOnFailureListener(e -> {
+                    if (!isAdded()) return;
+                    Toast.makeText(requireContext(), "Error al cargar centros", Toast.LENGTH_SHORT).show();
+                });
     }
 }
