@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class IniciarSesion extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
+    private Toast toastActual;
 
     @Override
     protected void onStart() {
@@ -39,47 +40,49 @@ public class IniciarSesion extends AppCompatActivity {
             String password = etContrasena.getText().toString().trim();
 
             if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
+                mostrarToast("Por favor completa todos los campos");
                 return;
             }
 
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            String uid = mAuth.getCurrentUser().getUid();
-                            verificarRolYRedirigir(uid);
-                        } else {
-                            Toast.makeText(this, "Email o contraseña incorrectos", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                if (task.isSuccessful()) {
+                    verificarRolYRedirigir(mAuth.getCurrentUser().getUid());
+                } else {
+                    mostrarToast("Email o contraseña incorrectos");
+                }
+            });
         });
 
-
-        //Interación "he olvidado mi contraseña"
-
-        // Interacción "he olvidado mi contraseña"
-        tvOlvide.setOnClickListener(v -> {startActivity(new Intent(this, RecuperarContrasena.class));
-        });
+        tvOlvide.setOnClickListener(v -> startActivity(new Intent(this, RecuperarContrasena.class)));
     }
 
     private void verificarRolYRedirigir(String uid) {
         FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
-                    if (document.exists()) {
-                        String rol = document.getString("rol");
-                        if ("administrador".equals(rol)) {
-                            startActivity(new Intent(this, Admin.class));
-                        } else if ("coordinador".equals(rol)) {
-                            startActivity(new Intent(this, Coordinador.class));
-                        } else {
-                            startActivity(new Intent(this, Home.class));
-                        }
-                        finish();
-                    } else {
-                        startActivity(new Intent(this, Home.class));
-                        finish();
-                    }
-                })
-                .addOnFailureListener(e -> {startActivity(new Intent(this, Home.class));
-                    finish();
-                });
+            if (document.exists()) {
+                String rol = document.getString("rol");
+                if ("administrador".equals(rol)) {
+                    startActivity(new Intent(this, Admin.class));
+                } else if ("coordinador".equals(rol)) {
+                    startActivity(new Intent(this, Coordinador.class));
+                } else {
+                    startActivity(new Intent(this, Home.class));
+                }
+                finish();
+
+            } else {
+
+                startActivity(new Intent(this, Home.class));
+                finish();
+            }
+        }).addOnFailureListener(e -> {
+            startActivity(new Intent(this, Home.class));
+            finish();
+        });
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(this, mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

@@ -26,6 +26,7 @@ public class PerfilFragment extends Fragment {
     private static final int PICK_IMAGE = 100;
     private ImageView ivFotoPerfil;
     private String uid;
+    private Toast toastActual;
 
     public PerfilFragment() {
         super(R.layout.fragment_perfil);
@@ -51,28 +52,22 @@ public class PerfilFragment extends Fragment {
         tvEmail.setText(email);
         tvEmailHeader.setText(email);
 
-        // Cargar datos desde Firestore
         FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
-                    if (!isAdded()) return;
-                    if (document.exists()) {
-                        String nombre = document.getString("nombre");
-                        tvNombre.setText(nombre);
-                        tvNombreHeader.setText(nombre);
-                        tvTelefono.setText(document.getString("telefono"));
-                        tvFechaNacimiento.setText(document.getString("fechaNacimiento"));
+            if (!isAdded()) return;
+            if (document.exists()) {
+                String nombre = document.getString("nombre");
+                tvNombre.setText(nombre);
+                tvNombreHeader.setText(nombre);
+                tvTelefono.setText(document.getString("telefono"));
+                tvFechaNacimiento.setText(document.getString("fechaNacimiento"));
 
-                        String fotoUrl = document.getString("fotoUrl");
-                        if (fotoUrl != null && !fotoUrl.isEmpty()) {
-                            Glide.with(requireContext()).load(fotoUrl).centerCrop().into(ivFotoPerfil);
-                        }
-                    }
-                })
-                .addOnFailureListener(e -> {
-                    if (!isAdded()) return;
-                    Toast.makeText(requireContext(), "Error al cargar perfil", Toast.LENGTH_SHORT).show();
-                });
+                String fotoUrl = document.getString("fotoUrl");
+                if (fotoUrl != null && !fotoUrl.isEmpty()) {
+                    Glide.with(requireContext()).load(fotoUrl).centerCrop().into(ivFotoPerfil);
+                }
+            }
+        });
 
-        // Al pulsar la foto abrimos la galería
         ivFotoPerfil.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
@@ -98,30 +93,35 @@ public class PerfilFragment extends Fragment {
 
     private void subirFoto(Uri uri) {
         if (!isAdded()) return;
-        Toast.makeText(requireContext(), "Subiendo foto...", Toast.LENGTH_SHORT).show();
         MediaManager.get().upload(uri).callback(new UploadCallback() {
-                    @Override public void onStart(String requestId) {}
-                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
+            @Override public void onStart(String requestId) {}
+            @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
 
-                    @Override
-                    public void onSuccess(String requestId, Map resultData) {
-                        if (!isAdded()) return;
-                        String fotoUrl = resultData.get("secure_url").toString();
+            @Override
+            public void onSuccess(String requestId, Map resultData) {
+                if (!isAdded()) return;
+                String fotoUrl = resultData.get("secure_url").toString();
 
-                        Map<String, Object> datos = new HashMap<>();
-                        datos.put("fotoUrl", fotoUrl);
-                        FirebaseFirestore.getInstance().collection("usuarios").document(uid).update(datos).addOnSuccessListener(a -> {
-                                    if (!isAdded()) return;
-                                    Toast.makeText(requireContext(), "Foto actualizada", Toast.LENGTH_SHORT).show();
-                                });
-                    }
+                Map<String, Object> datos = new HashMap<>();
+                datos.put("fotoUrl", fotoUrl);
+                FirebaseFirestore.getInstance().collection("usuarios").document(uid).update(datos).addOnSuccessListener(a -> {
+                    if (!isAdded()) return;
+                    mostrarToast("Foto actualizada");
+                });
+            }
 
-                    @Override
-                    public void onError(String requestId, ErrorInfo error) {
-                        if (!isAdded()) return;
-                        Toast.makeText(requireContext(), "Error al subir foto", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override public void onReschedule(String requestId, ErrorInfo error) {}
-                }).dispatch();
+            @Override
+            public void onError(String requestId, ErrorInfo error) {
+                if (!isAdded()) return;
+                mostrarToast("Error al subir foto");
+            }
+            @Override public void onReschedule(String requestId, ErrorInfo error) {}
+        }).dispatch();
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

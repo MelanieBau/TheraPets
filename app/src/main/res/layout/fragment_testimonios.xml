@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="@drawable/fondo_therapets">
 
     <!-- Cabecera verde oscuro -->
     <LinearLayout
@@ -27,10 +27,9 @@
     <!-- Imagen decorativa -->
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="12dp"
-        android:src="@drawable/testimonios_therapets"
-        android:scaleType="centerCrop" />
+        android:layout_height="195dp"
+        android:layout_marginTop="0dp"
+        android:src="@drawable/testimonios_therapets"/>
 
     <!-- Cuadro para agregar testimonio -->
     <androidx.cardview.widget.CardView

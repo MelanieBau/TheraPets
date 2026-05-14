@@ -23,8 +23,7 @@ public class AgregarAnimal extends AppCompatActivity {
     private static final int PICK_FOTO_ANIMAL = 100;
     private static final int PICK_FOTO_TERAPEUTA = 101;
     private String centroId;
-    private String fotoAnimalUrl = "";
-    private String fotoTerapeutaUrl = "";
+    private Toast toastActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,21 +47,18 @@ public class AgregarAnimal extends AppCompatActivity {
 
         findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
 
-        // Abrir galería para foto del animal
         btnFotoAnimal.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_FOTO_ANIMAL);
         });
 
-        // Abrir galería para foto de la terapeuta
         btnFotoTerapeuta.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_FOTO_TERAPEUTA);
         });
 
-        // Guardar animal
         btnGuardar.setOnClickListener(v -> {
             String nombreStr = nombre.getText().toString().trim();
             String tipoStr = tipo.getText().toString().trim();
@@ -73,19 +69,15 @@ public class AgregarAnimal extends AppCompatActivity {
             String especialidadTerapeutaStr = especialidadTerapeuta.getText().toString().trim();
 
             if (nombreStr.isEmpty()) {
-                Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();
+                mostrarToast("El nombre es obligatorio");
                 return;
             }
 
-            // Subimos primero la foto del animal si existe
             if (fotoAnimal != null) {
                 subirFotoAnimal(nombreStr, tipoStr, razaStr, edadStr, especialidadStr, nombreTerapeutaStr, especialidadTerapeutaStr);
             } else {
-
-                // Si no hay foto del animal subimos la de la terapeuta directamente
                 if (fotoTerapeuta != null) {
                     subirFotoTerapeuta(nombreStr, tipoStr, razaStr, edadStr, especialidadStr, nombreTerapeutaStr, especialidadTerapeutaStr, "");
-
                 } else {
                     guardarAnimal(nombreStr, tipoStr, razaStr, edadStr, especialidadStr, "", nombreTerapeutaStr, especialidadTerapeutaStr, "");
                 }
@@ -100,7 +92,6 @@ public class AgregarAnimal extends AppCompatActivity {
             if (requestCode == PICK_FOTO_ANIMAL) {
                 fotoAnimal = data.getData();
                 ((ImageView) findViewById(R.id.ivFotoAnimal)).setImageURI(fotoAnimal);
-
             } else if (requestCode == PICK_FOTO_TERAPEUTA) {
                 fotoTerapeuta = data.getData();
                 ((ImageView) findViewById(R.id.ivFotoTerapeuta)).setImageURI(fotoTerapeuta);
@@ -108,50 +99,33 @@ public class AgregarAnimal extends AppCompatActivity {
         }
     }
 
-    // Subimos primero la foto del animal
     private void subirFotoAnimal(String nombre, String tipo, String raza, String edad, String especialidad, String nombreTerapeuta, String especialidadTerapeuta) {
-        Toast.makeText(this, "Subiendo foto del animal...", Toast.LENGTH_SHORT).show();
         MediaManager.get().upload(fotoAnimal).callback(new UploadCallback() {
-
-            @Override public void onStart(String requestId) {
-
-            }
-
-            @Override public void onProgress(String requestId, long bytes, long totalBytes) {
-
-            }
+            @Override public void onStart(String requestId) {}
+            @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
 
             @Override
             public void onSuccess(String requestId, Map resultData) {
                 String url = resultData.get("secure_url").toString();
+                if (fotoTerapeuta != null) {
+                    subirFotoTerapeuta(nombre, tipo, raza, edad, especialidad, nombreTerapeuta, especialidadTerapeuta, url);
+                } else {
+                    guardarAnimal(nombre, tipo, raza, edad, especialidad, url, nombreTerapeuta, especialidadTerapeuta, "");
+                }
+            }
 
-                        // Luego subimos la foto de la terapeuta si existe
-                        if (fotoTerapeuta != null) {
-                            subirFotoTerapeuta(nombre, tipo, raza, edad, especialidad, nombreTerapeuta, especialidadTerapeuta, url);
-                        } else {
-                            guardarAnimal(nombre, tipo, raza, edad, especialidad, url, nombreTerapeuta, especialidadTerapeuta, "");
-                        }
-                    }
-
-                    @Override
-                    public void onError(String requestId, ErrorInfo error) {
-                        Toast.makeText(AgregarAnimal.this, "Error al subir la foto", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override public void onReschedule(String requestId, ErrorInfo error) {}
-                }).dispatch();
+            @Override
+            public void onError(String requestId, ErrorInfo error) {
+                mostrarToast("Error al subir la foto");
+            }
+            @Override public void onReschedule(String requestId, ErrorInfo error) {}
+        }).dispatch();
     }
 
-    // Subimos la foto de la terapeuta
     private void subirFotoTerapeuta(String nombre, String tipo, String raza, String edad, String especialidad, String nombreTerapeuta, String especialidadTerapeuta, String fotoAnimalUrl) {
         MediaManager.get().upload(fotoTerapeuta).callback(new UploadCallback() {
-
-            @Override public void onStart(String requestId) {
-
-            }
-
-            @Override public void onProgress(String requestId, long bytes, long totalBytes) {
-
-            }
+            @Override public void onStart(String requestId) {}
+            @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
 
             @Override
             public void onSuccess(String requestId, Map resultData) {
@@ -161,18 +135,13 @@ public class AgregarAnimal extends AppCompatActivity {
 
             @Override
             public void onError(String requestId, ErrorInfo error) {
-                Toast.makeText(AgregarAnimal.this, "Error al subir foto del terapeuta", Toast.LENGTH_SHORT).show();
+                mostrarToast("Error al subir foto del terapeuta");
             }
-
-            @Override public void onReschedule(String requestId, ErrorInfo error) {
-
-            }
-                }).dispatch();
+            @Override public void onReschedule(String requestId, ErrorInfo error) {}
+        }).dispatch();
     }
 
-    // Guardar los datos en Firestore
     private void guardarAnimal(String nombre, String tipo, String raza, String edad, String especialidad, String fotoUrl, String nombreTerapeuta, String especialidadTerapeuta, String fotoTerapeutaUrl) {
-
         Map<String, Object> animal = new HashMap<>();
         animal.put("nombre", nombre);
         animal.put("tipo", tipo);
@@ -186,10 +155,13 @@ public class AgregarAnimal extends AppCompatActivity {
         animal.put("fotoTerapeuta", fotoTerapeutaUrl);
 
         FirebaseFirestore.getInstance().collection("animales").add(animal).addOnSuccessListener(ref -> {
-            Toast.makeText(this, "Animal guardado", Toast.LENGTH_SHORT).show();
             finish();
+        }).addOnFailureListener(e -> mostrarToast("Error al guardar"));
+    }
 
-
-        }).addOnFailureListener(e -> Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(this, mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

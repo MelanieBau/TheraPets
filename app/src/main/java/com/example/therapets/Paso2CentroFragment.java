@@ -15,6 +15,8 @@ import java.util.List;
 
 public class Paso2CentroFragment extends Fragment {
 
+    private Toast toastActual;
+
     public Paso2CentroFragment() {
         super(R.layout.fragment_paso2_centro);
     }
@@ -22,15 +24,13 @@ public class Paso2CentroFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.btnVolver).setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().popBackStack());
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         RecyclerView rv = view.findViewById(R.id.rvCentrosSeleccion);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         List<Centro> listaCentros = new ArrayList<>();
 
-        // Cuando el usuario selecciona un centro va al paso de seleccionar el horario
         ListaDeCentros adapter = new ListaDeCentros(listaCentros, (centro, hora) -> {
             CitaDraftStore.centro = centro.getNombre();
             CitaDraftStore.hora = hora;
@@ -39,8 +39,8 @@ public class Paso2CentroFragment extends Fragment {
 
         rv.setAdapter(adapter);
 
-        // Cargamos los centros desde Firestore
-        FirebaseFirestore.getInstance().collection("centros").get().addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("centros").get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!isAdded()) return;
                     listaCentros.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
@@ -49,13 +49,16 @@ public class Paso2CentroFragment extends Fragment {
                         listaCentros.add(centro);
                     }
                     adapter.notifyDataSetChanged();
-
-                    if (listaCentros.isEmpty()) {
-                        Toast.makeText(requireContext(), "No hay centros disponibles", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(e -> {
+                })
+                .addOnFailureListener(e -> {
                     if (!isAdded()) return;
-                    Toast.makeText(requireContext(), "Error al cargar centros", Toast.LENGTH_SHORT).show();
+                    mostrarToast("Error al cargar centros");
                 });
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

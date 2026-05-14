@@ -13,9 +13,10 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class Paso1DatosFragment extends Fragment {
+
+    private Toast toastActual;
 
     public Paso1DatosFragment() {
         super(R.layout.fragment_paso1_datos);
@@ -33,43 +34,37 @@ public class Paso1DatosFragment extends Fragment {
         Button elegirFecha = view.findViewById(R.id.btnElegirFecha);
         Button siguiente = view.findViewById(R.id.btnSiguiente1);
 
-
-        //Restaurar los datos del usuario si va para atrás
         nombres.setText(CitaDraftStore.nombres);
         apellidos.setText(CitaDraftStore.apellidos);
         telefono.setText(CitaDraftStore.telefono);
         if (!CitaDraftStore.fecha.isEmpty()) {
-
             fechaSeleccionada.setText(CitaDraftStore.fecha);
             fechaSeleccionada.setTextColor(requireContext().getColor(R.color.texto_principal));
         }
 
-        //Abrir DatePicker cuando pulsa "elegir la fecha"
         elegirFecha.setOnClickListener(v -> {
             MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().setTitleText("Selecciona una fecha").build();
 
             datePicker.addOnPositiveButtonClickListener(selection -> {
                 String fecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date(selection));
-
                 fechaSeleccionada.setText(fecha);
                 fechaSeleccionada.setTextColor(requireContext().getColor(R.color.texto_principal));
                 CitaDraftStore.fecha = fecha;
             });
 
             datePicker.show(getParentFragmentManager(), "DATE_PICKER");
-
         });
 
         siguiente.setOnClickListener(v -> {
             String nombreSrt = nombres.getText().toString().trim();
 
-            if (nombreSrt.isEmpty()){
-                Toast.makeText(requireContext(), "Introduce tu nombre", Toast.LENGTH_SHORT).show();
+            if (nombreSrt.isEmpty()) {
+                mostrarToast("Introduce tu nombre");
                 return;
             }
 
-            if (CitaDraftStore.fecha.isEmpty()){
-                Toast.makeText(requireContext(), "Selecciona una fecha", Toast.LENGTH_SHORT).show();
+            if (CitaDraftStore.fecha.isEmpty()) {
+                mostrarToast("Selecciona una fecha");
                 return;
             }
 
@@ -79,6 +74,11 @@ public class Paso1DatosFragment extends Fragment {
 
             requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new Paso2CentroFragment()).addToBackStack(null).commit();
         });
+    }
 
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

@@ -16,78 +16,79 @@ public class Registro extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private Toast toastActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
 
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
-        TextInputEditText etEmail = findViewById(R.id.etEmail);
-        TextInputEditText etPassword = findViewById(R.id.etPassword);
-        TextInputEditText etConfirmPassword = findViewById(R.id.etConfirmPassword);
-        TextInputEditText etNombre = findViewById(R.id.etNombre);
-        TextInputEditText etTelefono = findViewById(R.id.etTelefono);
-        TextInputEditText etFechaNacimiento = findViewById(R.id.etFechaNacimiento);
+        TextInputEditText Email = findViewById(R.id.etEmail);
+        TextInputEditText Password = findViewById(R.id.etPassword);
+        TextInputEditText ConfirmPassword = findViewById(R.id.etConfirmPassword);
+        TextInputEditText Nombre = findViewById(R.id.etNombre);
+        TextInputEditText Telefono = findViewById(R.id.etTelefono);
+        TextInputEditText FechaNacimiento = findViewById(R.id.etFechaNacimiento);
         Button btnSignUp = findViewById(R.id.btnSignUp);
         TextView tvGoLogin = findViewById(R.id.tvGoLogin);
 
         btnSignUp.setOnClickListener(v -> {
-            String email = etEmail.getText().toString().trim();
-            String password = etPassword.getText().toString().trim();
-            String confirmPassword = etConfirmPassword.getText().toString().trim();
-            String nombre = etNombre.getText().toString().trim();
-            String telefono = etTelefono.getText().toString().trim();
-            String fechaNacimiento = etFechaNacimiento.getText().toString().trim();
+            String email = Email.getText().toString().trim();
+            String password = Password.getText().toString().trim();
+            String confirmPassword = ConfirmPassword.getText().toString().trim();
+            String nombre = Nombre.getText().toString().trim();
+            String telefono = Telefono.getText().toString().trim();
+            String fechaNacimiento = FechaNacimiento.getText().toString().trim();
 
-            // Validaciones
             if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || fechaNacimiento.isEmpty()) {
-                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show();
+                mostrarToast("Por favor completa todos los campos");
                 return;
             }
             if (!password.equals(confirmPassword)) {
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show();
+                mostrarToast("Las contraseñas no coinciden");
                 return;
             }
             if (password.length() < 6) {
-                Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
+                mostrarToast("La contraseña debe tener al menos 6 caracteres");
                 return;
             }
 
-            // Crear usuario en Firebase Authentication
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            String uid = mAuth.getCurrentUser().getUid();
+                if (task.isSuccessful()) {
+                    String uid = mAuth.getCurrentUser().getUid();
 
-                            // Guardar datos del perfil en Firestore
-                            Map<String, Object> usuario = new HashMap<>();
-                            usuario.put("nombre", nombre);
-                            usuario.put("email", email);
-                            usuario.put("telefono", telefono);
-                            usuario.put("fechaNacimiento", fechaNacimiento);
-                            usuario.put("rol", "usuario");
+                    //Campos para el registro
+                    Map<String, Object> usuario = new HashMap<>();
 
-                            db.collection("usuarios").document(uid).set(usuario).addOnSuccessListener(a -> {
-                                        Toast.makeText(this, "¡Cuenta creada con éxito! 🐾", Toast.LENGTH_SHORT).show();
-                                        startActivity(new Intent(this, IniciarSesion.class));
-                                        finish();
-                                    })
-                                    .addOnFailureListener(e -> {
-                                        Toast.makeText(this, "Error al guardar perfil: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                                    });
+                    usuario.put("nombre", nombre);
+                    usuario.put("email", email);
+                    usuario.put("telefono", telefono);
+                    usuario.put("fechaNacimiento", fechaNacimiento);
+                    usuario.put("rol", "usuario");
 
-                        } else {
-                            Toast.makeText(this, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                        }
+                    db.collection("usuarios").document(uid).set(usuario).addOnSuccessListener(a -> {
+                        startActivity(new Intent(this, IniciarSesion.class));
+                        finish();
                     });
+                } else {
+                    mostrarToast("Error al registrarse, prueba con otro email");
+                }
+            });
         });
 
         tvGoLogin.setOnClickListener(v -> {
-
             startActivity(new Intent(this, IniciarSesion.class));
             finish();
         });
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(this, mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

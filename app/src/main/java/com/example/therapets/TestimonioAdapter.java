@@ -21,6 +21,7 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
 
     private List<Testimonio> lista;
     private FragmentManager fragmentManager;
+    private Toast toastActual;
 
     public TestimonioAdapter(List<Testimonio> lista, FragmentManager fragmentManager) {
         this.lista = lista;
@@ -30,8 +31,7 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_testimonio, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_testimonio, parent, false);
         return new ViewHolder(view);
     }
 
@@ -45,41 +45,28 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
         holder.tvFecha.setText(t.getFecha());
         holder.tvContadorMeGusta.setText(String.valueOf(t.getMeGusta()));
 
-        // Estrellas
         if (holder.ratingBar != null) {
             holder.ratingBar.setRating(t.getEstrellas());
         }
 
-        // Foto del testimonio
         if (t.getFotoUrl() != null && !t.getFotoUrl().isEmpty()) {
             holder.ivFotoAnimal.setVisibility(View.VISIBLE);
-            Glide.with(holder.itemView.getContext())
-                    .load(t.getFotoUrl())
-                    .centerCrop()
-                    .into(holder.ivFotoAnimal);
+            Glide.with(holder.itemView.getContext()).load(t.getFotoUrl()).centerCrop().into(holder.ivFotoAnimal);
         } else {
             holder.ivFotoAnimal.setVisibility(View.GONE);
         }
 
-        // Foto del usuario
         if (t.getFotoUsuarioUrl() != null && !t.getFotoUsuarioUrl().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(t.getFotoUsuarioUrl())
-                    .centerCrop()
-                    .into(holder.ivFotoUsuario);
+            Glide.with(holder.itemView.getContext()).load(t.getFotoUsuarioUrl()).centerCrop().into(holder.ivFotoUsuario);
         }
 
-        // Corazón — verificar si ya dio like
-        boolean yaLeDioLike = t.getLikesUsuarios() != null &&
-                t.getLikesUsuarios().contains(uidActual);
+        boolean yaLeDioLike = t.getLikesUsuarios() != null && t.getLikesUsuarios().contains(uidActual);
 
-        holder.btnMeGusta.setImageResource(yaLeDioLike ?
-                android.R.drawable.btn_star_big_on :
-                android.R.drawable.btn_star_big_off);
+        holder.btnMeGusta.setImageResource(yaLeDioLike ? R.drawable.corazon : R.drawable.amor);
 
         holder.btnMeGusta.setOnClickListener(v -> {
             if (t.getLikesUsuarios() != null && t.getLikesUsuarios().contains(uidActual)) {
-                Toast.makeText(v.getContext(), "Ya le diste me gusta", Toast.LENGTH_SHORT).show();
+                mostrarToast(v.getContext(), "Ya le diste me gusta");
                 return;
             }
 
@@ -94,23 +81,17 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
                         t.setMeGusta(t.getMeGusta() + 1);
                         if (t.getLikesUsuarios() != null) t.getLikesUsuarios().add(uidActual);
                         holder.tvContadorMeGusta.setText(String.valueOf(t.getMeGusta()));
-                        holder.btnMeGusta.setImageResource(android.R.drawable.btn_star_big_on);
+                        holder.btnMeGusta.setImageResource(R.drawable.corazon);
                     });
         });
 
-        // Botón borrar
         if (t.getUsuarioId().equals(uidActual)) {
             holder.btnBorrar.setVisibility(View.VISIBLE);
             holder.btnBorrar.setOnClickListener(v -> {
-                FirebaseFirestore.getInstance()
-                        .collection("testimonios")
-                        .document(t.getId())
-                        .delete()
-                        .addOnSuccessListener(a -> {
-                            lista.remove(position);
-                            notifyItemRemoved(position);
-                            Toast.makeText(v.getContext(), "Testimonio eliminado", Toast.LENGTH_SHORT).show();
-                        });
+                FirebaseFirestore.getInstance().collection("testimonios").document(t.getId()).delete().addOnSuccessListener(a -> {
+                    lista.remove(position);
+                    notifyItemRemoved(position);
+                });
             });
         } else {
             holder.btnBorrar.setVisibility(View.GONE);
@@ -119,6 +100,12 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
 
     @Override
     public int getItemCount() { return lista.size(); }
+
+    private void mostrarToast(android.content.Context context, String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(context, mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvNombreUsuario, tvComentario, tvFecha, tvContadorMeGusta;

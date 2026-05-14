@@ -1,6 +1,7 @@
 package com.example.therapets;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
     private OnConfirmarListener onConfirmar;
     private OnCancelarListener onCancelar;
     private OnCompletarListener onCompletar;
+    private Toast toastActual;
 
     public interface OnConfirmarListener {
         void onConfirmar(Cita cita);
@@ -56,10 +58,9 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
         holder.tvMotivo.setText("Motivo: " + cita.getMotivo());
         holder.tvEstado.setText(cita.getEstado());
 
-        // Mostrar motivo de cancelación del usuario
         if (cita.getMotivoCancelacion() != null && !cita.getMotivoCancelacion().isEmpty()) {
             holder.tvMotivoCancelacion.setVisibility(View.VISIBLE);
-            holder.tvMotivoCancelacion.setText("❌ Cancelada por usuario: " + cita.getMotivoCancelacion());
+            holder.tvMotivoCancelacion.setText("Cancelada por usuario: " + cita.getMotivoCancelacion());
         } else {
             holder.tvMotivoCancelacion.setVisibility(View.GONE);
         }
@@ -81,29 +82,31 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
         holder.btnConfirmar.setOnClickListener(v -> onConfirmar.onConfirmar(cita));
         holder.btnCompletar.setOnClickListener(v -> onCompletar.onCompletar(cita));
 
-        // Botón cancelar con el motivo
         holder.btnCancelar.setOnClickListener(v -> {
             EditText etMotivo = new EditText(v.getContext());
             etMotivo.setHint("Motivo de cancelación");
             etMotivo.setPadding(40, 20, 40, 20);
 
             new AlertDialog.Builder(v.getContext()).setTitle("Cancelar cita").setMessage("Indica el motivo para que el usuario pueda verlo").setView(etMotivo).setPositiveButton("Cancelar cita", (dialog, which) -> {
-
-                        String motivo = etMotivo.getText().toString().trim();
-                        if (motivo.isEmpty()) {
-                            Toast.makeText(v.getContext(), "Indica el motivo", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        onCancelar.onCancelar(cita, motivo);
-                    })
-                    .setNegativeButton("Volver", null)
-                    .show();
+                String motivo = etMotivo.getText().toString().trim();
+                if (motivo.isEmpty()) {
+                    mostrarToast(v.getContext(), "Indica el motivo");
+                    return;
+                }
+                onCancelar.onCancelar(cita, motivo);
+            }).setNegativeButton("Volver", null).show();
         });
     }
 
     @Override
     public int getItemCount() {
         return lista.size();
+    }
+
+    private void mostrarToast(Context context, String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(context, mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

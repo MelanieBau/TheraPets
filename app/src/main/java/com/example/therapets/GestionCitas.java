@@ -1,7 +1,6 @@
 package com.example.therapets;
 
 import android.os.Bundle;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,14 +34,13 @@ public class GestionCitas extends AppCompatActivity {
 
     private void cargarTodasLasCitas() {
         db.collection("citas").get().addOnSuccessListener(queryDocumentSnapshots -> {
-                    listaCitas.clear();
-                    for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                        Cita cita = doc.toObject(Cita.class);
-                        cita.setId(doc.getId());
-                        listaCitas.add(cita);
-                    }
-                    adapter.notifyDataSetChanged();
-                }).addOnFailureListener(e -> {Toast.makeText(this, "Error al cargar citas: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                });
+            listaCitas.clear();
+            for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
+                Cita cita = doc.toObject(Cita.class);
+                cita.setId(doc.getId());
+                listaCitas.add(cita);
+            }
+            adapter.notifyDataSetChanged();
+        });
     }
 }

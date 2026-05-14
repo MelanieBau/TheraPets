@@ -14,6 +14,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class ConfirmacionCitaFragment extends Fragment {
 
+    private Toast toastActual;
+
     public ConfirmacionCitaFragment() {
         super(R.layout.fragment_confirmacion_cita);
     }
@@ -26,8 +28,7 @@ public class ConfirmacionCitaFragment extends Fragment {
         Button btnVolverCitas = view.findViewById(R.id.btnVolverCitas);
         Button btnIrInicio = view.findViewById(R.id.btnIrInicio);
 
-        String resumen =
-                "Nombre: " + CitaDraftStore.nombres + " " + CitaDraftStore.apellidos + "\n" +
+        String resumen = "Nombre: " + CitaDraftStore.nombres + " " + CitaDraftStore.apellidos + "\n" +
                         "Teléfono: " + CitaDraftStore.telefono + "\n\n" +
                         "Fecha: " + CitaDraftStore.fecha + "\n" +
                         "Hora: " + CitaDraftStore.hora + "\n\n" +
@@ -39,7 +40,6 @@ public class ConfirmacionCitaFragment extends Fragment {
 
         tvResumen.setText(resumen);
 
-        // Ambos botones guardan la cita, solo cambia el destino
         btnIrInicio.setOnClickListener(v -> guardarCita(false));
         btnVolverCitas.setOnClickListener(v -> guardarCita(true));
     }
@@ -55,29 +55,33 @@ public class ConfirmacionCitaFragment extends Fragment {
         cita.setHora(CitaDraftStore.hora);
         cita.setCentro(CitaDraftStore.centro);
         cita.setCuidador(CitaDraftStore.cuidador);
-        cita.setMotivo(
-                CitaDraftStore.otroMotivo.isEmpty()
-                        ? CitaDraftStore.motivo
-                        : CitaDraftStore.motivo + " - " + CitaDraftStore.otroMotivo
-        );
+        cita.setMotivo(CitaDraftStore.otroMotivo.isEmpty() ? CitaDraftStore.motivo : CitaDraftStore.motivo + " - " + CitaDraftStore.otroMotivo);
         cita.setEstado("pendiente");
         cita.setNombreTerapeuta(CitaDraftStore.nombreTerapeuta);
         cita.setUsuarioId(uid);
 
         FirebaseFirestore.getInstance().collection("citas").add(cita).addOnSuccessListener(documentReference -> {
-                    CitaDraftStore.clear();
+            if (!isAdded()) return;
+            CitaDraftStore.clear();
 
-                    Intent intent = new Intent(requireContext(), Home.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                    if (irACitas) {
-                        intent.putExtra("open_tab", "citas");
-                    } else {
-                        intent.putExtra("open_tab", "inicio");
-                    }
-                    startActivity(intent);
-                    requireActivity().finish();
-                })
-                .addOnFailureListener(e ->
-                        Toast.makeText(requireContext(), "Error al guardar la cita", Toast.LENGTH_SHORT).show());
+            Intent intent = new Intent(requireContext(), Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            if (irACitas) {
+                intent.putExtra("open_tab", "citas");
+            } else {
+                intent.putExtra("open_tab", "inicio");
+            }
+            startActivity(intent);
+            requireActivity().finish();
+        }).addOnFailureListener(e -> {
+            if (!isAdded()) return;
+            mostrarToast("Error al guardar la cita");
+        });
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

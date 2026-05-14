@@ -13,6 +13,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class Configuracion extends AppCompatActivity {
 
+    private Toast toastActual;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,15 +25,13 @@ public class Configuracion extends AppCompatActivity {
         Button btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
         Button btnEliminarCuenta = findViewById(R.id.btnEliminarCuenta);
 
-        // Abre la pantalla de recuperar contraseña
         cardCambiarContrasena.setOnClickListener(v -> startActivity(new Intent(this, RecuperarContrasena.class)));
 
-        // Switch de notificaciones (por ahora solo visual)
-        switchNotificaciones.setOnCheckedChangeListener((buttonView, isChecked) -> {String mensaje = isChecked ? "Notificaciones activadas" : "Notificaciones desactivadas";
-            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+        switchNotificaciones.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            String mensaje = isChecked ? "Notificaciones activadas" : "Notificaciones desactivadas";
+            mostrarToast(mensaje);
         });
 
-        // Cerrar sesión
         btnCerrarSesion.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, IniciarSesion.class);
@@ -40,25 +40,25 @@ public class Configuracion extends AppCompatActivity {
             finish();
         });
 
-        // Eliminar cuenta con confirmación
         btnEliminarCuenta.setOnClickListener(v -> {
             new AlertDialog.Builder(this).setTitle("Eliminar cuenta").setMessage("¿Estás segura de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.").setPositiveButton("Eliminar", (dialog, which) -> {
-                        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-                        // Borramos el documento del usuario en Firestore
-                        FirebaseFirestore.getInstance().collection("usuarios").document(uid).delete().addOnSuccessListener(a -> {
-                                    // Borramos la cuenta de Firebase Authentication
-                                    FirebaseAuth.getInstance().getCurrentUser().delete().addOnSuccessListener(b -> {
-                                                Toast.makeText(this, "Cuenta eliminada", Toast.LENGTH_SHORT).show();
-                                                Intent intent = new Intent(this, IniciarSesion.class);
-                                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                                startActivity(intent);
-                                                finish();
-                                            });
-                                });
-                    })
-                    .setNegativeButton("Cancelar", null)
-                    .show();
+                FirebaseFirestore.getInstance().collection("usuarios").document(uid).delete().addOnSuccessListener(a -> {
+                    FirebaseAuth.getInstance().getCurrentUser().delete().addOnSuccessListener(b -> {
+                        Intent intent = new Intent(this, IniciarSesion.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        finish();
+                    });
+                });
+            }).setNegativeButton("Cancelar", null).show();
         });
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(this, mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

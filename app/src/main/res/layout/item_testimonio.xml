@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/logo_therapets"
+            android:src="@drawable/therapets_logo"
             android:background="#E8F5E9" />
 
         <!-- Barra verde -->
@@ -55,7 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/logo_therapets_2"
+                        android:src="@drawable/user"
                         android:background="#E8F5E9" />
 
                 </androidx.cardview.widget.CardView>
@@ -133,7 +133,7 @@
                     android:id="@+id/btnMeGusta"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
-                    android:src="@android:drawable/btn_star_big_off"
+                    android:src="@drawable/amor"
                     android:background="@null"
                     android:contentDescription="Me gusta" />
 
@@ -143,7 +143,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textSize="14sp"
-                    android:textColor="#4CAF82"
+                    android:textColor="#E53935"
                     android:layout_marginStart="6dp" />
 
                 <ImageButton

@@ -71,8 +71,7 @@
                     android:id="@+id/ivFotoTestimonio"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/logo_therapets"
+                    android:src="@drawable/subir_imagen"
                     android:background="#E8F5E9" />
 
             </androidx.cardview.widget.CardView>

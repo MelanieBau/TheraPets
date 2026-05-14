@@ -15,6 +15,8 @@ import java.util.List;
 
 public class Paso3CuidadorFragment extends Fragment {
 
+    private Toast toastActual;
+
     public Paso3CuidadorFragment() {
         super(R.layout.fragment_paso3_cuidador);
     }
@@ -22,17 +24,14 @@ public class Paso3CuidadorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.btnVolver).setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().popBackStack());
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         RecyclerView rv = view.findViewById(R.id.rvAnimalesSeleccion);
         rv.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         List<Animal> listaAnimales = new ArrayList<>();
 
-        // Cuando el usuario selecciona un animal
         AnimalSeleccion seleccion = new AnimalSeleccion(listaAnimales, animal -> {
-            // Guardamos el animal elegido y vamos al Paso 4
             CitaDraftStore.cuidador = animal.getNombre() + " (" + animal.getTipo() + ")";
             CitaDraftStore.nombreTerapeuta = animal.getNombreTerapeuta() != null ? animal.getNombreTerapeuta() : "";
             requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new Paso4MotivoFragment()).addToBackStack(null).commit();
@@ -40,8 +39,9 @@ public class Paso3CuidadorFragment extends Fragment {
 
         rv.setAdapter(seleccion);
 
-        // Cargamos los animales del centro elegido en el Paso 2
-        FirebaseFirestore.getInstance().collection("animales").whereEqualTo("centro", CitaDraftStore.centro).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        FirebaseFirestore.getInstance().collection("animales").whereEqualTo("centro", CitaDraftStore.centro).get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    if (!isAdded()) return;
                     listaAnimales.clear();
                     for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
                         Animal animal = doc.toObject(Animal.class);
@@ -49,14 +49,16 @@ public class Paso3CuidadorFragment extends Fragment {
                         listaAnimales.add(animal);
                     }
                     seleccion.notifyDataSetChanged();
-
-                    // Si no hay animales mostramos un mensaje
-                    if (listaAnimales.isEmpty()) {
-                        Toast.makeText(requireContext(), "No hay animales disponibles en este centro", Toast.LENGTH_SHORT).show();
-                    }
                 })
                 .addOnFailureListener(e -> {
-                    Toast.makeText(requireContext(), "Error al cargar animales", Toast.LENGTH_SHORT).show();
+                    if (!isAdded()) return;
+                    mostrarToast("Error al cargar animales");
                 });
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

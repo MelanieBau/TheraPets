@@ -26,13 +26,13 @@ public class EditarAnimal extends AppCompatActivity {
     private String animalId;
     private String fotoAnimalActual;
     private String fotoTerapeutaActual;
+    private Toast toastActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_animal);
 
-        // Recibimos todos los datos del animal
         animalId = getIntent().getStringExtra("animalId");
         String nombre = getIntent().getStringExtra("nombre");
         String tipo = getIntent().getStringExtra("tipo");
@@ -44,7 +44,6 @@ public class EditarAnimal extends AppCompatActivity {
         String especialidadTerapeuta = getIntent().getStringExtra("especialidadTerapeuta");
         fotoTerapeutaActual = getIntent().getStringExtra("fotoTerapeuta");
 
-        //Editar campo animal y terapeuta
         ImageView ivFotoAnimal = findViewById(R.id.ivFotoAnimalEditar);
         ImageView ivFotoTerapeuta = findViewById(R.id.ivFotoTerapeutaEditar);
         Button btnFotoAnimal = findViewById(R.id.btnSeleccionarFotoEditar);
@@ -60,7 +59,6 @@ public class EditarAnimal extends AppCompatActivity {
 
         findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
 
-        // Rellenamos los datos actuales
         etNombre.setText(nombre);
         etTipo.setText(tipo);
         etRaza.setText(raza);
@@ -69,28 +67,24 @@ public class EditarAnimal extends AppCompatActivity {
         etNombreTerapeuta.setText(nombreTerapeuta);
         etEspecialidadTerapeuta.setText(especialidadTerapeuta);
 
-        // Mostramos las fotos actuales
         if (fotoAnimalActual != null && !fotoAnimalActual.isEmpty())
             Glide.with(this).load(fotoAnimalActual).centerCrop().into(ivFotoAnimal);
 
         if (fotoTerapeutaActual != null && !fotoTerapeutaActual.isEmpty())
             Glide.with(this).load(fotoTerapeutaActual).centerCrop().into(ivFotoTerapeuta);
 
-        // Abrir galería para foto del animal
         btnFotoAnimal.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_FOTO_ANIMAL);
         });
 
-        // Abrir galería para foto de la terapeuta
         btnFotoTerapeuta.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_FOTO_TERAPEUTA);
         });
 
-        // Guardar cambios
         btnGuardar.setOnClickListener(v -> {
             String nuevoNombre = etNombre.getText().toString().trim();
             String nuevoTipo = etTipo.getText().toString().trim();
@@ -101,7 +95,7 @@ public class EditarAnimal extends AppCompatActivity {
             String nuevaEspecialidadTerapeuta = etEspecialidadTerapeuta.getText().toString().trim();
 
             if (nuevoNombre.isEmpty()) {
-                Toast.makeText(this, "El nombre es obligatorio", Toast.LENGTH_SHORT).show();
+                mostrarToast("El nombre es obligatorio");
                 return;
             }
 
@@ -133,63 +127,45 @@ public class EditarAnimal extends AppCompatActivity {
     }
 
     private void subirFotoAnimal(String nombre, String tipo, String raza, String edad, String especialidad, String nombreTerapeuta, String especialidadTerapeuta) {
-        Toast.makeText(this, "Subiendo foto...", Toast.LENGTH_SHORT).show();
-        MediaManager.get().upload(fotoAnimal)
-                .callback(new UploadCallback() {
+        MediaManager.get().upload(fotoAnimal).callback(new UploadCallback() {
+            @Override public void onStart(String requestId) {}
+            @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
 
-                    @Override public void onStart(String requestId) {
+            @Override
+            public void onSuccess(String requestId, Map resultData) {
+                String url = resultData.get("secure_url").toString();
+                if (fotoTerapeuta != null) {
+                    subirFotoTerapeuta(nombre, tipo, raza, edad, especialidad, nombreTerapeuta, especialidadTerapeuta, url);
+                } else {
+                    guardarCambios(nombre, tipo, raza, edad, especialidad, url, nombreTerapeuta, especialidadTerapeuta, fotoTerapeutaActual);
+                }
+            }
 
-                    }
-
-                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(String requestId, Map resultData) {
-                        String url = resultData.get("secure_url").toString();
-                        if (fotoTerapeuta != null) {
-                            subirFotoTerapeuta(nombre, tipo, raza, edad,
-                                    especialidad, nombreTerapeuta, especialidadTerapeuta, url);
-                        } else {
-                            guardarCambios(nombre, tipo, raza, edad, especialidad,
-                                    url, nombreTerapeuta, especialidadTerapeuta, fotoTerapeutaActual);
-                        }
-                    }
-
-                    @Override
-                    public void onError(String requestId, ErrorInfo error) {
-                        Toast.makeText(EditarAnimal.this, "Error al subir foto", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override public void onReschedule(String requestId, ErrorInfo error) {}
-                }).dispatch();
+            @Override
+            public void onError(String requestId, ErrorInfo error) {
+                mostrarToast("Error al subir foto");
+            }
+            @Override public void onReschedule(String requestId, ErrorInfo error) {}
+        }).dispatch();
     }
 
     private void subirFotoTerapeuta(String nombre, String tipo, String raza, String edad, String especialidad, String nombreTerapeuta, String especialidadTerapeuta, String fotoAnimalUrl) {
-        MediaManager.get().upload(fotoTerapeuta)
-                .callback(new UploadCallback() {
+        MediaManager.get().upload(fotoTerapeuta).callback(new UploadCallback() {
+            @Override public void onStart(String requestId) {}
+            @Override public void onProgress(String requestId, long bytes, long totalBytes) {}
 
-                    @Override public void onStart(String requestId) {
+            @Override
+            public void onSuccess(String requestId, Map resultData) {
+                String url = resultData.get("secure_url").toString();
+                guardarCambios(nombre, tipo, raza, edad, especialidad, fotoAnimalUrl, nombreTerapeuta, especialidadTerapeuta, url);
+            }
 
-                    }
-
-                    @Override public void onProgress(String requestId, long bytes, long totalBytes) {
-
-                    }
-
-                    @Override
-                    public void onSuccess(String requestId, Map resultData) {
-                        String url = resultData.get("secure_url").toString();
-                        guardarCambios(nombre, tipo, raza, edad, especialidad,
-                                fotoAnimalUrl, nombreTerapeuta, especialidadTerapeuta, url);
-                    }
-
-                    @Override
-                    public void onError(String requestId, ErrorInfo error) {
-                        Toast.makeText(EditarAnimal.this, "Error al subir foto terapeuta", Toast.LENGTH_SHORT).show();
-                    }
-                    @Override public void onReschedule(String requestId, ErrorInfo error) {}
-                }).dispatch();
+            @Override
+            public void onError(String requestId, ErrorInfo error) {
+                mostrarToast("Error al subir foto terapeuta");
+            }
+            @Override public void onReschedule(String requestId, ErrorInfo error) {}
+        }).dispatch();
     }
 
     private void guardarCambios(String nombre, String tipo, String raza, String edad, String especialidad, String fotoUrl, String nombreTerapeuta, String especialidadTerapeuta, String fotoTerapeutaUrl) {
@@ -205,8 +181,13 @@ public class EditarAnimal extends AppCompatActivity {
         datos.put("fotoTerapeuta", fotoTerapeutaUrl);
 
         FirebaseFirestore.getInstance().collection("animales").document(animalId).update(datos).addOnSuccessListener(a -> {
-                    Toast.makeText(this, "Animal actualizado", Toast.LENGTH_SHORT).show();
-                    finish();
-        }).addOnFailureListener(e -> Toast.makeText(this, "Error al guardar", Toast.LENGTH_SHORT).show());
+            finish();
+        }).addOnFailureListener(e -> mostrarToast("Error al guardar"));
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(this, mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }

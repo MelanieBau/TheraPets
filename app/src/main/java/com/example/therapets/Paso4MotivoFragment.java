@@ -7,12 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 public class Paso4MotivoFragment extends Fragment {
+
+    private Toast toastActual;
 
     public Paso4MotivoFragment() {
         super(R.layout.fragment_paso4_motivo);
@@ -21,21 +22,13 @@ public class Paso4MotivoFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.btnVolver).setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().popBackStack());
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
 
         Spinner spMotivo = view.findViewById(R.id.spMotivo);
         EditText etOtro = view.findViewById(R.id.etOtroMotivo);
         Button btnFinalizar = view.findViewById(R.id.btnFinalizar);
 
-        String[] motivos = {
-                "Selecciona un motivo",
-                "Ansiedad",
-                "Estrés",
-                "Depresión",
-                "Acompañamiento emocional",
-                "Otro"
-        };
+        String[] motivos = {"Selecciona un motivo", "Ansiedad", "Estrés", "Depresión", "Acompañamiento emocional", "Otro" };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 requireContext(),
@@ -44,7 +37,6 @@ public class Paso4MotivoFragment extends Fragment {
         );
         spMotivo.setAdapter(adapter);
 
-        // Restaurar si vuelves atrás
         if (!CitaDraftStore.motivo.isEmpty()) {
             for (int i = 0; i < motivos.length; i++) {
                 if (motivos[i].equals(CitaDraftStore.motivo)) {
@@ -58,15 +50,20 @@ public class Paso4MotivoFragment extends Fragment {
         btnFinalizar.setOnClickListener(v -> {
             String selected = spMotivo.getSelectedItem().toString();
             if (selected.equals("Selecciona un motivo")) {
-                Toast.makeText(requireContext(), "Selecciona un motivo", Toast.LENGTH_SHORT).show();
+                mostrarToast("Selecciona un motivo");
                 return;
             }
 
             CitaDraftStore.motivo = selected;
             CitaDraftStore.otroMotivo = etOtro.getText().toString().trim();
 
-            // Ir a confirmación con resumen
             requireActivity().getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new ConfirmacionCitaFragment()).addToBackStack(null).commit();
         });
+    }
+
+    private void mostrarToast(String mensaje) {
+        if (toastActual != null) toastActual.cancel();
+        toastActual = Toast.makeText(requireContext(), mensaje, Toast.LENGTH_SHORT);
+        toastActual.show();
     }
 }
