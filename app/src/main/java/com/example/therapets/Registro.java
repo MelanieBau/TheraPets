@@ -27,24 +27,31 @@ public class Registro extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
 
+        //Datos para el registro
+        TextInputEditText Nombre = findViewById(R.id.etNombre);
+        TextInputEditText FechaNacimiento = findViewById(R.id.etFechaNacimiento);
+        TextInputEditText Telefono = findViewById(R.id.etTelefono);
         TextInputEditText Email = findViewById(R.id.etEmail);
         TextInputEditText Password = findViewById(R.id.etPassword);
         TextInputEditText ConfirmPassword = findViewById(R.id.etConfirmPassword);
-        TextInputEditText Nombre = findViewById(R.id.etNombre);
-        TextInputEditText Telefono = findViewById(R.id.etTelefono);
-        TextInputEditText FechaNacimiento = findViewById(R.id.etFechaNacimiento);
+
+        //Boton de registrar
         Button btnSignUp = findViewById(R.id.btnSignUp);
+
+        //Boton para ir al login si en caso ya tienen un user
         TextView tvGoLogin = findViewById(R.id.tvGoLogin);
 
         btnSignUp.setOnClickListener(v -> {
+
+            String nombre = Nombre.getText().toString().trim();
+            String fechaNacimiento = FechaNacimiento.getText().toString().trim();
+            String telefono = Telefono.getText().toString().trim();
             String email = Email.getText().toString().trim();
             String password = Password.getText().toString().trim();
             String confirmPassword = ConfirmPassword.getText().toString().trim();
-            String nombre = Nombre.getText().toString().trim();
-            String telefono = Telefono.getText().toString().trim();
-            String fechaNacimiento = FechaNacimiento.getText().toString().trim();
 
-            if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || nombre.isEmpty() || telefono.isEmpty() || fechaNacimiento.isEmpty()) {
+            //Condicionales
+            if (nombre.isEmpty() || fechaNacimiento.isEmpty() || telefono.isEmpty() || email.isEmpty() || password.isEmpty() ||confirmPassword.isEmpty()) {
                 mostrarToast("Por favor completa todos los campos");
                 return;
             }
@@ -61,7 +68,8 @@ public class Registro extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     String uid = mAuth.getCurrentUser().getUid();
 
-                    //Campos para el registro
+                    //Se crea un mapa (diccionario) que asocia claves de tipo String con valores de cualquier tipo (Object)
+                    //Se usa HashMap como implementación para almacenar los datos
                     Map<String, Object> usuario = new HashMap<>();
 
                     usuario.put("nombre", nombre);

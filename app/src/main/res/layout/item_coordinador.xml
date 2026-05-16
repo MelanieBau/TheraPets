@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="Centro asignado"
                 android:textSize="13sp"
-                android:textColor="@color/morado_principal"
+                android:textColor="#FF3939"
                 android:layout_marginTop="4dp" />
 
             <!-- Separador -->
@@ -66,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:text="Borrar coordinador"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:backgroundTint="#2E2E2E"

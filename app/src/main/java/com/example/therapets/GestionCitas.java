@@ -26,7 +26,7 @@ public class GestionCitas extends AppCompatActivity {
         rvCitas.setLayoutManager(new LinearLayoutManager(this));
 
         listaCitas = new ArrayList<>();
-        adapter = new CitaAdapter(listaCitas, false);
+        adapter = new CitaAdapter(listaCitas, false, true);
         rvCitas.setAdapter(adapter);
 
         cargarTodasLasCitas();

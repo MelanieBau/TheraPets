@@ -121,26 +121,26 @@
                 <Button
                     android:id="@+id/btnConfirmarCita"
                     android:layout_width="0dp"
-                    android:layout_height="36dp"
+                    android:layout_height="46dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
                     android:text="Confirmar"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#02A009"
-                    app:cornerRadius="8dp" />
+                    app:cornerRadius="30dp" />
 
                 <!-- Botón cancelar en coral -->
                 <Button
                     android:id="@+id/btnCancelarCitaCoord"
                     android:layout_width="0dp"
-                    android:layout_height="36dp"
+                    android:layout_height="46dp"
                     android:layout_weight="1"
                     android:text="Cancelar"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#E60000"
-                    app:cornerRadius="8dp" />
+                    app:cornerRadius="30dp" />
 
                 <!-- Botón marcar como completada, solo visible cuando está confirmada -->
                 <Button
@@ -149,6 +149,7 @@
                     android:layout_height="46dp"
                     android:layout_marginTop="5dp"
                     android:text="Marcar como completada"
+                    android:textStyle="bold"
                     android:textAllCaps="false"
                     android:textColor="#FFFFFF"
                     android:backgroundTint="#616161"

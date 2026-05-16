@@ -1,11 +1,15 @@
 package com.example.therapets;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,6 +22,7 @@ public class IniciarSesion extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             verificarRolYRedirigir(FirebaseAuth.getInstance().getCurrentUser().getUid());
         }
@@ -44,40 +49,66 @@ public class IniciarSesion extends AppCompatActivity {
                 return;
             }
 
+            if (!hayInternet()) {
+                mostrarToast("No hay conexión a internet");
+                return;
+            }
+
+            btnLogin.setEnabled(false);
+
             mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+                btnLogin.setEnabled(true);
+
                 if (task.isSuccessful()) {
-                    verificarRolYRedirigir(mAuth.getCurrentUser().getUid());
+                    if (mAuth.getCurrentUser() != null) {
+                        verificarRolYRedirigir(mAuth.getCurrentUser().getUid());
+                    }
                 } else {
                     mostrarToast("Email o contraseña incorrectos");
                 }
             });
         });
 
-        tvOlvide.setOnClickListener(v -> startActivity(new Intent(this, RecuperarContrasena.class)));
+        tvOlvide.setOnClickListener(v ->
+                startActivity(new Intent(this, RecuperarContrasena.class))
+        );
     }
 
     private void verificarRolYRedirigir(String uid) {
         FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
+            Intent intent;
+
             if (document.exists()) {
                 String rol = document.getString("rol");
+
                 if ("administrador".equals(rol)) {
-                    startActivity(new Intent(this, Admin.class));
+                    intent = new Intent(this, Admin.class);
                 } else if ("coordinador".equals(rol)) {
-                    startActivity(new Intent(this, Coordinador.class));
+                    intent = new Intent(this, Coordinador.class);
                 } else {
-                    startActivity(new Intent(this, Home.class));
+                    intent = new Intent(this, Home.class);
                 }
-                finish();
-
             } else {
-
-                startActivity(new Intent(this, Home.class));
-                finish();
+                intent = new Intent(this, Home.class);
             }
-        }).addOnFailureListener(e -> {
-            startActivity(new Intent(this, Home.class));
+
+            // Limpiamos todo el historial para que no se pueda volver atrás al login
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
             finish();
+
+        }).addOnFailureListener(e -> {
+            mostrarToast("Error al obtener datos del usuario");
         });
+    }
+
+    private boolean hayInternet() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        if (cm != null) {
+            NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+            return networkInfo != null && networkInfo.isConnected();
+        }
+        return false;
     }
 
     private void mostrarToast(String mensaje) {

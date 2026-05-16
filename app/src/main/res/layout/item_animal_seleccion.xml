@@ -37,7 +37,7 @@
                 android:text="Max"
                 android:textSize="22sp"
                 android:textStyle="bold"
-                android:textColor="#2D5F4F" />
+                android:textColor="#0E1F18" />
 
             <TextView
                 android:id="@+id/tvTipoRazaSeleccion"
@@ -45,7 +45,7 @@
                 android:layout_height="wrap_content"
                 android:text="Perro · Golden Retriever"
                 android:textSize="13sp"
-                android:textColor="#4CAF82"
+                android:textColor="#092619"
                 android:layout_marginTop="4dp" />
 
             <!-- Edad y especialidad -->
@@ -65,7 +65,7 @@
                     android:textColor="#FFFFFF"
                     android:background="#4CAF82"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp"
+                    android:paddingVertical="5dp"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
@@ -77,7 +77,7 @@
                     android:textColor="#FFFFFF"
                     android:background="#2D5F4F"
                     android:paddingHorizontal="10dp"
-                    android:paddingVertical="4dp" />
+                    android:paddingVertical="5dp" />
 
             </LinearLayout>
 
@@ -93,8 +93,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TERAPEUTA ASIGNADA"
-                android:textSize="11sp"
-                android:textColor="#4CAF82"
+                android:textSize="13sp"
+                android:textColor="#101A15"
                 android:letterSpacing="0.08"
                 android:layout_marginBottom="10dp" />
 
@@ -118,7 +118,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:background="#E8F5E9" />
+                        android:background="@drawable/perfil_usuario" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -157,6 +157,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:text="Seleccionar"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"

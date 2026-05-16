@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@drawable/fondo_therapets">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -95,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:text="Guardar cambios"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"

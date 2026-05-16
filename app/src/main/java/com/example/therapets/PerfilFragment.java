@@ -37,9 +37,7 @@ public class PerfilFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         ivFotoPerfil = view.findViewById(R.id.ivFotoPerfil);
-        TextView tvNombre = view.findViewById(R.id.tvNombre);
         TextView tvNombreHeader = view.findViewById(R.id.tvNombreHeader);
-        TextView tvEmail = view.findViewById(R.id.tvEmail);
         TextView tvEmailHeader = view.findViewById(R.id.tvEmailHeader);
         TextView tvTelefono = view.findViewById(R.id.tvTelefono);
         TextView tvFechaNacimiento = view.findViewById(R.id.tvFechaNacimiento);
@@ -49,14 +47,12 @@ public class PerfilFragment extends Fragment {
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
 
-        tvEmail.setText(email);
         tvEmailHeader.setText(email);
 
         FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
             if (!isAdded()) return;
             if (document.exists()) {
                 String nombre = document.getString("nombre");
-                tvNombre.setText(nombre);
                 tvNombreHeader.setText(nombre);
                 tvTelefono.setText(document.getString("telefono"));
                 tvFechaNacimiento.setText(document.getString("fechaNacimiento"));

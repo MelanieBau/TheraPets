@@ -1,40 +1,64 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.TheraPets" parent="Theme.Material3.DayNight.NoActionBar">
+
+    <!-- Base theme Material 3 -->
+    <style name="Base.Theme.TheraPets"
+        parent="Theme.Material3.DayNight.NoActionBar">
+
         <item name="fontFamily">@font/poppins</item>
         <item name="android:fontFamily">@font/poppins</item>
+
         <item name="colorSecondaryContainer">#E8F5E9</item>
+
     </style>
 
-    <style name="ShapeAppearance.TheraPets.TopRounded" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+    <!-- Tema principal -->
+    <style name="Theme.TheraPets"
+        parent="Base.Theme.TheraPets" />
+
+    <!-- Shape opcional -->
+    <style name="ShapeAppearance.TheraPets.TopRounded"
+        parent="ShapeAppearance.Material3.MediumComponent">
+
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">24dp</item>
+
     </style>
 
-    <style name="RoundedInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">12dp</item>
-        <item name="boxCornerRadiusTopEnd">12dp</item>
-        <item name="boxCornerRadiusBottomStart">12dp</item>
-        <item name="boxCornerRadiusBottomEnd">12dp</item>
+    <!-- INPUT PRINCIPAL (CORREGIDO PRO) -->
+    <style name="RoundedInputLayout"
+        parent="Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <!-- 🔥 ESTA ES LA CLAVE REAL -->
+        <item name="shapeAppearanceOverlay">@style/ShapeInput30</item>
+
         <item name="boxStrokeColor">@color/morado_principal</item>
         <item name="hintTextColor">@color/morado_principal</item>
+
     </style>
 
-    <style name="RoundedInputLayoutBlanco" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="boxCornerRadiusTopStart">30dp</item>
-        <item name="boxCornerRadiusTopEnd">30dp</item>
-        <item name="boxCornerRadiusBottomStart">30dp</item>
-        <item name="boxCornerRadiusBottomEnd">30dp</item>
+
+    <style name="ShapeInput30">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30dp</item>
+    </style>
+
+    <style name="RoundedInputLayoutBlanco"
+        parent="Widget.Material3.TextInputLayout.OutlinedBox">
+
+        <item name="shapeAppearanceOverlay">@style/ShapeInput30</item>
+
         <item name="boxStrokeColor">@color/borde_blanco</item>
         <item name="boxStrokeWidth">1dp</item>
         <item name="boxStrokeWidthFocused">1dp</item>
+
         <item name="hintTextColor">@color/borde_blanco</item>
         <item name="android:textColorHint">#AAFFFFFF</item>
+
     </style>
 
-
-    <style name="Theme.TheraPets" parent="Base.Theme.TheraPets" />
-
-
+    <style name="RoundedButton30">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">30dp</item>
+    </style>
 
 </resources>

@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="09:00"
                 android:textSize="14sp"
-                android:textColor="@color/morado_principal"
+                android:textColor="#FF3939"
                 android:layout_marginTop="4dp" />
 
             <!-- Separador -->
@@ -56,6 +56,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:text="Borrar horario"
+                android:textStyle="bold"
+
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:backgroundTint="#616161"

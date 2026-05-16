@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="@drawable/fondo_therapets">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -83,6 +83,7 @@
                 android:layout_height="46dp"
                 android:layout_marginTop="12dp"
                 android:text="Seleccionar foto"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#4CAF82"
@@ -132,7 +133,8 @@
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:text="Publicar testimonio"
+                android:text="Publicar mi testimonio"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textSize="15sp"
                 android:textColor="#FFFFFF"

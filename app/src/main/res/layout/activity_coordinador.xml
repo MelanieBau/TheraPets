@@ -57,7 +57,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="45dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
 
@@ -68,11 +68,6 @@
                 android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <View
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:background="#4CAF82"
-                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -99,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="45dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
 
@@ -109,12 +104,6 @@
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:padding="16dp">
-
-                <View
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:background="#4CAF82"
-                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -141,7 +130,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="45dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
 
@@ -152,11 +141,6 @@
                 android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <View
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:background="#4CAF82"
-                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -183,7 +167,7 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="16dp"
+            app:cardCornerRadius="45dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#FFFFFF">
 
@@ -194,11 +178,6 @@
                 android:gravity="center_vertical"
                 android:padding="16dp">
 
-                <View
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:background="#4CAF82"
-                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:layout_width="0dp"

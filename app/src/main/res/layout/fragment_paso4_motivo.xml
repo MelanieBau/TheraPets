@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo_therapets">
 
-    <!-- Cabecera verde -->
+    <!-- Cabecera -->
     <LinearLayout
         android:id="@+id/cabecera"
         android:layout_width="0dp"
@@ -53,17 +53,29 @@
 
     </LinearLayout>
 
-    <!-- Contenido -->
+    <!-- contenedor de motivos -->
     <LinearLayout
         android:id="@+id/contenido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="20dp"
+        android:gravity="center_horizontal"
         app:layout_constraintTop_toBottomOf="@id/cabecera"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+        <!-- Imagen-->
+        <ImageView
+            android:id="@+id/ivMotivo"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/consulta"
+            android:contentDescription="Imagen motivo"
+            android:scaleType="centerCrop"
+            android:layout_marginBottom="20dp" />
+
+        <!-- Texto -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,6 +84,7 @@
             android:textColor="#9E9E9E"
             android:layout_marginBottom="8dp" />
 
+        <!-- Spinner de motivos -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,6 +101,7 @@
 
         </androidx.cardview.widget.CardView>
 
+        <!-- Caja para especificar otro motivo -->
         <com.google.android.material.textfield.TextInputLayout
             style="@style/RoundedInputLayout"
             android:layout_width="match_parent"
@@ -106,7 +120,7 @@
 
     </LinearLayout>
 
-    <!-- Botón fijo abajo -->
+    <!-- Botón para enviar solicitud -->
     <Button
         android:id="@+id/btnFinalizar"
         android:layout_width="0dp"
@@ -114,6 +128,8 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="20dp"
         android:text="Enviar solicitud"
+        android:textStyle="bold"
+
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textColor="#FFFFFF"

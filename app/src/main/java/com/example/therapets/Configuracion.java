@@ -2,6 +2,7 @@ package com.example.therapets;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Switch;
@@ -25,9 +26,16 @@ public class Configuracion extends AppCompatActivity {
         Button btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
         Button btnEliminarCuenta = findViewById(R.id.btnEliminarCuenta);
 
+        SharedPreferences prefs = getSharedPreferences("TheraPetsPrefs", MODE_PRIVATE);
+        boolean notificacionesActivas = prefs.getBoolean("notificaciones", true);
+        switchNotificaciones.setChecked(notificacionesActivas);
+
         cardCambiarContrasena.setOnClickListener(v -> startActivity(new Intent(this, RecuperarContrasena.class)));
 
-        switchNotificaciones.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        switchNotificaciones.setOnClickListener(v -> {
+            boolean isChecked = switchNotificaciones.isChecked();
+            prefs.edit().putBoolean("notificaciones", isChecked).apply();
+
             String mensaje = isChecked ? "Notificaciones activadas" : "Notificaciones desactivadas";
             mostrarToast(mensaje);
         });
@@ -35,7 +43,7 @@ public class Configuracion extends AppCompatActivity {
         btnCerrarSesion.setOnClickListener(v -> {
             FirebaseAuth.getInstance().signOut();
             Intent intent = new Intent(this, IniciarSesion.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         });
@@ -47,7 +55,7 @@ public class Configuracion extends AppCompatActivity {
                 FirebaseFirestore.getInstance().collection("usuarios").document(uid).delete().addOnSuccessListener(a -> {
                     FirebaseAuth.getInstance().getCurrentUser().delete().addOnSuccessListener(b -> {
                         Intent intent = new Intent(this, IniciarSesion.class);
-                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     });
@@ -60,5 +68,9 @@ public class Configuracion extends AppCompatActivity {
         if (toastActual != null) toastActual.cancel();
         toastActual = Toast.makeText(this, mensaje, Toast.LENGTH_SHORT);
         toastActual.show();
+
+        new android.os.Handler().postDelayed(() -> {
+            if (toastActual != null) toastActual.cancel();
+        }, 1000);
     }
 }

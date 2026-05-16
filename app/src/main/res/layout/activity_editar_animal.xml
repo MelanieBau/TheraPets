@@ -14,7 +14,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/cabecera"
+            android:background="#616161"
             android:padding="20dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
@@ -48,7 +48,7 @@
                     android:layout_height="wrap_content"
                     android:text="No olvides modificar y guardar los cambios"
                     android:textSize="13sp"
-                    android:textColor="@color/morado_claro"
+                    android:textColor="@color/white"
                     android:layout_marginTop="2dp" />
 
             </LinearLayout>
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:background="@color/morado_claro"
+                android:background="@color/texto_hint"
                 android:layout_marginBottom="12dp" />
 
             <!-- Botón cambiar foto -->
@@ -79,9 +79,10 @@
                 android:layout_height="46dp"
                 android:layout_marginBottom="16dp"
                 android:text="Cambiar foto"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/coral_acento"
+                android:backgroundTint="@color/texto_principal"
                 app:cornerRadius="30dp" />
 
             <!-- Nombre -->
@@ -177,7 +178,7 @@
                 android:text="Editar terapeuta"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/coral_acento"
+                android:textColor="@color/texto_principal"
                 android:layout_marginBottom="16dp" />
 
             <!-- Foto circular terapeuta + campos al lado -->
@@ -200,7 +201,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:background="@color/morado_claro" />
+                        android:background="@drawable/perfil_usuario" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -246,9 +247,10 @@
                 android:layout_height="48dp"
                 android:layout_marginBottom="24dp"
                 android:text="Cambiar foto terapeuta"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/coral_acento"
+                android:backgroundTint="@color/texto_hint"
                 app:cornerRadius="30dp" />
             <!-- Botón guardar -->
             <Button
@@ -256,10 +258,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="Guardar cambios"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/morado_oscuro"
+                android:backgroundTint="@color/texto_principal"
                 app:cornerRadius="30dp" />
 
         </LinearLayout>

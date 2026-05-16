@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Cabecera morada -->
+        <!-- Cabecera -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -79,6 +79,7 @@
                 android:layout_height="46dp"
                 android:layout_marginBottom="16dp"
                 android:text="Seleccionar foto"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:backgroundTint="#BFBFBF"
@@ -138,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:text="Guardar centro"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"

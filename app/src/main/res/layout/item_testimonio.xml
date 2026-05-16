@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/therapets_logo"
+            android:src="@drawable/post_terapia"
             android:background="#E8F5E9" />
 
         <!-- Barra verde -->
@@ -36,7 +36,7 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Foto usuario circular + nombre + fecha -->
+            <!-- Usuario -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/user"
+                        android:src="@drawable/perfil_usuario"
                         android:background="#E8F5E9" />
 
                 </androidx.cardview.widget.CardView>
@@ -71,7 +71,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Nombre usuario"
-                        android:textSize="15sp"
+                        android:textSize="17sp"
                         android:textStyle="bold"
                         android:textColor="#2E2E2E" />
 
@@ -80,17 +80,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="15 marzo 2026"
-                        android:textSize="12sp"
+                        android:textSize="13sp"
                         android:textColor="#9E9E9E"
                         android:layout_marginTop="2dp" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🐾"
-                    android:textSize="20sp" />
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/animales_testimonios"
+                    android:contentDescription="Pata"
+                    android:layout_marginStart="8dp"/>
 
             </LinearLayout>
 
@@ -99,7 +100,7 @@
                 android:id="@+id/tvComentario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Comentario de la experiencia..."
+                android:text="Coment sobre tu experiencia"
                 android:textSize="14sp"
                 android:textColor="#555555"
                 android:layout_marginTop="12dp"
@@ -131,10 +132,12 @@
 
                 <ImageButton
                     android:id="@+id/btnMeGusta"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
                     android:src="@drawable/amor"
-                    android:background="@null"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:scaleType="centerInside"
+                    android:padding="4dp"
                     android:contentDescription="Me gusta" />
 
                 <TextView
@@ -146,13 +149,16 @@
                     android:textColor="#E53935"
                     android:layout_marginStart="6dp" />
 
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
                 <ImageButton
                     android:id="@+id/btnBorrar"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@android:drawable/ic_menu_delete"
-                    android:background="@null"
-                    android:layout_marginStart="16dp"
                     android:contentDescription="Borrar testimonio" />
 
             </LinearLayout>

@@ -21,11 +21,17 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
 
     private List<Cita> lista;
     private boolean mostrarBotonCancelar;
+    private boolean soloLectura;
     private Toast toastActual;
 
     public CitaAdapter(List<Cita> lista, boolean mostrarBotonCancelar) {
+        this(lista, mostrarBotonCancelar, false);
+    }
+
+    public CitaAdapter(List<Cita> lista, boolean mostrarBotonCancelar, boolean soloLectura) {
         this.lista = lista;
         this.mostrarBotonCancelar = mostrarBotonCancelar;
+        this.soloLectura = soloLectura;
     }
 
     @NonNull
@@ -103,7 +109,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
         } else {
             holder.btnCancelarCita.setVisibility(View.GONE);
 
-            if (cita.getEstado().equals("completada")) {
+            if (cita.getEstado().equals("completada") && !soloLectura) {
                 holder.btnValorarCita.setVisibility(View.VISIBLE);
                 holder.btnValorarCita.setOnClickListener(v -> {
                     Intent intent = new Intent(v.getContext(), ValorarCita.class);

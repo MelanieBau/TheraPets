@@ -103,7 +103,6 @@ public class GestionCentros extends AppCompatActivity {
         etTelefono.setText(centro.getTelefono());
 
         builder.setPositiveButton("Guardar", (dialog, which) -> {
-
             Map<String, Object> datos = new HashMap<>();
             datos.put("nombre", etNombre.getText().toString().trim());
             datos.put("direccion", etDireccion.getText().toString().trim());
@@ -122,9 +121,39 @@ public class GestionCentros extends AppCompatActivity {
             return;
         }
 
-        new AlertDialog.Builder(this).setTitle("Borrar centro").setMessage("¿Estás segura de que quieres borrar " + centro.getNombre() + "?").setPositiveButton("Borrar", (dialog, which) -> {
-            db.collection("centros").document(centro.getId()).delete().addOnSuccessListener(a -> cargarCentros());
-        }).setNegativeButton("Cancelar", null).show();
+        new AlertDialog.Builder(this)
+                .setTitle("Borrar centro")
+                .setMessage("¿Estás segura de que quieres borrar " + centro.getNombre() + "? Se eliminarán también todas sus citas, animales y horarios.")
+                .setPositiveButton("Borrar", (dialog, which) -> borrarCentroYRelacionados(centro))
+                .setNegativeButton("Cancelar", null).show();
+    }
+
+    private void borrarCentroYRelacionados(Centro centro) {
+        String nombreCentro = centro.getNombre();
+
+        // Borramos las citas del centro
+        db.collection("citas").whereEqualTo("centro", nombreCentro).get().addOnSuccessListener(snap -> {
+            for (QueryDocumentSnapshot doc : snap) {
+                doc.getReference().delete();
+            }
+        });
+
+        // Borramos los animales del centro
+        db.collection("animales").whereEqualTo("centro", nombreCentro).get().addOnSuccessListener(snap -> {
+            for (QueryDocumentSnapshot doc : snap) {
+                doc.getReference().delete();
+            }
+        });
+
+        // Borramos los horarios del centro
+        db.collection("horarios").whereEqualTo("centroId", nombreCentro).get().addOnSuccessListener(snap -> {
+            for (QueryDocumentSnapshot doc : snap) {
+                doc.getReference().delete();
+            }
+        });
+
+        // Borramos el centro
+        db.collection("centros").document(centro.getId()).delete().addOnSuccessListener(a -> cargarCentros());
     }
 
     private void mostrarToast(String mensaje) {

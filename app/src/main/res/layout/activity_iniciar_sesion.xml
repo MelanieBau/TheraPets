@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Imagen de fondo -->
+    <!-- Fondo -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Overlay oscuro -->
+    <!-- Overlay -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Logo arriba -->
+    <!-- Logo -->
     <ImageView
         android:id="@+id/logo"
         android:layout_width="100dp"
@@ -35,12 +35,11 @@
         android:layout_marginTop="60dp"
         android:contentDescription="Logo"
         android:src="@drawable/logo_therapets_sin_fondo"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Tarjeta centrada -->
-    <!-- Tarjeta  -->
+    <!-- Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLogin"
         android:layout_width="0dp"
@@ -58,6 +57,7 @@
             android:orientation="vertical"
             android:padding="24dp">
 
+            <!-- Título -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -68,23 +68,26 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="20dp" />
 
-            <!-- Correo -->
-            <EditText
-                android:id="@+id/ingresarCorreo"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/bg_input"
-                android:hint="Correo electrónico"
-                android:inputType="textEmailAddress"
-                android:paddingHorizontal="14dp"
-                android:textColor="#3D2A2A"
-                android:textColorHint="@color/texto_hint"
-                android:textSize="15sp" />
+            <!-- Email -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/RoundedInputLayoutBlanco"                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ingresarCorreo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Correo electrónico"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#FFFFFF"
+                    android:textColorHint="#AAFFFFFF" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!-- Contraseña -->
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilContrasena"
+                style="@style/RoundedInputLayoutBlanco"                android:id="@+id/tilContrasena"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
@@ -93,18 +96,14 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/ingresarContrasena"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:background="@drawable/bg_input"
+                    android:layout_height="wrap_content"
                     android:hint="Contraseña"
                     android:inputType="textPassword"
-                    android:paddingStart="14dp"
-                    android:paddingEnd="14dp"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/texto_hint" />
-
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/morado_claro"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Botón ingresar -->
+            <!-- Botón -->
             <Button
                 android:id="@+id/btnIniciarsesion"
                 android:layout_width="match_parent"
@@ -118,7 +117,7 @@
                 android:textStyle="bold"
                 app:cornerRadius="30dp" />
 
-            <!-- Olvidaste contraseña -->
+            <!-- OLVIDE CONTRASEÑA -->
             <TextView
                 android:id="@+id/tvOlvidarcontraseña"
                 android:layout_width="wrap_content"

@@ -59,7 +59,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#4CAF82"
-                    android:src="@drawable/subir_imagen" />
+                    android:src="@drawable/perfil_usuario" />
 
             </androidx.cardview.widget.CardView>
 
@@ -82,7 +82,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="24dp"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="45dp"
             app:cardElevation="4dp">
 
             <LinearLayout
@@ -105,7 +105,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:background="#4CAF82" />
+                        android:background="@drawable/terapeuta" />
 
                 </androidx.cardview.widget.CardView>
 
@@ -133,15 +133,6 @@
                         android:textStyle="bold"
                         android:textColor="#FFFFFF" />
 
-                    <TextView
-                        android:id="@+id/tvProximaCitaDetalle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Agenda desde el botón 🐾"
-                        android:textSize="12sp"
-                        android:textColor="#E7F6F6F6"
-                        android:layout_marginTop="4dp" />
-
                 </LinearLayout>
 
             </LinearLayout>
@@ -153,20 +144,97 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nuestros animales"
+            android:text="Conoce a nuestros animales"
             android:textSize="17sp"
             android:textStyle="bold"
             android:textColor="#2E2E2E"
-            android:layout_marginHorizontal="18dp"
-            android:layout_marginBottom="14dp" />
+            android:layout_marginHorizontal="20dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <HorizontalScrollView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Conoce a tu próximo compañero terapéutico"
-            android:textSize="14sp"
-            android:textColor="#2D5F4F"
-            android:layout_marginHorizontal="18dp"/>
+            android:layout_marginBottom="12dp"
+            android:scrollbars="none">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroupFiltros"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp"
+                android:paddingEnd="12dp"
+                app:singleSelection="true"
+                app:selectionRequired="true"
+                app:singleLine="true">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipTodos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Todos"
+                    app:chipCornerRadius="30dp"
+                    android:checkable="true"
+                    android:checked="true"
+                    app:chipBackgroundColor="@color/chip_color_state"
+                    android:textColor="@color/chip_text_color" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipPerros"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Perros"
+                    app:chipIcon="@drawable/perro"
+                    android:checkable="true"
+                    app:chipBackgroundColor="@color/chip_color_state"
+                    app:chipCornerRadius="30dp"
+                    android:textColor="@color/chip_text_color" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipGatos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gatos"
+                    app:chipIcon="@drawable/gato"
+                    android:checkable="true"
+                    app:chipBackgroundColor="@color/chip_color_state"
+                    app:chipCornerRadius="30dp"
+                    android:textColor="@color/chip_text_color" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipConejos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Conejos"
+                    app:chipIcon="@drawable/conejo"
+                    android:checkable="true"
+                    app:chipBackgroundColor="@color/chip_color_state"
+                    app:chipCornerRadius="30dp"
+                    android:textColor="@color/chip_text_color" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCaballos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Caballos"
+                    app:chipIcon="@drawable/caballo"
+                    android:checkable="true"
+                    app:chipBackgroundColor="@color/chip_color_state"
+                    app:chipCornerRadius="30dp"
+                    android:textColor="@color/chip_text_color" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipCobayas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cobayas"
+                    app:chipIcon="@drawable/cobaya"
+                    android:checkable="true"
+                    app:chipBackgroundColor="@color/chip_color_state"
+                    app:chipCornerRadius="30dp"
+                    android:textColor="@color/chip_text_color" />
+
+            </com.google.android.material.chip.ChipGroup>
+
+        </HorizontalScrollView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvAnimales"
@@ -174,9 +242,8 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:clipToPadding="false"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="32dp"
-            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="20dp"
+            android:paddingHorizontal="12dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         <!-- Como surgio TheraPets -->
@@ -186,7 +253,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="32dp"
-            app:cardCornerRadius="20dp"
+            app:cardCornerRadius="45dp"
             app:cardElevation="4dp"
             app:cardBackgroundColor="#2D5F4F">
 
@@ -214,12 +281,20 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Conoce nuestra historia →"
+                        android:text="Conoce nuestra historia aquí"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:layout_marginTop="4dp" />
 
                 </LinearLayout>
+
+                <!-- ICONO -->
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/como_surgio"
+                    android:alpha="0.9"
+                    android:scaleType="fitCenter" />
 
             </LinearLayout>
 

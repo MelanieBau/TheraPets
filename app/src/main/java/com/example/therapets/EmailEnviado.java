@@ -22,7 +22,7 @@ public class EmailEnviado extends AppCompatActivity{
 
             //Aquí se muestra el email en el mensaje enviado al usuario
             if (email != null) {
-                tvEmailEnviado.setText("Te hemos enviado un email a " + email + "con los pasos para que puedas reestablecer tu contraseña");
+                tvEmailEnviado.setText("Te hemos enviado un email a " + email);
             }
 
             //Usuario puede volver al login

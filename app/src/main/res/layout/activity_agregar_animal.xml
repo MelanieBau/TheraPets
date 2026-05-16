@@ -10,11 +10,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Cabecera morada con curva -->
+        <!-- CABECERA -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/cabecera"
+            android:background="@color/texto_secundario"
             android:padding="20dp"
             android:paddingBottom="36dp"
             android:orientation="horizontal"
@@ -54,20 +54,19 @@
 
         </LinearLayout>
 
-        <!-- Formulario -->
+        <!-- FORMULARIO -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="20dp"
-            android:layout_marginTop="-16dp">
+            android:layout_marginTop="-5dp">
 
-            <!-- Foto del animal -->
+            <!-- FOTO ANIMAL -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
 
                 <ImageView
@@ -75,28 +74,30 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:background="@color/morado_claro" />
+                    android:background="@color/texto_hint" />
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Botón seleccionar foto animal -->
-            <Button
+            <!-- BOTÓN FOTO ANIMAL (CORREGIDO) -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSeleccionarFotoAnimal"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginBottom="20dp"
                 android:text="Seleccionar foto del animal"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/coral_acento"
+                app:backgroundTint="@color/texto_principal"
                 app:cornerRadius="30dp" />
 
-            <!-- Campos del animal -->
+            <!-- CAMPOS ANIMAL -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etNombreAnimal"
                     android:layout_width="match_parent"
@@ -110,6 +111,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etTipoAnimal"
                     android:layout_width="match_parent"
@@ -123,6 +125,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etRazaAnimal"
                     android:layout_width="match_parent"
@@ -136,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEdadAnimal"
                     android:layout_width="match_parent"
@@ -149,6 +153,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etEspecialidadAnimal"
                     android:layout_width="match_parent"
@@ -157,7 +162,7 @@
                     android:inputType="textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Separador terapeuta -->
+            <!-- SEPARADOR -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -170,10 +175,10 @@
                 android:text="Terapeuta asignada"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/coral_acento"
+                android:textColor="@color/texto_principal"
                 android:layout_marginBottom="16dp" />
 
-            <!-- Foto circular terapeuta + campos al lado -->
+            <!-- TERAPEUTA -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -181,7 +186,6 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="18dp">
 
-                <!-- Foto circular -->
                 <androidx.cardview.widget.CardView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
@@ -194,11 +198,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:background="@color/morado_claro" />
+                        android:background="@drawable/perfil_usuario" />
 
                 </androidx.cardview.widget.CardView>
 
-                <!-- Campos nombre y especialidad -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -210,6 +213,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="12dp">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etNombreTerapeuta"
                             android:layout_width="match_parent"
@@ -222,6 +226,7 @@
                         style="@style/RoundedInputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etEspecialidadTerapeuta"
                             android:layout_width="match_parent"
@@ -234,28 +239,30 @@
 
             </LinearLayout>
 
-            <!-- Botón seleccionar foto terapeuta -->
-            <Button
+            <!-- BOTÓN FOTO TERAPEUTA (CORREGIDO) -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSeleccionarFotoTerapeuta"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:layout_marginBottom="24dp"
                 android:text="Seleccionar foto terapeuta"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
-                android:backgroundTint="@color/coral_acento"
+                app:backgroundTint="@color/texto_hint"
                 app:cornerRadius="30dp" />
 
-            <!-- Botón guardar -->
-            <Button
+            <!-- BOTÓN GUARDAR (CORREGIDO) -->
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGuardarAnimal"
                 android:layout_width="match_parent"
                 android:layout_height="46dp"
                 android:text="Guardar"
+                android:textStyle="bold"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#FFFFFF"
-                android:backgroundTint="@color/morado_oscuro"
+                app:backgroundTint="@color/texto_principal"
                 app:cornerRadius="30dp" />
 
         </LinearLayout>

@@ -101,14 +101,14 @@
             <Button
                 android:id="@+id/btnVolverLogin"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="46dp"
                 android:text="Volver al login"
                 android:textAllCaps="false"
                 android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#2D5F4F"
-                app:cornerRadius="28dp" />
+                app:cornerRadius="30dp" />
 
         </LinearLayout>
 
