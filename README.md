@@ -27,16 +27,24 @@ La app cuenta con tres roles diferenciados con paneles personalizados: **usuario
 - **Coordinadores** que necesitan organizar la actividad de su centro
 - **Profesionales** del ámbito psicológico interesados en la animaloterapia
 
+## Instalación
+
+Para instalar la aplicación en un dispositivo Android:
+
+1. Descarga el APK desde la sección [Releases](https://github.com/MelanieBau/TheraPets/releases)
+2. En tu dispositivo Android, ve a **Ajustes → Seguridad** y activa la opción **"Instalación de fuentes desconocidas"** (o **"Instalar apps desconocidas"** según la versión de Android)
+3. Abre el archivo APK descargado
+4. Pulsa **"Instalar"**
+5. Una vez instalada, abre la aplicación TheraPets y comienza a usarla
+
+**Requisitos mínimos:** Android 7.0 (API 24) o superior
+
 ##  Estructura del proyecto
 
 - `app/src/main/java/com/example/therapets/` → Código fuente Java
 - `app/src/main/res/layout/` → Archivos XML de las interfaces
 - `app/src/main/res/drawable/` → Recursos gráficos
 - `app/src/main/res/values/` → Colores, strings y estilos
-
-##  Versión
-
-**v1.1** - Versión final disponible en [Releases](https://github.com/MelanieBau/TheraPets/releases)
 
 ##  Web informativa
 
