@@ -1,68 +1,47 @@
-## TheraPets
+# TheraPets
 
-Aplicación Android de ayuda emocional mediante terapia con animales, desarrollada como Proyecto de Final de Ciclo (DAM).
+App Android de terapia asistida con animales. Conecta a personas con centros especializados y terapeutas profesionales para mejorar su bienestar emocional a través del vínculo con los animales.
 
+## ¿De qué se trata?
 
+TheraPets es una aplicación móvil que permite agendar y gestionar sesiones de terapia asistida con animales en centros especializados. Los usuarios pueden explorar diferentes centros por toda España, conocer a los animales terapéuticos, agendar sus citas en pocos pasos, valorar sus sesiones y compartir su experiencia mediante testimonios con la comunidad.
 
-##  Descripción de la aplicación
+La app cuenta con tres roles diferenciados con paneles personalizados: **usuario** (paciente), **coordinador de centro** y **administrador**.
 
-TheraPets es una aplicación móvil que conecta a usuarios con centros de terapia con animales. Permite reservar sesiones terapéuticas, gestionar citas y compartir experiencias con la comunidad.
-
-
-
-##  Tecnologías utilizadas
+## Tecnologías utilizadas
 
 - **Lenguaje:** Java
-- **Plataforma:** Android (API 27+)
+- **Plataforma:** Android (SDK 24+)
+- **IDE:** Android Studio
 - **Base de datos:** Firebase Firestore
 - **Autenticación:** Firebase Authentication
-- **IDE:** Android Studio
-- **Control de versiones:** Git / GitHub
+- **Almacenamiento de imágenes:** Cloudinary
+- **Carga de imágenes:** Glide
+- **Diseño:** Material Design 3
+- **Patrón de diseño:** MVC con Fragments y RecyclerViews
 
+## ¿Para quién es?
 
-## Roles de usuario
+- **Personas** que buscan mejorar su bienestar emocional a través de la terapia con animales (ansiedad, estrés, depresión, autismo, TDAH, etc.)
+- **Centros de terapia** que quieren digitalizar y gestionar sus citas, animales y horarios
+- **Coordinadores** que necesitan organizar la actividad de su centro
+- **Profesionales** del ámbito psicológico interesados en la animaloterapia
 
-### Usuario
-- Registro e inicio de sesión
-- Agendar citas en 4 pasos
-- Ver, gestionar y cancelar citas
-- Publicar y ver testimonios
-- Ver perfil personal
+##  Estructura del proyecto
 
-### Administrador
-- Gestionar centros terapéuticos
-- Gestionar animales disponibles
-- Ver todas las citas del sistema
+- `app/src/main/java/com/example/therapets/` → Código fuente Java
+- `app/src/main/res/layout/` → Archivos XML de las interfaces
+- `app/src/main/res/drawable/` → Recursos gráficos
+- `app/src/main/res/values/` → Colores, strings y estilos
 
-### Coordinador de centro
-- Gestionar su propio centro
-- Gestionar los animales de su centro
-- Ver y gestionar las citas de su centro
+##  Versión
 
+**v1.1** - Versión final disponible en [Releases](https://github.com/MelanieBau/TheraPets/releases)
 
-## Funcionalidades principales
+##  Web informativa
 
-- Autenticación con email y contraseña
-- Persistencia de sesión automática
-- Sistema de roles (usuario, administrador, coordinador)
-- Reserva de citas en 4 pasos con centros y animales dinámicos desde Firestore
-- Historial de citas (próximas y pasadas)
-- Feed de testimonios con me gusta
-- Panel de administración completo
-- Diseño consistente con paleta morado y coral
-
-
-## Pasos para la instalación
-
-1. Clona el repositorio: git clone https://github.com/MelanieBau/TheraPets.git
-2. Abre el proyecto en **Android Studio**
-3. Añade el archivo `google-services.json` de tu proyecto Firebase en la carpeta `app/`
-4. Sincroniza el proyecto con Gradle
-5. Ejecuta la app en un dispositivo o emulador Android
-
+[https://melaniebau.github.io/therapets-web/](https://melaniebau.github.io/therapets-web/)
 
 ## Autora
 
-**Nicole Melanie Vega Bautista** — Proyecto de Final de Ciclo
-[GitHub](https://github.com/MelanieBau)
-
+Proyecto desarrollado por **Nicole Vega Bautista** como Trabajo de Fin de Grado del ciclo DAM · 2026
