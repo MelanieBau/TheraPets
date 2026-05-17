@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Imagen de fondo ocupando toda la pantalla -->
+    <!-- Imagen de fondo -->
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Overlay oscuro suave -->
+    <!-- Overlay oscuro -->
     <View
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,7 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Logo y texto centrado -->
     <LinearLayout
         android:id="@+id/brandContainer"
         android:layout_width="wrap_content"

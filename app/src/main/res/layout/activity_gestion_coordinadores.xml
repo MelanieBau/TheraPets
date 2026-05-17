@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Cabecera -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,7 +14,14 @@
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
-        <!--Titulo coordinador -->
+        <ImageButton
+            android:id="@+id/btnVolver"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_boton_volver"
+            android:src="@drawable/ic_arrow_volver"
+            android:contentDescription="Volver" />
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -23,9 +29,10 @@
             android:text="Coordinadores"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="#FFFFFF" />
+            android:textColor="#FFFFFF"
+            android:layout_marginStart="16dp" />
 
-        <!-- Boton para añadir coordinador o centro -->
+        <!-- Boton para añadir coordinador -->
         <Button
             android:id="@+id/btnAgregarCoordinador"
             android:layout_width="wrap_content"
@@ -37,7 +44,6 @@
             android:backgroundTint="#BFBFBF"
             app:cornerRadius="20dp" />
     </LinearLayout>
-
 
     <!-- Lista de coordinadores -->
     <androidx.recyclerview.widget.RecyclerView

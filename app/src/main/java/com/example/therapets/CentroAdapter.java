@@ -14,11 +14,9 @@ public class CentroAdapter extends RecyclerView.Adapter<CentroAdapter.ViewHolder
     private List<Centro> lista;
     private OnEditarListener onEditar;
     private OnBorrarListener onBorrar;
-
     public interface OnEditarListener {
         void onEditar(Centro centro);
     }
-
     public interface OnBorrarListener {
         void onBorrar(Centro centro);
     }

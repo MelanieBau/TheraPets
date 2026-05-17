@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Imagen de fondo ocupando toda la pantalla -->
     <ImageView
         android:id="@+id/logoImageTherapets"
         android:layout_width="match_parent"
@@ -28,7 +27,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Logo y nombre -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

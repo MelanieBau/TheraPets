@@ -76,9 +76,9 @@ public class IniciarSesion extends AppCompatActivity {
 
     private void verificarRolYRedirigir(String uid) {
         FirebaseFirestore.getInstance().collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
-            Intent intent;
 
             if (document.exists()) {
+                Intent intent;
                 String rol = document.getString("rol");
 
                 if ("administrador".equals(rol)) {
@@ -88,14 +88,17 @@ public class IniciarSesion extends AppCompatActivity {
                 } else {
                     intent = new Intent(this, Home.class);
                 }
-            } else {
-                intent = new Intent(this, Home.class);
-            }
 
-            // Limpiamos todo el historial para que no se pueda volver atrás al login
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+                // Limpiamos el historial
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+
+            } else {
+                // El usuario no tiene documento en Firestore, lo echamos
+                FirebaseAuth.getInstance().signOut();
+                mostrarToast("Tu cuenta ya no está disponible");
+            }
 
         }).addOnFailureListener(e -> {
             mostrarToast("Error al obtener datos del usuario");

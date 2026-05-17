@@ -47,6 +47,8 @@ public class AgregarCentro extends AppCompatActivity {
             String direccionStr = direccion.getText().toString().trim();
             String telefonoStr = telefono.getText().toString().trim();
 
+
+            //Si el campo de nombre centro esta vacio mostrar un toast
             if (nombreStr.isEmpty()) {
                 mostrarToast("El nombre es obligatorio");
                 return;
@@ -75,11 +77,9 @@ public class AgregarCentro extends AppCompatActivity {
 
 
             @Override public void onStart(String requestId) {
-
             }
 
             @Override public void onProgress(String requestId, long bytes, long totalBytes) {
-
             }
 
             @Override

@@ -2,6 +2,7 @@ package com.example.therapets;
 
 import android.app.AlertDialog;
 import android.content.res.ColorStateList;
+import android.graphics.Paint;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -23,7 +24,6 @@ public class GestorHorarios {
         this.horaSeleccionada = horaSeleccionada;
     }
 
-    // Obtiene el día de la semana de la fecha elegida en el Paso 1
     private String obtenerDiaSemana() {
         try {
             Date date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(CitaDraftStore.fecha);
@@ -34,8 +34,6 @@ public class GestorHorarios {
         }
     }
 
-    // Carga las horas disponibles del centro para el día elegido
-    // y las muestra en un AlertDialog con radio buttons
     public void mostrarHorasDisponibles(String centroNombre, OnHoraConfirmadaListener listener) {
         String dia = obtenerDiaSemana();
 
@@ -45,55 +43,69 @@ public class GestorHorarios {
         }
 
         FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", centroNombre).whereEqualTo("dia", dia).get().addOnSuccessListener(snap -> {
-            if (snap.isEmpty()) {
-                return;
+            if (snap.isEmpty()) return;
+
+            List<String> horas = new ArrayList<>();
+            for (QueryDocumentSnapshot doc : snap) {
+                String hora = doc.getString("hora");
+                if (hora != null) horas.add(hora);
             }
 
-                    List<String> horas = new ArrayList<>();
-                    for (QueryDocumentSnapshot doc : snap) {
-                        String hora = doc.getString("hora");
-                        if (hora != null) horas.add(hora);
-                    }
-
-                    // Verificamos cuáles están ocupadas y mostramos el dialog
-                    verificarHorasYMostrarDialog(centroNombre, horas, dia, listener);
-                }).addOnFailureListener(e -> Toast.makeText(context, "Error al cargar horarios", Toast.LENGTH_SHORT).show());
+            verificarHorasYMostrarDialog(centroNombre, horas, dia, listener);
+        }).addOnFailureListener(e -> Toast.makeText(context, "Error al cargar horarios", Toast.LENGTH_SHORT).show());
     }
 
-    // Verifica qué horas están ocupadas y muestra el AlertDialog
+
+    // Ver qué horas están libres y cuáles ocupadas, y luego muestra el diálogo de selección
     private void verificarHorasYMostrarDialog(String centroNombre, List<String> horas, String dia, OnHoraConfirmadaListener listener) {
+
+        // Listas para separar las horas según disponibilidad
         List<String> horasLibres = new ArrayList<>();
         List<String> horasOcupadas = new ArrayList<>();
+
+        // Contador para saber si ya termino la verificacion de disponibilidad
         final int[] pendientes = {horas.size()};
 
+        // Verificar cada hora del horario del centro
         for (String hora : horas) {
-            FirebaseFirestore.getInstance().collection("citas").whereEqualTo("centro", centroNombre).whereEqualTo("fecha", CitaDraftStore.fecha).whereEqualTo("hora", hora).get().addOnSuccessListener(citasSnap -> {
-                        if (citasSnap.isEmpty()) {
-                            horasLibres.add(hora);
-                        } else {
-                            horasOcupadas.add(hora);
-                        }
-                        pendientes[0]--;
 
-                        // Cuando terminamos de verificar todas las horas
-                        if (pendientes[0] == 0) {
-                            mostrarDialog(horasLibres, horasOcupadas, dia, listener);
-                        }
-                    });
+            // Buscar si en Firebase si ya hay una cita en este centro, fecha y hora
+            FirebaseFirestore.getInstance().collection("citas").whereEqualTo("centro", centroNombre).whereEqualTo("fecha", CitaDraftStore.fecha).whereEqualTo("hora", hora).get().addOnSuccessListener(citasSnap -> {
+                if (citasSnap.isEmpty()) {
+                    horasLibres.add(hora);
+                } else {
+                    horasOcupadas.add(hora);
+                }
+                pendientes[0]--;
+
+                // Cuando hemos verificado todas las horas, mostramos el diálogo
+                if (pendientes[0] == 0) {
+                    mostrarDialog(horasLibres, horasOcupadas, dia, listener);
+                }
+            });
         }
     }
 
-    // Muestra el AlertDialog con radio buttons
-    private void mostrarDialog(List<String> horasLibres, List<String> horasOcupadas,
-                               String dia, OnHoraConfirmadaListener listener) {
+    private void mostrarDialog(List<String> horasLibres, List<String> horasOcupadas, String dia, OnHoraConfirmadaListener listener) {
+
+        // Si no hay ninguna hora libre, mostramos un mensaje y no abrimos el dialog
+        if (horasLibres.isEmpty()) {
+            new AlertDialog.Builder(context)
+                    .setTitle("Sin horarios disponibles")
+                    .setMessage("Todos los horarios del " + dia + " están ocupados para este centro. Por favor, selecciona otra fecha u otro centro.")
+                    .setPositiveButton("Entendido", null)
+                    .show();
+            return;
+        }
+
         RadioGroup radioGroup = new RadioGroup(context);
         radioGroup.setOrientation(RadioGroup.VERTICAL);
         radioGroup.setPadding(40, 20, 40, 20);
 
-        // Añadimos las horas libres como radio buttons seleccionables
+        // Horas libres → seleccionables, en verde
         for (String hora : horasLibres) {
             RadioButton rb = new RadioButton(context);
-            rb.setText(hora + " — Libre");
+            rb.setText(hora + " - Libre");
             rb.setTextColor(context.getColor(R.color.texto_principal));
             rb.setButtonTintList(ColorStateList.valueOf(context.getColor(R.color.morado_principal)));
             rb.setPadding(0, 16, 0, 16);
@@ -101,30 +113,32 @@ public class GestorHorarios {
             radioGroup.addView(rb);
         }
 
-        // Añadimos las horas ocupadas como radio buttons desactivados
+        // Horas ocupadas → desactivadas, tachadas y en gris
         for (String hora : horasOcupadas) {
             RadioButton rb = new RadioButton(context);
-            rb.setText(hora + " — Ocupado");
-            rb.setTextColor(context.getColor(R.color.coral_acento));
+            rb.setText(hora + " - Ocupado");
+            rb.setTextColor(context.getColor(android.R.color.darker_gray));
+            rb.setButtonTintList(ColorStateList.valueOf(context.getColor(android.R.color.darker_gray)));
+            rb.setPaintFlags(rb.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
             rb.setEnabled(false);
+            rb.setAlpha(0.6f);
             rb.setPadding(0, 16, 0, 16);
             radioGroup.addView(rb);
         }
 
-        new AlertDialog.Builder(context).setTitle("Horarios disponibles — " + dia).setView(radioGroup).setPositiveButton("Confirmar", (dialog, which) -> {
-                    int selectedId = radioGroup.getCheckedRadioButtonId();
-                    if (selectedId == -1) {
-                        Toast.makeText(context, "Selecciona una hora", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    RadioButton selected = radioGroup.findViewById(selectedId);
-                    String hora = selected.getTag().toString();
-                    horaSeleccionada[0] = hora;
-                    listener.onHoraConfirmada(hora);
-                }).setNegativeButton("Cancelar", null).show();
+        new AlertDialog.Builder(context).setTitle("Horarios disponibles - " + dia).setView(radioGroup).setPositiveButton("Confirmar", (dialog, which) -> {
+            int selectedId = radioGroup.getCheckedRadioButtonId();
+            if (selectedId == -1) {
+                Toast.makeText(context, "Selecciona una hora", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            RadioButton selected = radioGroup.findViewById(selectedId);
+            String hora = selected.getTag().toString();
+            horaSeleccionada[0] = hora;
+            listener.onHoraConfirmada(hora);
+        }).setNegativeButton("Cancelar", null).show();
     }
 
-    // Interface para cuando se confirma la hora
     public interface OnHoraConfirmadaListener {
         void onHoraConfirmada(String hora);
     }

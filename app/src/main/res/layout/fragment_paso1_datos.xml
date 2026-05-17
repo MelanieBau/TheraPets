@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo_therapets">
 
-    <!-- Cabecera verde -->
     <LinearLayout
         android:id="@+id/cabecera"
         android:layout_width="0dp"
@@ -53,7 +52,6 @@
 
     </LinearLayout>
 
-    <!-- Imagen -->
     <ImageView
         android:id="@+id/ivLogo"
         android:layout_width="120dp"
@@ -126,7 +124,6 @@
 
     </LinearLayout>
 
-    <!-- Botones fijados abajo -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

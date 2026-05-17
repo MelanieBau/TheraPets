@@ -87,7 +87,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta Gestionar Coordinadores -->
+        <!-- Gestión coordinadores -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardAnimales"
             android:layout_width="match_parent"
@@ -123,7 +123,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta Ver todas las Citas -->
+        <!-- Ver todas las citas -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardCitas"
             android:layout_width="match_parent"

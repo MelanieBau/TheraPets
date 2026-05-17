@@ -32,6 +32,7 @@ public class RecuperarContrasena extends AppCompatActivity {
                 return;
             }
 
+            //Ingresar el correo para que el usuario pueda recibir el correo y pueda acceder
             mAuth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
                     Intent intent = new Intent(this, EmailEnviado.class);

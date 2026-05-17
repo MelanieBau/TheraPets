@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="#FFFFFF">
 
-    <!-- Cabecera gris oscuro -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,7 +50,7 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <!-- Tarjeta Mi Centro -->
+        <!-- Mi Centro -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMiCentro"
             android:layout_width="match_parent"
@@ -88,7 +87,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta Mis Animales -->
+        <!-- Mis animales y terapeutas -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardMisAnimales"
             android:layout_width="match_parent"
@@ -109,7 +108,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Mis Animales"
+                    android:text="Animales y terapeutas"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#2E2E2E" />
@@ -124,7 +123,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta Citas de mi centro -->
+        <!-- Citas de mi centro -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardCitasCentro"
             android:layout_width="match_parent"
@@ -161,7 +160,7 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta Gestionar Horarios -->
+        <!-- Gestionar mis horarios -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardHorarios"
             android:layout_width="match_parent"
@@ -183,7 +182,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Gestionar horarios"
+                    android:text="Gestionar mis horarios"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:textColor="#2E2E2E" />
@@ -200,7 +199,6 @@
 
     </LinearLayout>
 
-    <!-- Botón cerrar sesión -->
     <Button
         android:id="@+id/btnCerrarSesionCoordinador"
         android:layout_width="match_parent"

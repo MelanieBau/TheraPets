@@ -34,8 +34,12 @@ public class AgregarAnimal extends AppCompatActivity {
 
         ImageView ivFotoAnimal = findViewById(R.id.ivFotoAnimal);
         ImageView ivFotoTerapeuta = findViewById(R.id.ivFotoTerapeuta);
+
+        //Botones
         Button btnFotoAnimal = findViewById(R.id.btnSeleccionarFotoAnimal);
         Button btnFotoTerapeuta = findViewById(R.id.btnSeleccionarFotoTerapeuta);
+
+        //Campos de texto
         TextInputEditText nombre = findViewById(R.id.etNombreAnimal);
         TextInputEditText tipo = findViewById(R.id.etTipoAnimal);
         TextInputEditText raza = findViewById(R.id.etRazaAnimal);
@@ -43,22 +47,29 @@ public class AgregarAnimal extends AppCompatActivity {
         TextInputEditText especialidad = findViewById(R.id.etEspecialidadAnimal);
         TextInputEditText nombreTerapeuta = findViewById(R.id.etNombreTerapeuta);
         TextInputEditText especialidadTerapeuta = findViewById(R.id.etEspecialidadTerapeuta);
+
+        //Guardar información del animal
         Button btnGuardar = findViewById(R.id.btnGuardarAnimal);
 
+        //Botón de volver
         findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
 
+
         btnFotoAnimal.setOnClickListener(v -> {
+            //Abrir la galeria para subir imagen del animal
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_FOTO_ANIMAL);
         });
 
+        //Abrir la galeria para subir imagen del terapeuta
         btnFotoTerapeuta.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");
             startActivityForResult(intent, PICK_FOTO_TERAPEUTA);
         });
 
+        //Trim para evitar espacios
         btnGuardar.setOnClickListener(v -> {
             String nombreStr = nombre.getText().toString().trim();
             String tipoStr = tipo.getText().toString().trim();
@@ -85,15 +96,21 @@ public class AgregarAnimal extends AppCompatActivity {
         });
     }
 
+
     @Override
+    //Guardar y mostrar la foto/imagen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        // Verificar que el usuario haya seleccionado una foto (y no cancelado)
         if (resultCode == Activity.RESULT_OK && data != null) {
             if (requestCode == PICK_FOTO_ANIMAL) {
                 fotoAnimal = data.getData();
+                //Mostrar foto animal
                 ((ImageView) findViewById(R.id.ivFotoAnimal)).setImageURI(fotoAnimal);
             } else if (requestCode == PICK_FOTO_TERAPEUTA) {
                 fotoTerapeuta = data.getData();
+                //Mostrar foto terapeuta
                 ((ImageView) findViewById(R.id.ivFotoTerapeuta)).setImageURI(fotoTerapeuta);
             }
         }
@@ -115,6 +132,7 @@ public class AgregarAnimal extends AppCompatActivity {
             }
 
             @Override
+            // Si hay un error al subir la foto a Cloudinary, muestra un mensaje al usuario
             public void onError(String requestId, ErrorInfo error) {
                 mostrarToast("Error al subir la foto");
             }

@@ -30,6 +30,7 @@ public class Configuracion extends AppCompatActivity {
         boolean notificacionesActivas = prefs.getBoolean("notificaciones", true);
         switchNotificaciones.setChecked(notificacionesActivas);
 
+        //Dirige a Activity recuperar/cambiar contraseña
         cardCambiarContrasena.setOnClickListener(v -> startActivity(new Intent(this, RecuperarContrasena.class)));
 
         switchNotificaciones.setOnClickListener(v -> {
@@ -48,6 +49,7 @@ public class Configuracion extends AppCompatActivity {
             finish();
         });
 
+        //Eliminar la cuenta del usuario
         btnEliminarCuenta.setOnClickListener(v -> {
             new AlertDialog.Builder(this).setTitle("Eliminar cuenta").setMessage("¿Estás segura de que quieres eliminar tu cuenta? Esta acción no se puede deshacer.").setPositiveButton("Eliminar", (dialog, which) -> {
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();

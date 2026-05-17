@@ -16,14 +16,12 @@
         android:orientation="horizontal">
 
 
-        <!-- Contenido -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Día de la semana -->
             <TextView
                 android:id="@+id/tvDiaHorario"
                 android:layout_width="wrap_content"
@@ -33,7 +31,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/texto_principal" />
 
-            <!-- Hora -->
+
             <TextView
                 android:id="@+id/tvHoraHorario"
                 android:layout_width="wrap_content"
@@ -43,14 +41,12 @@
                 android:textColor="#FF3939"
                 android:layout_marginTop="4dp" />
 
-            <!-- Separador -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#F0F0F0"
                 android:layout_marginVertical="10dp" />
 
-            <!-- Botón borrar -->
             <Button
                 android:id="@+id/btnBorrarHorario"
                 android:layout_width="match_parent"

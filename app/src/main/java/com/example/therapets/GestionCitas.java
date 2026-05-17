@@ -30,6 +30,9 @@ public class GestionCitas extends AppCompatActivity {
         rvCitas.setAdapter(adapter);
 
         cargarTodasLasCitas();
+
+        //Boton volver
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
 
     private void cargarTodasLasCitas() {

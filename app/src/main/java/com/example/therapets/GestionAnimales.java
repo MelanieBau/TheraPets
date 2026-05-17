@@ -52,6 +52,9 @@ public class GestionAnimales extends AppCompatActivity {
             intent.putExtra("centroId", centroId);
             startActivity(intent);
         });
+
+        //Boton de volver
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
 
     private void cargarAnimales() {

@@ -7,7 +7,7 @@
     android:layout_marginEnd="12dp"
     app:cardCornerRadius="16dp"
     app:cardElevation="4dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,9 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:background="@color/morado_claro" />
+            android:background="@color/white" />
 
-        <!-- Nombre de los animales -->
+        <!-- Nombre del animal -->
         <TextView
             android:id="@+id/tvNombreAnimalHome"
             android:layout_width="match_parent"

@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class HistoriaTherapets extends AppCompatActivity {
 
+
+    //Activity informativo de therapets
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -24,7 +24,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón volver -->
     <ImageButton
         android:id="@+id/btnVolver"
         android:layout_width="36dp"

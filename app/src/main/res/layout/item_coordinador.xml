@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Contenido -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -33,7 +32,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/texto_principal" />
 
-            <!-- Email -->
             <TextView
                 android:id="@+id/tvEmailCoord"
                 android:layout_width="wrap_content"
@@ -43,7 +41,6 @@
                 android:textColor="@color/texto_secundario"
                 android:layout_marginTop="4dp" />
 
-            <!-- Centro asignado -->
             <TextView
                 android:id="@+id/tvCentroCoord"
                 android:layout_width="wrap_content"
@@ -53,7 +50,6 @@
                 android:textColor="#FF3939"
                 android:layout_marginTop="4dp" />
 
-            <!-- Separador -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"

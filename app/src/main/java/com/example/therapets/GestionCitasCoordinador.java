@@ -35,6 +35,9 @@ public class GestionCitasCoordinador extends AppCompatActivity {
         rvCitas.setAdapter(adapter);
 
         obtenerCentroYCargarCitas();
+
+        //Boton volver
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
 
     private void obtenerCentroYCargarCitas() {
@@ -65,6 +68,7 @@ public class GestionCitasCoordinador extends AppCompatActivity {
 
     private void cancelarCita(Cita cita, String motivo) {
 
+        //Si en caso la cita es cancelada por el coordinador de centro
         Map<String, Object> datos = new HashMap<>();
         datos.put("estado", "cancelada_coordinador");
         datos.put("motivoCancelacion", motivo);

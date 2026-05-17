@@ -57,51 +57,34 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
         // Foto del animal
         if (t.getFotoUrl() != null && !t.getFotoUrl().isEmpty()) {
             holder.ivFotoAnimal.setVisibility(View.VISIBLE);
-            Glide.with(holder.itemView.getContext())
-                    .load(t.getFotoUrl())
-                    .centerCrop()
-                    .into(holder.ivFotoAnimal);
+            Glide.with(holder.itemView.getContext()).load(t.getFotoUrl()).centerCrop().into(holder.ivFotoAnimal);
         } else {
             holder.ivFotoAnimal.setVisibility(View.GONE);
+            holder.ivFotoAnimal.setImageDrawable(null);
         }
 
-        // Foto del usuario
+        // Foto del usuario - con imagen por defecto si no tiene
         if (t.getFotoUsuarioUrl() != null && !t.getFotoUsuarioUrl().isEmpty()) {
-            Glide.with(holder.itemView.getContext())
-                    .load(t.getFotoUsuarioUrl())
-                    .centerCrop()
-                    .into(holder.ivFotoUsuario);
+            Glide.with(holder.itemView.getContext()).load(t.getFotoUsuarioUrl()).centerCrop().into(holder.ivFotoUsuario);
+        } else {
+            // Si el usuario no tiene foto, ponemos una imagen por defecto para evitar que muestre la de otro testimonio
+            holder.ivFotoUsuario.setImageResource(R.drawable.perfil_usuario);
         }
 
-
-        boolean yaLeDioLike =
-                t.getLikesUsuarios() != null &&
-                        t.getLikesUsuarios().contains(uidActual);
-
-
-        holder.btnMeGusta.setImageResource(
-                yaLeDioLike ? R.drawable.corazon : R.drawable.amor
-        );
+        boolean yaLeDioLike = t.getLikesUsuarios() != null && t.getLikesUsuarios().contains(uidActual);
+        holder.btnMeGusta.setImageResource(yaLeDioLike ? R.drawable.corazon : R.drawable.amor);
 
         // Like a publicación
         holder.btnMeGusta.setOnClickListener(v -> {
-
-            if (t.getLikesUsuarios() != null &&
-                    t.getLikesUsuarios().contains(uidActual)) {
-
+            if (t.getLikesUsuarios() != null && t.getLikesUsuarios().contains(uidActual)) {
                 mostrarToast(v.getContext(), "Ya le diste me gusta");
                 return;
             }
 
-            FirebaseFirestore.getInstance()
-                    .collection("testimonios")
-                    .document(t.getId())
-                    .update(
-                            "meGusta", t.getMeGusta() + 1,
-                            "likesUsuarios", FieldValue.arrayUnion(uidActual)
+            FirebaseFirestore.getInstance().collection("testimonios").document(t.getId()).update(
+                            "meGusta", t.getMeGusta() + 1, "likesUsuarios", FieldValue.arrayUnion(uidActual)
                     )
                     .addOnSuccessListener(a -> {
-
                         t.setMeGusta(t.getMeGusta() + 1);
 
                         if (t.getLikesUsuarios() != null) {
@@ -109,25 +92,19 @@ public class TestimonioAdapter extends RecyclerView.Adapter<TestimonioAdapter.Vi
                         }
 
                         holder.tvContadorMeGusta.setText(String.valueOf(t.getMeGusta()));
-
-                        // 🔥 CAMBIO DE ICONO CONSISTENTE
                         holder.btnMeGusta.setImageResource(R.drawable.corazon);
                     });
         });
 
-        //Borrar
+        // Borrar
         if (t.getUsuarioId().equals(uidActual)) {
             holder.btnBorrar.setVisibility(View.VISIBLE);
 
             holder.btnBorrar.setOnClickListener(v -> {
-                FirebaseFirestore.getInstance()
-                        .collection("testimonios")
-                        .document(t.getId())
-                        .delete()
-                        .addOnSuccessListener(a -> {
-                            lista.remove(position);
-                            notifyItemRemoved(position);
-                        });
+                FirebaseFirestore.getInstance().collection("testimonios").document(t.getId()).delete().addOnSuccessListener(a -> {
+                    lista.remove(position);
+                    notifyItemRemoved(position);
+                });
             });
 
         } else {

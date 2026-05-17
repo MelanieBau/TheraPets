@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo_therapets">
 
-    <!-- Cabecera -->
     <LinearLayout
         android:id="@+id/cabecera"
         android:layout_width="0dp"
@@ -53,7 +52,6 @@
 
     </LinearLayout>
 
-    <!-- contenedor de motivos -->
     <LinearLayout
         android:id="@+id/contenido"
         android:layout_width="0dp"
@@ -65,7 +63,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Imagen-->
         <ImageView
             android:id="@+id/ivMotivo"
             android:layout_width="110dp"
@@ -75,7 +72,6 @@
             android:scaleType="centerCrop"
             android:layout_marginBottom="20dp" />
 
-        <!-- Texto -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

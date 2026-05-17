@@ -45,6 +45,9 @@ public class GestionCoordinadores extends AppCompatActivity {
         cargarCoordinadores();
 
         btnAgregar.setOnClickListener(v -> mostrarDialogoAgregar());
+
+        //Boton volver
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
 
     private void cargarCoordinadores() {

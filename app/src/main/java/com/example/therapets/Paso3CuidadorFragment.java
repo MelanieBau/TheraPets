@@ -39,6 +39,7 @@ public class Paso3CuidadorFragment extends Fragment {
 
         rv.setAdapter(seleccion);
 
+        //Acceder a la coleccion de animales y terapeutas
         FirebaseFirestore.getInstance().collection("animales").whereEqualTo("centro", CitaDraftStore.centro).get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!isAdded()) return;

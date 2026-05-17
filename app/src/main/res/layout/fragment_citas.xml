@@ -6,7 +6,6 @@
     android:orientation="vertical"
     android:background="@drawable/fondo_therapets">
 
-    <!-- Cabecera verde -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,16 +22,15 @@
 
     </LinearLayout>
 
-    <!-- Pestañas -->
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
+        android:background="@drawable/bg_tablayout"
         app:tabSelectedTextColor="#2D5F4F"
         app:tabTextColor="#9E9E9E"
         app:tabIndicatorColor="#4CAF82"
-        app:tabBackground="@android:color/transparent"
         app:tabMode="fixed" />
 
     <!-- Contenido de las pestañas -->

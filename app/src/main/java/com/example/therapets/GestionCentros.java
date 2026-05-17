@@ -61,6 +61,10 @@ public class GestionCentros extends AppCompatActivity {
 
         btnAgregar.setOnClickListener(v ->
                 startActivity(new Intent(this, AgregarCentro.class)));
+
+
+        //Boton volver
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
 
     private void cargarCentros() {
@@ -117,6 +121,7 @@ public class GestionCentros extends AppCompatActivity {
 
     private void borrarCentro(Centro centro) {
         if (soloMiCentro) {
+            //Solo el administrador podra borrar los centros y coordinadores
             mostrarToast("No tienes permisos para borrar el centro");
             return;
         }

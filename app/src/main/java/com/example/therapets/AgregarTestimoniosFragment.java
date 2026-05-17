@@ -45,6 +45,9 @@ public class AgregarTestimoniosFragment extends Fragment {
         Button btnSeleccionarFoto = view.findViewById(R.id.btnSeleccionarFoto);
         RatingBar ratingBar = view.findViewById(R.id.ratingBar);
 
+        //Boton para volver de testimonios
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> requireActivity().getSupportFragmentManager().popBackStack());
+
         ratingBar.setOnRatingBarChangeListener((bar, rating, fromUser) -> estrellasSeleccionadas = rating);
 
         btnSeleccionarFoto.setOnClickListener(v -> {
@@ -78,14 +81,13 @@ public class AgregarTestimoniosFragment extends Fragment {
         }
     }
 
+    //Subir las fotos a Cloudinary
     private void subirFotoYPublicar(String comentario) {
         MediaManager.get().upload(fotoSeleccionada).callback(new UploadCallback() {
             @Override public void onStart(String requestId) {
-
             }
 
             @Override public void onProgress(String requestId, long bytes, long totalBytes) {
-
             }
 
             @Override
@@ -103,6 +105,8 @@ public class AgregarTestimoniosFragment extends Fragment {
         }).dispatch();
     }
 
+
+    //Metodo para que el usuario pueda subir su testimonio post cita
     private void publicarTestimonio(String comentario, String fotoUrl) {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String fecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());

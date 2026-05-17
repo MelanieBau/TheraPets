@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <!-- Header -->
         <View
             android:id="@+id/headerBg"
             android:layout_width="0dp"
@@ -20,7 +19,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Titulo de mi perfil -->
+
         <TextView
             android:id="@+id/tvTituloPerfil"
             android:layout_width="wrap_content"
@@ -34,7 +33,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <!-- Foto del usuario -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardFoto"
             android:layout_width="120dp"
@@ -55,7 +53,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Nombre del usuario -->
         <TextView
             android:id="@+id/tvNombreHeader"
             android:layout_width="wrap_content"
@@ -69,7 +66,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Email del usuario -->
         <TextView
             android:id="@+id/tvEmailHeader"
             android:layout_width="wrap_content"
@@ -82,7 +78,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Tarjeta con los datos -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardDatos"
             android:layout_width="0dp"
@@ -101,7 +96,6 @@
                 android:orientation="vertical"
                 android:padding="25dp">
 
-                <!-- Fecha de nacimiento del usuario -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -132,7 +126,6 @@
                     android:layout_height="0.5dp"
                     android:background="#F0F0F0" />
 
-                <!-- Teléfono del usuario -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

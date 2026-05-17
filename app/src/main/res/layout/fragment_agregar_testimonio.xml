@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Cabecera verde -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -59,7 +58,6 @@
             android:orientation="vertical"
             android:padding="20dp">
 
-            <!-- Foto -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardFotoTestimonio"
                 android:layout_width="match_parent"
@@ -76,7 +74,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- Botón seleccionar foto -->
             <Button
                 android:id="@+id/btnSeleccionarFoto"
                 android:layout_width="match_parent"
@@ -89,7 +86,6 @@
                 android:backgroundTint="#4CAF82"
                 app:cornerRadius="30dp" />
 
-            <!-- Comentario -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
@@ -126,7 +122,8 @@
                 android:stepSize="1"
                 android:rating="0"
                 android:layout_marginBottom="16dp" />
-            <!-- Botón publicar -->
+
+
             <Button
                 android:id="@+id/btnPublicarTestimonio"
                 android:layout_width="match_parent"

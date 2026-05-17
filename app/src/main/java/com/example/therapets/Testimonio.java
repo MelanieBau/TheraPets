@@ -17,33 +17,75 @@ public class Testimonio {
 
     public Testimonio() {}
 
-    public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
+    public String getId() {
+        return id; }
 
-    public String getUsuarioId() { return usuarioId; }
-    public void setUsuarioId(String usuarioId) { this.usuarioId = usuarioId; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getNombreUsuario() { return nombreUsuario; }
-    public void setNombreUsuario(String nombreUsuario) { this.nombreUsuario = nombreUsuario; }
+    public String getUsuarioId() {
+        return usuarioId;
+    }
+    public void setUsuarioId(String usuarioId) {
+        this.usuarioId = usuarioId;
+    }
 
-    public String getComentario() { return comentario; }
-    public void setComentario(String comentario) { this.comentario = comentario; }
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
 
-    public String getFecha() { return fecha; }
-    public void setFecha(String fecha) { this.fecha = fecha; }
+    public String getComentario() {
+        return comentario;
+    }
+    public void setComentario(String comentario) {
+        this.comentario = comentario;
+    }
 
-    public long getMeGusta() { return meGusta; }
-    public void setMeGusta(long meGusta) { this.meGusta = meGusta; }
+    public String getFecha() {
+        return fecha;
+    }
 
-    public String getFotoUrl() { return fotoUrl; }
-    public void setFotoUrl(String fotoUrl) { this.fotoUrl = fotoUrl; }
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
 
-    public String getFotoUsuarioUrl() { return fotoUsuarioUrl; }
-    public void setFotoUsuarioUrl(String fotoUsuarioUrl) { this.fotoUsuarioUrl = fotoUsuarioUrl; }
+    public long getMeGusta() {
+        return meGusta;
+    }
+    public void setMeGusta(long meGusta) {
+        this.meGusta = meGusta;
+    }
 
-    public float getEstrellas() { return estrellas; }
-    public void setEstrellas(float estrellas) { this.estrellas = estrellas; }
+    public String getFotoUrl() {
+        return fotoUrl;
+    }
 
-    public List<String> getLikesUsuarios() { return likesUsuarios; }
-    public void setLikesUsuarios(List<String> likesUsuarios) { this.likesUsuarios = likesUsuarios; }
+    public void setFotoUrl(String fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
+
+    public String getFotoUsuarioUrl() {
+        return fotoUsuarioUrl;
+    }
+    public void setFotoUsuarioUrl(String fotoUsuarioUrl) {
+        this.fotoUsuarioUrl = fotoUsuarioUrl;
+    }
+
+    public float getEstrellas() {
+        return estrellas;
+    }
+    public void setEstrellas(float estrellas) {
+        this.estrellas = estrellas;
+    }
+
+    public List<String> getLikesUsuarios() {
+        return likesUsuarios;
+    }
+    public void setLikesUsuarios(List<String> likesUsuarios) {
+        this.likesUsuarios = likesUsuarios;
+    }
 }

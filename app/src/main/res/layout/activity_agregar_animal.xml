@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- CABECERA -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +53,7 @@
 
         </LinearLayout>
 
-        <!-- FORMULARIO -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +61,7 @@
             android:padding="20dp"
             android:layout_marginTop="-5dp">
 
-            <!-- FOTO ANIMAL -->
+            <!-- Foto del animal -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
@@ -78,7 +77,6 @@
 
             </androidx.cardview.widget.CardView>
 
-            <!-- BOTÓN FOTO ANIMAL (CORREGIDO) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSeleccionarFotoAnimal"
                 android:layout_width="match_parent"
@@ -91,7 +89,7 @@
                 app:backgroundTint="@color/texto_principal"
                 app:cornerRadius="30dp" />
 
-            <!-- CAMPOS ANIMAL -->
+            <!-- Campos del animal -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/RoundedInputLayout"
                 android:layout_width="match_parent"
@@ -162,11 +160,11 @@
                     android:inputType="textCapWords" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- SEPARADOR -->
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/morado_claro"
+                android:background="@color/black"
                 android:layout_marginBottom="16dp" />
 
             <TextView
@@ -178,7 +176,7 @@
                 android:textColor="@color/texto_principal"
                 android:layout_marginBottom="16dp" />
 
-            <!-- TERAPEUTA -->
+            <!-- Información de la terapeuta -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,7 +237,6 @@
 
             </LinearLayout>
 
-            <!-- BOTÓN FOTO TERAPEUTA (CORREGIDO) -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSeleccionarFotoTerapeuta"
                 android:layout_width="match_parent"
@@ -252,7 +249,7 @@
                 app:backgroundTint="@color/texto_hint"
                 app:cornerRadius="30dp" />
 
-            <!-- BOTÓN GUARDAR (CORREGIDO) -->
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnGuardarAnimal"
                 android:layout_width="match_parent"

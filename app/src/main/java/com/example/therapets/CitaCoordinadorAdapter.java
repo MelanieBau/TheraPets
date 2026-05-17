@@ -52,11 +52,27 @@ public class CitaCoordinadorAdapter extends RecyclerView.Adapter<CitaCoordinador
         Cita cita = lista.get(position);
 
         holder.tvFecha.setText(cita.getFecha() + " a las " + cita.getHora());
-        holder.tvNombre.setText(cita.getNombres() + " " + cita.getApellidos());
+        holder.tvNombre.setText("Paciente: " + (cita.getNombres() != null ? cita.getNombres() : ""));
         holder.tvCentro.setText("Centro: " + cita.getCentro());
         holder.tvCuidador.setText("Cuidador: " + cita.getCuidador());
         holder.tvMotivo.setText("Motivo: " + cita.getMotivo());
-        holder.tvEstado.setText(cita.getEstado());
+
+        //Estado de la cita solo para el coordinador
+        String estado = cita.getEstado();
+
+        if (estado.equals("pendiente")) {
+            holder.tvEstado.setText("Pendiente");
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_pendiente);
+        } else if (estado.equals("confirmada")) {
+            holder.tvEstado.setText("Confirmada");
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cita_confirmada);
+        } else if (estado.equals("completada")) {
+            holder.tvEstado.setText("Completada");
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_cita_completada);
+        } else if (estado.equals("cancelada_usuario") || estado.equals("cancelada_coordinador")) {
+            holder.tvEstado.setText("Cancelada");
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cancelada);
+        }
 
         if (cita.getMotivoCancelacion() != null && !cita.getMotivoCancelacion().isEmpty()) {
             holder.tvMotivoCancelacion.setVisibility(View.VISIBLE);

@@ -56,7 +56,7 @@ public class AnimalSeleccion extends RecyclerView.Adapter<AnimalSeleccion.ViewHo
             Glide.with(holder.itemView.getContext()).load(animal.getFotoTerapeuta()).centerCrop().into(holder.fotoTerapeuta);
         }
 
-        // Cuando pulsa Seleccionar
+        // Cuando pulsa seleccionar
         holder.btnSeleccionar.setOnClickListener(v -> onSeleccionar.onSeleccionar(animal));
     }
 

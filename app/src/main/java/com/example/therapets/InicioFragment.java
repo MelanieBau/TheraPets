@@ -28,6 +28,11 @@ import java.util.Locale;
 
 public class InicioFragment extends Fragment {
 
+    private View rootView;
+    private List<Animal> listaAnimales = new ArrayList<>();
+    private List<Animal> listaAnimalesCompleta = new ArrayList<>();
+    private AnimalHome adapter;
+
     public InicioFragment() {
         super(R.layout.fragment_inicio);
     }
@@ -35,124 +40,61 @@ public class InicioFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        rootView = view;
 
         TextView tvFecha = view.findViewById(R.id.tvFecha);
         TextView tvSaludo = view.findViewById(R.id.tvSaludo);
-        TextView tvProximaCitaFecha = view.findViewById(R.id.tvProximaCitaFecha);
         CardView cardComoSurgio = view.findViewById(R.id.cardComoSurgio);
-
-        ImageView ivFotoPerfil = view.findViewById(R.id.ivFotoPerfil);
-        ImageView ivFotoTerapeutaCita = view.findViewById(R.id.ivFotoTerapeutaCita);
 
         tvSaludo.setText("¡Hola!");
 
         // Fecha
         String fecha = new SimpleDateFormat("EEEE, dd 'de' MMMM",
                 new Locale("es", "ES")).format(new Date());
-
         tvFecha.setText(fecha.substring(0, 1).toUpperCase() + fecha.substring(1));
 
-        String uid = FirebaseAuth.getInstance().getCurrentUser() != null ? FirebaseAuth.getInstance().getCurrentUser().getUid() : null;
-
-        if (uid == null) return;
-
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        // Usuario therapets
-        db.collection("usuarios").document(uid).get()
-                .addOnSuccessListener(document -> {
-
-                    if (!isAdded() || !document.exists()) return;
-
-                    String nombre = document.getString("nombre");
-
-                    if (nombre != null && !nombre.isEmpty()) {
-                        String primerNombre = nombre.split(" ")[0];
-                        primerNombre = primerNombre.substring(0, 1).toUpperCase() + primerNombre.substring(1).toLowerCase();
-
-                        tvSaludo.setText("¡Hola, " + primerNombre + "!");
-                    }
-
-                    String fotoUrl = document.getString("fotoUrl");
-
-                    if (fotoUrl != null && !fotoUrl.isEmpty()) {
-                        Glide.with(requireContext()).load(fotoUrl).centerCrop().into(ivFotoPerfil);
-                    }
-                });
-
-        // Próxima cita
-        db.collection("citas").whereEqualTo("usuarioId", uid).whereIn("estado", Arrays.asList("pendiente", "confirmada")).limit(1).get().addOnSuccessListener(snapshot -> {
-
-                    if (!isAdded()) return;
-
-                    if (!snapshot.isEmpty()) {
-
-                        QueryDocumentSnapshot doc =
-                                (QueryDocumentSnapshot) snapshot.getDocuments().get(0);
-
-                        String fechaCita = doc.getString("fecha");
-                        String hora = doc.getString("hora");
-                        String terapeuta = doc.getString("nombreTerapeuta");
-                        String cuidador = doc.getString("cuidador");
-
-                        tvProximaCitaFecha.setText(
-                                terapeuta != null ? terapeuta : "Sesión agendada"
-                        );
-
-
-                        if (cuidador != null && cuidador.contains("(")) {
-
-                            String nombreAnimal = cuidador.split(" \\(")[0];
-
-                            db.collection("animales").whereEqualTo("nombre", nombreAnimal).limit(1).get().addOnSuccessListener(snap -> {
-
-                                        if (!isAdded() || snap.isEmpty()) return;
-
-                                        String fotoTerapeuta =
-                                                snap.getDocuments().get(0).getString("fotoTerapeuta");
-
-                                        if (fotoTerapeuta != null && !fotoTerapeuta.isEmpty()) {
-                                            Glide.with(requireContext()).load(fotoTerapeuta).centerCrop().into(ivFotoTerapeutaCita);
-                                        }
-                                    });
-                        }
-
-                    } else {
-                        tvProximaCitaFecha.setText("Sin sesiones próximas");
-                    }
-                });
-
-        // Animales
+        // RecyclerView animales
         RecyclerView rvAnimales = view.findViewById(R.id.rvAnimales);
+
         rvAnimales.setLayoutManager(
-                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                new LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.HORIZONTAL,
+                        false)
         );
 
-        List<Animal> listaAnimales = new ArrayList<>();
-        List<Animal> listaAnimalesCompleta = new ArrayList<>();
-        AnimalHome adapter = new AnimalHome(listaAnimales);
+        adapter = new AnimalHome(listaAnimales);
+
         rvAnimales.setAdapter(adapter);
 
-        db.collection("animales").get().addOnSuccessListener(snapshot -> {
+       //AutoScroll
+        rvAnimales.postDelayed(new Runnable() {
 
-                    if (!isAdded()) return;
+            int position = 0;
 
-                    listaAnimalesCompleta.clear();
+            @Override
+            public void run() {
 
-                    for (QueryDocumentSnapshot doc : snapshot) {
-                        Animal animal = doc.toObject(Animal.class);
-                        animal.setId(doc.getId());
-                        listaAnimalesCompleta.add(animal);
-                    }
+                //Frecuencia con la que pasan las tarjetas de los animales
+                if (adapter == null || adapter.getItemCount() == 0) {
+                    rvAnimales.postDelayed(this, 1800);
+                    return;
+                }
 
-                    listaAnimales.clear();
-                    listaAnimales.addAll(listaAnimalesCompleta);
-                    adapter.notifyDataSetChanged();
-                });
+                position++;
 
-        // Chip de filtro para los animales de la app
+                if (position >= adapter.getItemCount()) {
+                    position = 0;
+                }
+
+                rvAnimales.smoothScrollToPosition(position);
+                rvAnimales.postDelayed(this, 1800);
+            }
+
+        }, 50);
+
+        // Chips de filtro
         ChipGroup chipGroup = view.findViewById(R.id.chipGroupFiltros);
-        chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
+         chipGroup.setOnCheckedChangeListener((group, checkedId) -> {
             listaAnimales.clear();
 
             if (checkedId == R.id.chipTodos) {
@@ -182,10 +124,100 @@ public class InicioFragment extends Fragment {
             adapter.notifyDataSetChanged();
         });
 
-
-        // Historia therapets
+        // Historia
         cardComoSurgio.setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), HistoriaTherapets.class))
         );
+        cargarDatos();
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        cargarDatos();
+    }
+
+    private void cargarDatos() {
+        if (rootView == null) return;
+
+        String uid = FirebaseAuth.getInstance().getCurrentUser() != null ? FirebaseAuth.getInstance().getCurrentUser().getUid() : null;
+
+        if (uid == null) return;
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        //Pantalla inicio organización
+        TextView tvSaludo = rootView.findViewById(R.id.tvSaludo);
+        TextView tvProximaCitaFecha = rootView.findViewById(R.id.tvProximaCitaFecha);
+        ImageView ivFotoPerfil = rootView.findViewById(R.id.ivFotoPerfil);
+        ImageView ivFotoTerapeutaCita = rootView.findViewById(R.id.ivFotoTerapeutaCita);
+
+        // Usuario
+        db.collection("usuarios").document(uid).get().addOnSuccessListener(document -> {
+            if (!isAdded() || !document.exists()) return;
+
+            String nombre = document.getString("nombre");
+
+            if (nombre != null && !nombre.isEmpty()) {
+                String primerNombre = nombre.split(" ")[0];
+                primerNombre = primerNombre.substring(0, 1).toUpperCase() + primerNombre.substring(1).toLowerCase();
+                tvSaludo.setText("¡Hola, " + primerNombre + "!");
+            }
+
+            String fotoUrl = document.getString("fotoUrl");
+            if (fotoUrl != null && !fotoUrl.isEmpty()) {
+                Glide.with(requireContext()).load(fotoUrl).centerCrop().into(ivFotoPerfil);
+            }
+        });
+
+        // Próxima cita
+        db.collection("citas").whereEqualTo("usuarioId", uid).whereIn("estado", Arrays.asList("pendiente", "confirmada")).limit(1).get().addOnSuccessListener(snapshot -> {
+            if (!isAdded()) return;
+
+            if (!snapshot.isEmpty()) {
+                QueryDocumentSnapshot doc = (QueryDocumentSnapshot) snapshot.getDocuments().get(0);
+
+                String fechaCita = doc.getString("fecha");
+                String hora = doc.getString("hora");
+                String terapeuta = doc.getString("nombreTerapeuta");
+                String cuidador = doc.getString("cuidador");
+
+                tvProximaCitaFecha.setText(terapeuta != null ? terapeuta : "Sesión agendada");
+
+                if (cuidador != null && cuidador.contains("(")) {
+                    String nombreAnimal = cuidador.split(" \\(")[0];
+
+                    db.collection("animales").whereEqualTo("nombre", nombreAnimal).limit(1).get().addOnSuccessListener(snap -> {
+                        if (!isAdded() || snap.isEmpty()) return;
+
+                        String fotoTerapeuta = snap.getDocuments().get(0).getString("fotoTerapeuta");
+                        if (fotoTerapeuta != null && !fotoTerapeuta.isEmpty()) {
+                            Glide.with(requireContext()).load(fotoTerapeuta).centerCrop().into(ivFotoTerapeutaCita);
+                        }
+                    });
+                }
+            } else {
+                tvProximaCitaFecha.setText("Sin sesiones próximas");
+            }
+        });
+
+        // Animales
+        db.collection("animales").get().addOnSuccessListener(snapshot -> {
+            if (!isAdded()) return;
+
+            listaAnimalesCompleta.clear();
+
+            for (QueryDocumentSnapshot doc : snapshot) {
+                Animal animal = doc.toObject(Animal.class);
+                animal.setId(doc.getId());
+                listaAnimalesCompleta.add(animal);
+            }
+
+            listaAnimales.clear();
+            listaAnimales.addAll(listaAnimalesCompleta);
+            adapter.notifyDataSetChanged();
+        });
+
+    }
+
 }

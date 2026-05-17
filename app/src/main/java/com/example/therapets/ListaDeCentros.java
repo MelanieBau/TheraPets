@@ -51,6 +51,7 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
             Glide.with(holder.itemView.getContext()).load(centro.getFotoUrl()).centerCrop().into(holder.foto);
         }
 
+        //Acceder a las direcciones puestas por los coordinadores
         holder.btnMaps.setOnClickListener(v -> {
             String uri = "geo:0,0?q=" + Uri.encode(centro.getDireccion());
             Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
@@ -61,7 +62,7 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
         // Verificamos si hay horarios disponibles para el día elegido
         verificarDisponibilidad(centro.getNombre(), holder);
 
-        // Cuando pulsa Seleccionar abrimos el dialog de horarios
+        // Abrir el dialog de horarios
         holder.btnSeleccionar.setOnClickListener(v -> {GestorHorarios gestor = new GestorHorarios(
                 holder.itemView.getContext(), horaSeleccionada);
 
@@ -81,7 +82,6 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
     }
 
     private void verificarDisponibilidad(String centroNombre, ViewHolder holder) {
-
         // El botón se desactiva hasta que sepamos si hay horarios
         holder.btnSeleccionar.setText("Comprobando si hay citas...");
         holder.btnSeleccionar.setEnabled(false);
@@ -96,7 +96,8 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
             dia = dia.substring(0, 1).toUpperCase() + dia.substring(1);
             final String diaFinal = dia;
 
-            FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", centroNombre).whereEqualTo("dia", diaFinal).get().addOnSuccessListener(snap -> {
+            FirebaseFirestore.getInstance().collection("horarios").whereEqualTo("centroId", centroNombre)
+                    .whereEqualTo("dia", diaFinal).get().addOnSuccessListener(snap -> {
                         if (snap.isEmpty()) {
                             holder.btnSeleccionar.setText("Sin horarios");
                             holder.btnSeleccionar.setEnabled(false);
@@ -108,8 +109,7 @@ public class ListaDeCentros extends RecyclerView.Adapter<ListaDeCentros.ViewHold
                             holder.btnSeleccionar.setBackgroundTintList(
                                     android.content.res.ColorStateList.valueOf(
                                             holder.itemView.getContext().getColor(R.color.morado_principal)));
-                        }
-                    });
+                        }});
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -50,6 +50,10 @@ public class EditarPerfil extends AppCompatActivity {
                 finish();
             }).addOnFailureListener(e -> mostrarToast("Error al guardar"));
         });
+
+
+        //Boton de volver
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
     }
 
     private void mostrarToast(String mensaje) {

@@ -33,6 +33,7 @@ public class EditarAnimal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editar_animal);
 
+        //Editar y guardar los datos de animal
         animalId = getIntent().getStringExtra("animalId");
         String nombre = getIntent().getStringExtra("nombre");
         String tipo = getIntent().getStringExtra("tipo");
@@ -79,6 +80,7 @@ public class EditarAnimal extends AppCompatActivity {
             startActivityForResult(intent, PICK_FOTO_ANIMAL);
         });
 
+        //Agregar/cambiar foto de terapeuta
         btnFotoTerapeuta.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK);
             intent.setType("image/*");

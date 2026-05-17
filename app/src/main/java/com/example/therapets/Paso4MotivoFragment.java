@@ -31,9 +31,7 @@ public class Paso4MotivoFragment extends Fragment {
         String[] motivos = {"Selecciona un motivo", "Ansiedad", "Estrés", "Depresión", "Acompañamiento emocional", "Otro" };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                requireContext(),
-                android.R.layout.simple_spinner_dropdown_item,
-                motivos
+                requireContext(), android.R.layout.simple_spinner_dropdown_item, motivos
         );
         spMotivo.setAdapter(adapter);
 

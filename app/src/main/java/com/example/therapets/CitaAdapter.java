@@ -46,17 +46,22 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
         Cita cita = lista.get(position);
 
         holder.tvFechaCita.setText(cita.getFecha() + " · " + cita.getHora());
-        holder.tvEstado.setText(cita.getEstado());
 
-        if (cita.getEstado().equals("pendiente")) {
-            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cita);
+        // Cita con colores para identificar el estado
+        String estado = cita.getEstado();
+
+        if (estado.equals("pendiente")) {
             holder.tvEstado.setText("Pendiente");
-        } else if (cita.getEstado().equals("confirmada")) {
-            holder.tvEstado.setBackgroundResource(R.drawable.bg_cita_confirmada);
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_pendiente);
+        } else if (estado.equals("confirmada")) {
             holder.tvEstado.setText("Confirmada");
-        } else if (cita.getEstado().equals("cancelada_usuario") || cita.getEstado().equals("cancelada_coordinador")) {
-            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cancelada);
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cita_confirmada);
+        } else if (estado.equals("completada")) {
+            holder.tvEstado.setText("Completada");
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_cita_completada);
+        } else if (estado.equals("cancelada_usuario") || estado.equals("cancelada_coordinador")) {
             holder.tvEstado.setText("Cancelada");
+            holder.tvEstado.setBackgroundResource(R.drawable.bg_estado_cancelada);
         }
 
         holder.tvCentroCita.setText("📍 " + cita.getCentro());
@@ -87,6 +92,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
                 etMotivo.setHint("Motivo de cancelación");
                 etMotivo.setPadding(40, 20, 40, 20);
 
+                //Le aparece un aviso al usuario antes de borrar la cita
                 new AlertDialog.Builder(v.getContext()).setTitle("Cancelar cita").setMessage("¿Por qué quieres cancelar esta cita?").setView(etMotivo).setPositiveButton("Cancelar cita", (dialog, which) -> {
                     String motivo = etMotivo.getText().toString().trim();
 
@@ -95,6 +101,7 @@ public class CitaAdapter extends RecyclerView.Adapter<CitaAdapter.ViewHolder> {
                         return;
                     }
 
+                    //Solo si la cita fue cancelada por el USUARIO
                     Map<String, Object> datos = new HashMap<>();
                     datos.put("estado", "cancelada_usuario");
                     datos.put("motivoCancelacion", motivo);

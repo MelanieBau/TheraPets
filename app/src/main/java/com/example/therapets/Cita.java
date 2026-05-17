@@ -1,12 +1,10 @@
 package com.example.therapets;
 
-
 //Datos para la cita
 public class Cita {
 
     private String id;
     private String nombres;
-    private String apellidos;
     private String telefono;
     private String fecha;
     private String hora;
@@ -19,11 +17,11 @@ public class Cita {
     private String motivoCancelacion;
 
     public Cita() {
-
     }
 
     public String getId() {
-        return id; }
+        return id;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -32,15 +30,9 @@ public class Cita {
     public String getNombres() {
         return nombres;
     }
+
     public void setNombres(String nombres) {
         this.nombres = nombres;
-    }
-
-    public String getApellidos() {
-        return apellidos;
-    }
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
     }
 
     public String getTelefono() {
@@ -78,6 +70,7 @@ public class Cita {
     public String getCuidador() {
         return cuidador;
     }
+
     public void setCuidador(String cuidador) {
         this.cuidador = cuidador;
     }
@@ -85,6 +78,7 @@ public class Cita {
     public String getMotivo() {
         return motivo;
     }
+
     public void setMotivo(String motivo) {
         this.motivo = motivo;
     }
@@ -92,6 +86,7 @@ public class Cita {
     public String getEstado() {
         return estado;
     }
+
     public void setEstado(String estado) {
         this.estado = estado;
     }
@@ -99,6 +94,7 @@ public class Cita {
     public String getUsuarioId() {
         return usuarioId;
     }
+
     public void setUsuarioId(String usuarioId) {
         this.usuarioId = usuarioId;
     }
@@ -114,6 +110,7 @@ public class Cita {
     public String getMotivoCancelacion() {
         return motivoCancelacion;
     }
+
     public void setMotivoCancelacion(String motivoCancelacion) {
         this.motivoCancelacion = motivoCancelacion;
     }

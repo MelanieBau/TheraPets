@@ -28,15 +28,14 @@ public class ConfirmacionCitaFragment extends Fragment {
         Button btnVolverCitas = view.findViewById(R.id.btnVolverCitas);
         Button btnIrInicio = view.findViewById(R.id.btnIrInicio);
 
-        String resumen = "Nombre: " + CitaDraftStore.nombres + " " + CitaDraftStore.apellidos + "\n" +
-                        "Teléfono: " + CitaDraftStore.telefono + "\n\n" +
-                        "Fecha: " + CitaDraftStore.fecha + "\n" +
-                        "Hora: " + CitaDraftStore.hora + "\n\n" +
-                        "Centro: " + CitaDraftStore.centro + "\n" +
-                        "Animal: " + CitaDraftStore.cuidador + "\n" +
-                        "Terapeuta: " + CitaDraftStore.nombreTerapeuta + "\n\n" +
-                        "Motivo: " + CitaDraftStore.motivo + "\n" +
-                        (CitaDraftStore.otroMotivo.isEmpty() ? "" : ("Otros: " + CitaDraftStore.otroMotivo + "\n"));
+
+        //Resumen de la cita del usuario
+        String resumen = "Nombre: " + CitaDraftStore.nombres + "\n" + "Teléfono: " + CitaDraftStore.telefono + "\n\n" + "Fecha: " + CitaDraftStore.fecha + "\n" + "Hora: " + CitaDraftStore.hora + "\n\n" +
+                "Centro: " + CitaDraftStore.centro + "\n" +
+                "Animal: " + CitaDraftStore.cuidador + "\n" +
+                "Terapeuta: " + CitaDraftStore.nombreTerapeuta + "\n\n" +
+                "Motivo: " + CitaDraftStore.motivo + "\n" +
+                (CitaDraftStore.otroMotivo.isEmpty() ? "" : ("Otros: " + CitaDraftStore.otroMotivo + "\n"));
 
         tvResumen.setText(resumen);
 
@@ -49,7 +48,6 @@ public class ConfirmacionCitaFragment extends Fragment {
 
         Cita cita = new Cita();
         cita.setNombres(CitaDraftStore.nombres);
-        cita.setApellidos(CitaDraftStore.apellidos);
         cita.setTelefono(CitaDraftStore.telefono);
         cita.setFecha(CitaDraftStore.fecha);
         cita.setHora(CitaDraftStore.hora);
@@ -67,8 +65,10 @@ public class ConfirmacionCitaFragment extends Fragment {
             Intent intent = new Intent(requireContext(), Home.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
             if (irACitas) {
+                //Dirigir a misCitas
                 intent.putExtra("open_tab", "citas");
             } else {
+                //Dirigir a inicio
                 intent.putExtra("open_tab", "inicio");
             }
             startActivity(intent);

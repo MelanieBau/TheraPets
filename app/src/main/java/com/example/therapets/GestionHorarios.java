@@ -51,6 +51,10 @@ public class GestionHorarios extends AppCompatActivity {
         });
 
         findViewById(R.id.btnAgregarHorario).setOnClickListener(v -> mostrarDialogo());
+
+        //Boton de volver
+        findViewById(R.id.btnVolver).setOnClickListener(v -> finish());
+
     }
 
     private void cargarHorarios() {
@@ -68,8 +72,13 @@ public class GestionHorarios extends AppCompatActivity {
     private void mostrarDialogo() {
         View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_agregar_horario, null);
 
+        //Dias
         Spinner spDia = dialogView.findViewById(R.id.spDia);
+
+        //Hora con el dialogView
         TextView tvHora = dialogView.findViewById(R.id.tvHoraSeleccionada);
+
+        //Elegir hora de la cita
         Button btnElegirHora = dialogView.findViewById(R.id.btnElegirHora);
 
         String[] dias = {"Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"};

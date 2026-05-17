@@ -17,6 +17,8 @@ public class BottomNavCurved extends BottomNavigationView {
 
     private int mNavBarHeight;
 
+
+    //Boton curveado en el menú
     public BottomNavCurved(Context context) {
         super(context);
         init();

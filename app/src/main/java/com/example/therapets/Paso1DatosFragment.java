@@ -39,6 +39,9 @@ public class Paso1DatosFragment extends Fragment {
         TextView fechaSeleccionada = view.findViewById(R.id.tvFechaSeleccionada);
         TextView siguiente = view.findViewById(R.id.btnSiguiente1);
 
+        //Boton para volver a la home
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> requireActivity().finish());
+
         // Restaurar datos temporales
         nombres.setText(CitaDraftStore.nombres);
         telefono.setText(CitaDraftStore.telefono);
@@ -65,7 +68,9 @@ public class Paso1DatosFragment extends Fragment {
                                 telefono.setText(telefonoUsuario);
                             }
                         }
+
                     });
+
         }
 
         // Restaurar fecha si existe
@@ -76,7 +81,7 @@ public class Paso1DatosFragment extends Fragment {
             );
         }
 
-        // CLICK EN TEXTO = ABRIR CALENDARIO
+        // Abrir calendario
         fechaSeleccionada.setOnClickListener(v -> {
 
             MaterialDatePicker<Long> datePicker =
@@ -97,7 +102,7 @@ public class Paso1DatosFragment extends Fragment {
             datePicker.show(getParentFragmentManager(), "DATE_PICKER");
         });
 
-        // SIGUIENTE
+        // Ir a siguiente paso
         siguiente.setOnClickListener(v -> {
 
             String nombreStr = nombres.getText().toString().trim();

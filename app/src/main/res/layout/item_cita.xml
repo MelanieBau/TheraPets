@@ -15,14 +15,12 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Contenido -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Fecha y estado -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,7 +37,6 @@
                     android:textStyle="bold"
                     android:textColor="#2E2E2E" />
 
-                <!-- Píldora estado -->
                 <TextView
                     android:id="@+id/tvEstado"
                     android:layout_width="wrap_content"
@@ -53,14 +50,6 @@
 
             </LinearLayout>
 
-            <!-- Separador -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#F0F0F0"
-                android:layout_marginVertical="10dp" />
-
-            <!-- Centro -->
             <TextView
                 android:id="@+id/tvCentroCita"
                 android:layout_width="wrap_content"
@@ -70,7 +59,6 @@
                 android:textColor="#2D5F4F"
                 android:textStyle="bold" />
 
-            <!-- Terapeuta -->
             <TextView
                 android:id="@+id/tvTerapeutaCita"
                 android:layout_width="wrap_content"
@@ -80,7 +68,6 @@
                 android:textColor="#9E9E9E"
                 android:layout_marginTop="4dp" />
 
-            <!-- Cuidador -->
             <TextView
                 android:id="@+id/tvCuidadorCita"
                 android:layout_width="wrap_content"
@@ -90,7 +77,6 @@
                 android:textColor="#9E9E9E"
                 android:layout_marginTop="4dp" />
 
-            <!-- Motivo -->
             <TextView
                 android:id="@+id/tvMotivoCita"
                 android:layout_width="wrap_content"
@@ -109,14 +95,12 @@
                 android:layout_marginTop="4dp"
                 android:visibility="gone" />
 
-            <!-- Separador -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#F0F0F0"
                 android:layout_marginVertical="10dp" />
 
-            <!-- Botón cancelar -->
             <Button
                 android:id="@+id/btnCancelarCita"
                 android:layout_width="match_parent"
@@ -129,7 +113,6 @@
                 android:backgroundTint="#2D5F4F"
                 app:cornerRadius="30dp" />
 
-            <!-- Botón valorar sesión, solo visible en citas completadas -->
             <Button
                 android:id="@+id/btnValorarCita"
                 android:layout_width="match_parent"

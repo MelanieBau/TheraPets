@@ -4,10 +4,10 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Paleta principal TheraPets -->
-    <color name="morado_principal">#A45B7D</color>
-    <color name="morado_claro">#F7E4EB</color>
-    <color name="morado_oscuro">#3B2F3A</color>
-    <color name="coral_acento">#D89EB2</color>
+    <color name="morado_principal">#4CAF82</color>
+    <color name="morado_claro">#E9E4E4</color>
+    <color name="morado_oscuro">@color/texto_principal</color>
+    <color name="coral_acento">#2D5F4F</color>
 
 
     <color name="fondo_principal">#FFF5F0</color>

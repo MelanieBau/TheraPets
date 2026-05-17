@@ -39,6 +39,7 @@ public class Paso2CentroFragment extends Fragment {
 
         rv.setAdapter(adapter);
 
+        //Acceder a el listado de los centros
         FirebaseFirestore.getInstance().collection("centros").get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     if (!isAdded()) return;

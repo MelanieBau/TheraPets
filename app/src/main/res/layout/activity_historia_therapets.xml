@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Cabecera verde -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
 
         </LinearLayout>
 
-        <!-- Foto de Chispita circular -->
+        <!-- Foto de Chispita -->
         <androidx.cardview.widget.CardView
             android:layout_width="160dp"
             android:layout_height="160dp"
@@ -57,7 +56,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Tarjeta con el texto -->
+
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,9 +73,8 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <!-- Barra verde -->
                 <View
-                    android:layout_width="40dp"
+                    android:layout_width="60dp"
                     android:layout_height="4dp"
                     android:background="#4CAF82"
                     android:layout_gravity="center_horizontal"

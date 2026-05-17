@@ -9,12 +9,9 @@ public class AgendarCita extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agendar_cita);
 
-
         if (savedInstanceState == null) {
             CitaDraftStore.clear();
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.stepContainer, new Paso1DatosFragment())
-                    .commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.stepContainer, new Paso1DatosFragment()).commit();
         }
     }
 }

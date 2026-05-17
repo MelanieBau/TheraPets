@@ -17,14 +17,12 @@
         android:orientation="horizontal">
 
 
-        <!-- Contenido de la tarjeta -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Fecha y hora -->
             <TextView
                 android:id="@+id/tvFechaCitaCoord"
                 android:layout_width="wrap_content"
@@ -47,14 +45,12 @@
                 android:paddingVertical="4dp"
                 android:layout_marginTop="4dp" />
 
-            <!-- Separador -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="#F0F0F0"
                 android:layout_marginVertical="10dp" />
 
-            <!-- Nombre del paciente -->
             <TextView
                 android:id="@+id/tvNombreCitaCoord"
                 android:layout_width="wrap_content"
@@ -64,7 +60,6 @@
                 android:textStyle="bold"
                 android:textColor="@color/texto_principal" />
 
-            <!-- Centro -->
             <TextView
                 android:id="@+id/tvCentroCitaCoord"
                 android:layout_width="wrap_content"
@@ -74,7 +69,6 @@
                 android:textColor="@color/texto_secundario"
                 android:layout_marginTop="4dp" />
 
-            <!-- Cuidador -->
             <TextView
                 android:id="@+id/tvCuidadorCitaCoord"
                 android:layout_width="wrap_content"
@@ -84,7 +78,6 @@
                 android:textColor="@color/texto_secundario"
                 android:layout_marginTop="4dp" />
 
-            <!-- Motivo -->
             <TextView
                 android:id="@+id/tvMotivoCitaCoord"
                 android:layout_width="wrap_content"
@@ -104,7 +97,6 @@
                 android:layout_marginTop="4dp"
                 android:visibility="gone" />
 
-            <!-- Separador -->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -117,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <!-- Botón confirmar en verde -->
+                <!-- Botón confirmar  -->
                 <Button
                     android:id="@+id/btnConfirmarCita"
                     android:layout_width="0dp"
@@ -130,7 +122,6 @@
                     android:backgroundTint="#02A009"
                     app:cornerRadius="30dp" />
 
-                <!-- Botón cancelar en coral -->
                 <Button
                     android:id="@+id/btnCancelarCitaCoord"
                     android:layout_width="0dp"
@@ -142,7 +133,7 @@
                     android:backgroundTint="#E60000"
                     app:cornerRadius="30dp" />
 
-                <!-- Botón marcar como completada, solo visible cuando está confirmada -->
+                <!-- Botón marcar como completada -->
                 <Button
                     android:id="@+id/btnCompletarCita"
                     android:layout_width="match_parent"
