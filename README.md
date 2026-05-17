@@ -44,4 +44,4 @@ La app cuenta con tres roles diferenciados con paneles personalizados: **usuario
 
 ## Autora
 
-Proyecto desarrollado por **Nicole Vega Bautista** como Trabajo de Fin de Grado del ciclo DAM · 2026
+Proyecto desarrollado por **Nicole Vega Bautista** | Trabajo de Fin de Grado del ciclo DAM.
